@@ -1,0 +1,124 @@
+influencers
+vvvvv
+discoverability
+gameplay
+monetization
+^^^^^
+content creators
+alternate revenue
+
+mascot fairy in labrynth theme
+
+random prompt/theme (Define Universe)
+
+make characters as phase one of the game
+
+send out story prompts to users
+
+
+
+Story Mixer board game
+// Gather 'Round (oops that's taken)
+do as a jackbox game? GAM407 Quiplash: The Multiscreen, Multidevice, Multiplayer Game for 10,000
+A cooperative storytelling game for people who like to come up with ideas and combine them with others.  
+2-6+ players
+1-2 hours
+13+ years old
+Gather around a table - bring a cooperative spirit and some organizational skills
+Put pencils, paper, cards, and dice in the middle
+Use them for maps, sketches, ideas (from the cards), and conflicts (from the dice)
+(Setup diagram)
+Stage - Define Universe
+Vote For Recorder
+  -Recorder should be someone that can write fast (but legibly) and recall/lookup facts faster
+Define Setting
+  -Take turns defining one thing about the universe and the initial scene - (for your first game, using the current time period and a familiar location is recommended - even the exact room you are in!)
+  -Keep descriptions to one sentence
+  -Basic things to define: Time, Place, Politics, Creatures, Power Sources, Physics, Life, Doors out of current room, Etc.
+  -Advanced things to define (Experienced Players Only!): Death, Probability, Disease, Doom, Planes, Behavior Patterns, Relationships, Etc.
+Define Characters
+  -Take turns defining one awesome characteristic about another player's character
+  -A character does not have to be a hero or even a single person
+  -Keep descriptions to one or two sentences
+  -Optional: Roll a die, if it is 4-6, you must define something good about the character ("good" meaning enabling, empowering, or enriching).  If it is 1-3, you must define something bad about the character ("bad" meaning disabling, negative, or sad).  You may roll the die before or after choosing who's character you are defining.  
+  -Basic things to define: Roles (Protagonist, Antagonist, Supporter/Sidekick, Skeptic, Guardian, Diverter/Tempter/Contagonist, Reasonable, Emotional), Powers (Disabled, Average, Legend, Deity), Goals, Associations, Distinguishing Marks, Traits, Possessions, Equipment, Current State, Etc.
+  -Advanced things to define (Experienced Players Only!): Death Conditions, Relationships, Origins, Growth Patterns, Advancement, Multi-Session Rules/Advancement, Game End Goals, Conflict Dice Rules/Restrictions, Idea Card Rules/Restrictions, Metagame Rules/Restrictions, Out of Character (Real World) Rules/Restrictions (e.g. betting, gambling, buying everyone something, changing seats), Etc.
+  -Instead of vague categories for Legend, define them by player action/motivation.
+    -Slayer/Achiever/Combat skill - Power (includes combat, strength, influence, money, magic ability, hide, etc.) - this is what you want to increase if you care about what happens to your character (most common)
+    -Explorer/Observer/Search skill - Awareness (includes perception, knowledge, see hidden, etc.) - this is what you want to increase if you care about your character knowing more about the world (recommended for thinkers and puzzle-solvers)
+    -Socializer/Presence skill - Attention (includes charisma, diplomacy, etc.) - this is what you want to increase if you want your character to have more "spotlight" time and you don't care exactly what happens to your character (recommended for observers and actors/role-players)
+Acts - See It Play Out
+Now the players take turns being the "control" player.  When it is your turn, you become the control player.  The control player begins by choosing another player (who becomes the "chosen" player) and describing something that happens to that player.  No one may speak but the control player as they describe the scenario.  The control player signals that they are done with "What do they do?"  or "What do you do?"
+Then the player that was chosen tells the story of how they or their character respond to the scenario and identifies any changes to the setting or the characters involved.  No one may speak but the chosen player.  The chosen player signals they are done with "Thus they have chosen." or "Thus I have chosen."
+Then the control player describes any effects they would like to add, and at this point, other players besides the chosen player may give input to the control player.  The chosen player has the final say on input from the the other players, and nothing is official/established unless the control player states it or otherwise indicates to the Recorder that they want something to happen.  When the control player is done taking input, or there is no further input to take, the Control player ends their turn by passing the Control player token.  
+Several things may happen during any of these three phases, and some require further actions by the speaking player.  
+Idea Cards - If the speaking player needs help or inspiration describing the scenario or the decisions or the consequences, they may draw any number of idea cards and read them for inspiration.  The idea cards should be read quickly and discarded as soon as the speaking player gets an idea they like.  Discarded cards may be reshuffled at any time, and both piles may be drawn from at any time from any part of the pile.  Spread them out on the table if you like, but that is not recommended since they can be distracting.  
+Conflict Dice - If the speaking player wants an element of randomness to be added to their story, they may roll a Conflict Dice.  On a one (1), the conflict resolves in the worst way possible.  On a six (6), the conflict resolves in the best way possible.  Anything in between is, of course, a moderate outcome.  The outcome is generally better if the number is higher.  
+For example, say the Chosen player wants to have something be behind a door, but they don't care what exactly is behind the door.  They roll the dice, and on a one (1), it is a horrible trap, and on a six (6), it is a glorious treasure.  On a 5, it would be good, but just not as good.  So, a 5 might be a creature that gives them a service of some kind.  A 4 is still good but not as good as a 5.  A 3 is bad but not as bad as a 2, and so on.  On a 2, for example, it might be a pile of rubble that is useless to the player.  
+In the contest example, the Chosen player is in a contest, equally matched with another player.  In an equal contest, the winner is usually determined by something random- a passing breeze, a coughing passerby, or a twist of fate.  In this case, the Chosen player may decide to use the Conflict Dice to resolve the conflict randomly.  The Chosen player hands the other player a dice and they both roll.  Whoever rolls higher wins the contest due to random chance.  Reroll ties.  
+In an Advanced game, the speaking player sets a result meaning (e.g. "5 and 6 mean this, anything below that means something else") and then roll the dice.  This is often used to resolve conflicts between entities or creatures or characters of the same power level (both Average, both Legend, etc.), but can be used for any reason.  In an Advanced game, the initial settings and goals may also give more specific meaning to the die results.  
+Boredom Timer - If any player is starting to get bored during any speaking player's turn, they may choose to silently reach out to the middle of the table and flip over the one-minute timer.  The speaking player then has one minute (until the timer is up) in order to finish what they are saying and move to the next phase.  
+
+Advanced Contest rules
+Advanced rules for competitive play - "this character is stronger in this situation" "alright but if we have this other situation, this character is faster"
+
+The game ends when the hour is up.
+In an Advanced game, the game ends when a character meets a Game End Goal, which is something that may be defined in the Define Characters step.
+
+change party version from saying the most stuff to a different mechanic since that conflicts with the task
+remembering previous established facts?
+guessing what the other player's theme was?
+  -four cards?
+
+If a player references something that happened with a character from a previous scene, or a character's trait or ability, that character's player may award the player a bonus point by indicating so at the end of that player's turn.  
+
+Dagda: cards for encounters
+Dagda:   template obstacles
+
+Dagda: other players decide which verb is best suited to the task
+
+  -Have each player decide if they are casual, creative, or strategist.
+  -The casual player just draws a card and puts it in front any player (usually themselves)
+    -The player must describe how they acquire that object. If they succeed, they get the card- face up in front of them, if they can't get it within a minute, the card is discarded.
+  -The creative tells a scene. They draw 5 before hand, show them to the player to their left, then pick one randomly and tell a scene in that theme. They cannot say the name of the theme! If they do, they immediately end their turn and the player to their left does not guess. After, if the player to the left can guess which theme it was, they both get one point. If the creative references something that happened in a previous turn, they gain another point. If they references a player's trait or ability, they gain a third point. They must use their own character and at least one other character. They can only earn up to 3 points per turn.
+  -The strategist watches for discontinuity, 1 point per pointed out infraction. On the strategist's turn, they may attempt to destroy a card by describing how the other player ends up losing the object. After describing the loss, if least 50% of the players buy the reason, then the strategist player rolls a d6. If the d6 result is higher than the card value, it is destroyed. The strategist player may also attempt to quest. The strategist player chooses another player's card. That player then describes some obstacle that the strategist player must overcome. Then the strategist player explains their plan to overcome the obstacle. If at least 50% of the players buy it, the strategist player rolls a d6. If the d6 result is higher than the target card, the strategist player describes overcoming the obstacle, and the target player gives the card to the strategist player as their quest reward.
+  -At the end of 3 rounds, total your points- cards are worth the number printed on them. The player with the most points wins!
+
+**casual player draws two cards, and selects one for themself. Others guess which character the discarded card matches best according to the casual player. Casual player reveals choice and those that guessed right get a bonus point.
+
+
+card game ideas
+  -tell a story (no goal): draw card, place card, move characters if desired
+  -make it a remembering game- have to tell the whole story each time you go and add your own part on the end
+  -cartographers remembering and correcting the map
+  -time travel?
+  -take turns being the "judge" of whether rope beats mountain
+
+
+tabletop RPG where players split the burden of GM by type
+  -referee
+    -combat
+    -skills
+    -advancement
+  -NPCs
+    -enemies
+    -shops
+  -environments
+    -lands
+    -cities/dwellings
+    -fantastic elements (magic, nanotech, etc.)
+  -rewards
+    -XP
+    -loot
+  -compatible with "in character at all times"
+  -compatible with "only suggests world reactions"
+  -compatible with story mixer
+
+
+
+
+
+TODO:
+research firebase
+decide more of the design
+

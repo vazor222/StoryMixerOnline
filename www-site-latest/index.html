@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<meta charset="utf-8">
+<title>Story Mixer Online</title>
+<meta name="description" content="A cooperative storytelling game for people who like to come up with ideas and combine them with others.">
+<!--<link rel="icon" type="image/png" href="">-->
+<meta name="mobile-web-app-capable" content="yes">  
+<script>
+console.log("init");
+</script>
+<script src="https://www.gstatic.com/firebasejs/5.10.0/firebase.js"></script>
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyDBGHHYip5Lk2-f7BPSgH3xxlay1fhQR_w",
+    authDomain: "story-mixer-online.firebaseapp.com",
+    databaseURL: "https://story-mixer-online.firebaseio.com",
+    projectId: "story-mixer-online",
+    storageBucket: "story-mixer-online.appspot.com",
+    messagingSenderId: "324326967821"
+  };
+  firebase.initializeApp(config);
+</script>
+<body>
+<noscript>
+Please enable Javascript in order to play Story Mixer Online.
+</noscript>
+<p>Welcome to Story Mixer Online! A cooperative storytelling game for people who like to come up with ideas and combine them with others.</p>
+<img src="img/Fairy_Mascot.jpg" alt="Fairy Mascot" style="width:100%" /><br />
+<hr />
+<div id="join">
+	Join an existing game?<br />
+	<form>
+		Game Room Code:<br />
+		<input id="room" /><br />
+		Player Name:<br />
+		<input id="player_name" /><br />
+		<button id="join_button">Join</button><br />
+	</form>
+</div>
+<hr />
+<div id="create">
+	Create a game?<br />
+	<form>
+		Creator Player Name:<br />
+		<input id="creator_player_name" /><br />
+		<button id="create_button">Create</button><br />
+	</form>
+</div>
+<hr />
+By using this website you agree that the game is ours, any content you submit is fair use, and you will not disrupt or harass other players.
+<!-- About | Contact -->
+<script src="index.js"></script>
+</body>
+</html>

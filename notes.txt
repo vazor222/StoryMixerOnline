@@ -119,6 +119,8 @@ tabletop RPG where players split the burden of GM by type
 
 
 TODO:
+download all the concept/donated art and save in project folder
 research firebase
+  -use cloud firestore
 decide more of the design
 

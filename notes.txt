@@ -1,3 +1,34 @@
+
+
+
+draw.io flowchart
+
+
+
+Main Menu
+New Game (goes to Room Lobby)
+Join Game text box for room code (ditto)
+How to Play (shows instructions)
+
+Room Lobby
+Shows room code
+Shows players joined
+Start Game
+
+Character Creation
+
+
+Storytelling
+
+
+The End
+Shows winner, other stats, credits.
+Replay with same players
+Back to Main Menu
+
+
+
+
 influencers
 vvvvv
 discoverability

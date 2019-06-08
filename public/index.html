@@ -29,7 +29,7 @@ Please enable Javascript in order to play Story Mixer Online.
 	<form>
 		Creator Player Name:<br />
 		<input id="creator_player_name" /><br />
-		<button id="create_button" onClick="CreateRoom();">Create</button><br />
+		<button id="create_button">Create</button><br />
 	</form>
 </div>
 <hr />
@@ -50,41 +50,6 @@ By using this website you agree that the game is ours, any content you submit is
     appId: "1:324326967821:web:b3799d68de5e2a5c"
   };
   firebase.initializeApp(config);
-  var db = firebase.firestore();
-  
-  function getRandomRoomCodeGlyph()
-  {
-		return Math.random()*65+'A';
-  }
-  
-  function generateRoomCode()
-  {
-		return getRandomRoomCodeGlyph()+
-			getRandomRoomCodeGlyph()+
-			getRandomRoomCodeGlyph()+
-			getRandomRoomCodeGlyph();
-  }
-  
-  // Create Room
-  function CreateRoom()
-  {
-		console.log(db);
-		console.log(db.collection);
-		console.log(getRandomRoomCodeGlyph());
-		console.log(generateRoomCode());
-		console.log(db.collection('rooms'));
-		console.log(db.collection('rooms').add);
-		db.collection('rooms').add({
-			code: generateRoomCode(),
-			creator: creator_player_name.value
-		})
-		.then(function(docRef) {
-			console.log("Document written! id:"+docRef.id);
-		})
-		.catch(function(error) {
-			console.error("Error adding doc:"+error);
-		});
-  }
 </script>
 </body>
 </html>

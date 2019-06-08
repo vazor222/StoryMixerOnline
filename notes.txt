@@ -47,6 +47,35 @@ make characters as phase one of the game
 send out story prompts to users
 
 
+Student
+Detective
+Athlete
+Vampire
+Wizard
+Royalty
+Explorer
+Scientist
+Ninja
+Mercenary
+Robot
+Pirate
+Witch
+Hunter
+Thief
+Werewolf
+Lawyer
+Vizier
+Cop
+Artist
+Lord
+Fairy
+Pixie
+Suit
+Thug
+Hobo
+Zombie
+Time Traveler
+
 
 Story Mixer board game
 // Gather 'Round (oops that's taken)
@@ -153,5 +182,8 @@ TODO:
 download all the concept/donated art and save in project folder
 research firebase
   -use cloud firestore
+fix create not working
+implement new UI design
+  -add jiggle to buttons
+fix room code generating not working
 decide more of the design
-

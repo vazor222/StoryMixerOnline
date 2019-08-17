@@ -182,6 +182,7 @@ TODO:
 download all the concept/donated art and save in project folder
 research firebase
   -use cloud firestore
+  -put npm local server instructions in here
 fix create not working
 implement new UI design
   -add jiggle to buttons

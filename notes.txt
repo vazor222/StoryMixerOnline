@@ -179,10 +179,10 @@ tabletop RPG where players split the burden of GM by type
 
 
 TODO:
-download all the concept/donated art and save in project folder
 research firebase
   -use cloud firestore
   -put npm local server instructions in here
+  -run through this? https://codelabs.developers.google.com/codelabs/firestore-web/#0
 fix create not working
 implement new UI design
   -add jiggle to buttons

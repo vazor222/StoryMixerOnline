@@ -1,5 +1,7 @@
 <!DOCTYPE html>
 <html lang="en-US">
+<!-- Main client page for StoryMixer Online. -->
+<!-- This work is copyrighted. -->
 <head>
 <meta charset="utf-8">
 <title>Story Mixer Online</title>
@@ -15,76 +17,33 @@ Please enable Javascript in order to play Story Mixer Online.
 <hr />
 <div id="join">
 	Join an existing game?<br />
-	<form>
-		Game Room Code:<br />
-		<input id="room" /><br />
-		Player Name:<br />
-		<input id="player_name" /><br />
-		<button id="join_button">Join</button><br />
-	</form>
+	Game Room Code:<br />
+	<input id="room" /><br />
+	Player Name:<br />
+	<input id="player_name" /><br />
+	<button id="join_button" onClick="joinRoom();">Join</button><br />
 </div>
 <hr />
 <div id="create">
 	Create a game?<br />
-	<form>
-		Creator Player Name:<br />
-		<input id="creator_player_name" /><br />
-		<button id="create_button" onClick="CreateRoom();">Create</button><br />
-	</form>
+	Creator Player Name:<br />
+	<input id="creator_player_name" /><br />
+	<button id="create_button" onClick="createRoom();">Create</button><br />
+</div>
+<hr />
+<div id="test">
+	# Debug Test #<br />
+	stop listening?<br />
+	<button id="stop_listening_button" onClick="stopListening();">Stop Listening</button><br />
 </div>
 <hr />
 By using this website you agree that the game is ours, any content you submit is fair use, and you will not disrupt or harass other players.
 <!-- About | Contact -->
+<script src="https://www.gstatic.com/firebasejs/7.6.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.6.1/firebase-firestore.js"></script>
 <script src="index.js"></script>
-<script src="https://www.gstatic.com/firebasejs/6.1.1/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/6.1.1/firebase-firestore.js"></script>
 <script>
-  // Initialize Firebase
-  var config = {
-    apiKey: "AIzaSyDBGHHYip5Lk2-f7BPSgH3xxlay1fhQR_w",
-    authDomain: "story-mixer-online.firebaseapp.com",
-    databaseURL: "https://story-mixer-online.firebaseio.com",
-    projectId: "story-mixer-online",
-    storageBucket: "story-mixer-online.appspot.com",
-    messagingSenderId: "324326967821",
-    appId: "1:324326967821:web:b3799d68de5e2a5c"
-  };
-  firebase.initializeApp(config);
-  var db = firebase.firestore();
-  
-  function getRandomRoomCodeGlyph()
-  {
-		return Math.random()*65+'A';
-  }
-  
-  function generateRoomCode()
-  {
-		return getRandomRoomCodeGlyph()+
-			getRandomRoomCodeGlyph()+
-			getRandomRoomCodeGlyph()+
-			getRandomRoomCodeGlyph();
-  }
-  
-  // Create Room
-  function CreateRoom()
-  {
-		console.log(db);
-		console.log(db.collection);
-		console.log(getRandomRoomCodeGlyph());
-		console.log(generateRoomCode());
-		console.log(db.collection('rooms'));
-		console.log(db.collection('rooms').add);
-		db.collection('rooms').add({
-			code: generateRoomCode(),
-			creator: creator_player_name.value
-		})
-		.then(function(docRef) {
-			console.log("Document written! id:"+docRef.id);
-		})
-		.catch(function(error) {
-			console.error("Error adding doc:"+error);
-		});
-  }
+  console.log("main index.html finished loading");
 </script>
 </body>
 </html>

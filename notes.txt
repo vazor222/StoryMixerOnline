@@ -175,21 +175,28 @@ tabletop RPG where players split the burden of GM by type
   -compatible with story mixer
 
 
+
+
 - npm local server -
 open Command Prompt
-navigate to /public
+navigate to www-site-latest
 type 'ws'
 open http://localhost:8000 in a browser
 
 
+- todo -
 
-TODO:
-research firebase
-  -use cloud firestore
-  -put npm local server instructions in here - done
-  -run through this? https://codelabs.developers.google.com/codelabs/firestore-web/#0
-fix create not working
+fix create not working (change to new parameters, make sure we can read input fields still)
 implement new UI design
   -add jiggle to buttons
-fix room code generating not working
 decide more of the design
+
+
+
+- done -
+
+research firebase - done
+  -use cloud firestore - done
+  -put npm local server instructions in here - done
+  -run through this? https://codelabs.developers.google.com/codelabs/firestore-web/#0 - done
+fix room code generating not working - done

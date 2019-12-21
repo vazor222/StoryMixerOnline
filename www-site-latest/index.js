@@ -1,4 +1,6 @@
-console.log(firebase);
+// StoryMixerOnline main game module
+// This work is copyrighted.
+
 
 // Initialize Cloud Firestore through Firebase
 firebase.initializeApp({
@@ -36,6 +38,47 @@ var unsubscribe = testRoom
 
 // use this when "exiting" a room
 function stopListening() {
+	console.log("stopListening called");
 	// Stop listening to changes
 	unsubscribe();
+}
+
+const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+function getRandomRoomCodeGlyph()
+{
+	return alphabet.charAt(Math.floor(Math.random()*26));
+}
+
+function generateRoomCode()
+{
+	return getRandomRoomCodeGlyph()+
+	getRandomRoomCodeGlyph()+
+	Math.floor(Math.random()*1000);
+}
+
+// makes the room entry in the database
+function createRoom()
+{
+	console.log("createRoom called");
+	console.log(db);
+	console.log(db.collection);
+	console.log(getRandomRoomCodeGlyph());
+	console.log(generateRoomCode());
+	console.log(db.collection('rooms'));
+	console.log(db.collection('rooms').add);
+	db.collection('rooms').add({
+		code: generateRoomCode(),
+		creator: creator_player_name.value
+	})
+	.then(function(docRef) {
+		console.log("Document written! id:"+docRef.id);
+	})
+	.catch(function(error) {
+		console.error("Error adding doc:"+error);
+	});
+}
+
+function joinRoom()
+{
+	console.log("joinRoom called");
 }

@@ -33,23 +33,21 @@ Please enable Javascript in order to play Story Mixer Online.
 	</form>
 </div>
 <hr />
+<div id="test">
+	stop listening?<br />
+	<button id="stop_listening_button">Stop Listening</button><br />
+</div>
+<hr />
 By using this website you agree that the game is ours, any content you submit is fair use, and you will not disrupt or harass other players.
 <!-- About | Contact -->
+<script src="https://www.gstatic.com/firebasejs/7.6.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.6.1/firebase-firestore.js"></script>
 <script src="index.js"></script>
-<script src="https://www.gstatic.com/firebasejs/6.1.1/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/6.1.1/firebase-firestore.js"></script>
 <script>
-  // Initialize Firebase
-  var config = {
-    apiKey: "AIzaSyDBGHHYip5Lk2-f7BPSgH3xxlay1fhQR_w",
-    authDomain: "story-mixer-online.firebaseapp.com",
-    databaseURL: "https://story-mixer-online.firebaseio.com",
-    projectId: "story-mixer-online",
-    storageBucket: "story-mixer-online.appspot.com",
-    messagingSenderId: "324326967821",
-    appId: "1:324326967821:web:b3799d68de5e2a5c"
-  };
-  firebase.initializeApp(config);
+	document.getElementById("stop_listening_button").onclick = function() {
+		stopListening();
+	};
+  console.log("main index.html finished loading");
 </script>
 </body>
 </html>

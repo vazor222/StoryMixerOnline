@@ -184,6 +184,13 @@ type 'ws'
 open http://localhost:8000 in a browser
 
 
+- github -
+https://github.com/vazor222/StoryMixerOnline
+
+- firebase -
+https://console.firebase.google.com/u/0/project/story-mixer-online/
+
+
 - todo -
 
 figure out ui library for player avatar display on main screen

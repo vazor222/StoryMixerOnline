@@ -186,6 +186,8 @@ open http://localhost:8000 in a browser
 
 - todo -
 
+figure out ui library for player avatar display on main screen
+  -animated gif? image sequence?
 fix create not working (change to new parameters, make sure we can read input fields still)
 implement new UI design
   -add jiggle to buttons

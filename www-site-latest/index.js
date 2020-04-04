@@ -39,8 +39,13 @@ var unsubscribe = testRoom
 // use this when "exiting" a room
 function stopListening() {
 	console.log("stopListening called");
+	document.getElementById('testavatar').src='b.png';
+	setTimeout(setTestBack, 3000);
 	// Stop listening to changes
 	unsubscribe();
+}
+function setTestBack() {
+  document.getElementById('testavatar').src='c.png';
 }
 
 const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'

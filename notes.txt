@@ -190,16 +190,17 @@ https://github.com/vazor222/StoryMixerOnline
 - firebase -
 https://console.firebase.google.com/u/0/project/story-mixer-online/
 
+- animated png maker -
+https://ezgif.com/apng-maker/ with 4.2 as the frametime
+
 
 - todo -
 
 figure out ui library for player avatar display on main screen
-  -animated gif? image sequence?
+  -plan to use animated png (Peter export png sequence from toonboom, I convert to animated png and commit those)
+    -https://ezgif.com/apng-maker/ with 4.2 as the frametime
+  -plan to show inside a box that crops it to the right frame size
   -reverse reaction animations to go back to idle
-  -continue researching how to convert swf to gif
-  -plan to use gif and javascript (maybe with a framework) to play animations
-  -if that doesn't work out, we might need to do png sequences
-  -https://ezgif.com/
 fix create not working (change to new parameters, make sure we can read input fields still)
 implement new UI design
   -add jiggle to buttons

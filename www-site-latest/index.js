@@ -31,16 +31,18 @@ testRoom.get().then(function(doc) {
 	}
 });
 
-var unsubscribe = testRoom
-	.onSnapshot(function (doc) {
-		console.log("got update", doc.data());
-	});
+var unsubscribe = testRoom.onSnapshot(roomOnSnapshot);
+
+function roomOnSnapshot(roomDoc)
+{
+	console.log("got update", roomDoc.data());
+}
 
 // use this when "exiting" a room
 function stopListening() {
 	console.log("stopListening called");
-	document.getElementById('testavatar').src='b.png';
-	setTimeout(setTestBack, 3000);
+	document.getElementById('testavatar').src='VampFail.png';
+	setTimeout(setTestBack, 1400);
 	// Stop listening to changes
 	unsubscribe();
 }
@@ -57,8 +59,8 @@ function getRandomRoomCodeGlyph()
 function generateRoomCode()
 {
 	return getRandomRoomCodeGlyph()+
-	getRandomRoomCodeGlyph()+
-	Math.floor(Math.random()*1000);
+		getRandomRoomCodeGlyph()+
+		String(Math.floor(Math.random()*1000)).padStart(4, '0');
 }
 
 // makes the room entry in the database

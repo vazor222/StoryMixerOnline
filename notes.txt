@@ -197,10 +197,12 @@ https://ezgif.com/apng-maker/ with 4.2 as the frametime
 - todo -
 
 figure out ui library for player avatar display on main screen
-  -plan to use animated png (Peter export png sequence from toonboom, I convert to animated png and commit those)
-    -https://ezgif.com/apng-maker/ with 4.2 as the frametime
+  -plan to use animated png - done
+  -Peter export png sequence from toonboom, I convert to animated png and commit those - done
+  -https://ezgif.com/apng-maker/ with 4.2 as the frametime - done
   -plan to show inside a box that crops it to the right frame size
   -reverse reaction animations to go back to idle
+review for client side ideas - https://css-tricks.com/building-a-real-time-chat-app-with-react-and-firebase/
 fix create not working (change to new parameters, make sure we can read input fields still)
 implement new UI design
   -add jiggle to buttons

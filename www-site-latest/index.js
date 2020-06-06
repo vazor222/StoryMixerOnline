@@ -73,9 +73,11 @@ function createRoom()
 	console.log(generateRoomCode());
 	console.log(db.collection('rooms'));
 	console.log(db.collection('rooms').add);
+	var newRoomCode = generateRoomCode();
 	db.collection('rooms').add({
-		code: generateRoomCode(),
-		creator: creator_player_name.value
+		code: newRoomCode,
+		creator: creator_player_name.value,
+		players: [creator_player_name.value]
 	})
 	.then(function(docRef) {
 		console.log("Document written! id:"+docRef.id);
@@ -85,7 +87,25 @@ function createRoom()
 	});
 }
 
-function joinRoom()
+function joinRoomFromForm()
 {
-	console.log("joinRoom called");
+	console.log("joinRoomFromForm called");
+	console.log("room", room.value);
+	console.log("player_name", player_name.value);
+	joinRoomByCode(room.value);
+}
+
+function joinRoomByCode(roomCodeToJoin) {
+	console.log("joinRoomByCode called");
+	console.log("roomCodeToJoin",roomCodeToJoin);
+	db.collection('rooms').doc(roomCodeToJoin).get().then(function(doc) {
+		if( doc.exists ){
+			console.log('Document data:', doc.data());
+			var newPlayers = doc.data().players;
+			newPlayers.add(player_name.value);
+			doc.update({players:newPlayers});
+		} else {
+			console.log('No such document!');
+		}
+	});
 }

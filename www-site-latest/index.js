@@ -60,50 +60,44 @@ function generateRoomCode()
 {
 	return getRandomRoomCodeGlyph()+
 		getRandomRoomCodeGlyph()+
-		String(Math.floor(Math.random()*1000)).padStart(4, '0');
+		String(Math.floor(Math.random()*1000)).padStart(3, '0');
 }
 
 // makes the room entry in the database
 function createRoom()
 {
 	console.log("createRoom called");
-	console.log(db);
-	console.log(db.collection);
-	console.log(getRandomRoomCodeGlyph());
-	console.log(generateRoomCode());
-	console.log(db.collection('rooms'));
-	console.log(db.collection('rooms').add);
 	var newRoomCode = generateRoomCode();
-	db.collection('rooms').add({
+	db.collection('rooms').doc(newRoomCode).set({
 		code: newRoomCode,
 		creator: creator_player_name.value,
 		players: [creator_player_name.value]
 	})
-	.then(function(docRef) {
-		console.log("Document written! id:"+docRef.id);
+	.then(function() {
+		console.log("Document written! id:"+newRoomCode);
 	})
 	.catch(function(error) {
-		console.error("Error adding doc:"+error);
+		console.error("Error adding room! id:"+newRoomCode+" error:"+error);
 	});
 }
 
 function joinRoomFromForm()
 {
-	console.log("joinRoomFromForm called");
-	console.log("room", room.value);
-	console.log("player_name", player_name.value);
 	joinRoomByCode(room.value);
 }
 
 function joinRoomByCode(roomCodeToJoin) {
 	console.log("joinRoomByCode called");
-	console.log("roomCodeToJoin",roomCodeToJoin);
 	db.collection('rooms').doc(roomCodeToJoin).get().then(function(doc) {
 		if( doc.exists ){
-			console.log('Document data:', doc.data());
 			var newPlayers = doc.data().players;
-			newPlayers.add(player_name.value);
-			doc.update({players:newPlayers});
+			newPlayers.push(player_name.value);
+			doc.ref.update({'players':newPlayers}).then(function() {
+				console.log("Document updated! id:"+roomCodeToJoin);
+			})
+			.catch(function(error) {
+				console.error("Error joining room:"+roomCodeToJoin+" player_name:"+player_name+" error:"+error);
+			});
 		} else {
 			console.log('No such document!');
 		}

@@ -202,10 +202,9 @@ set loop once
 
 - todo -
 fix create not working
-  -see if we can add generated code as key
-    -or else we need to do a query and search by room code field, e.g.: `.get("code", "==", roomCodeToJoin)`
-  -change to new parameters
-  -make sure we can read input fields still
+  -see if we can add generated code as key - yep - done
+  -change to new parameters - done
+  -make sure we can read input fields still - done
 implement new UI design
   -add jiggle to buttons
 decide more of the design

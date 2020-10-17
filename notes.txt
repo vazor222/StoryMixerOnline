@@ -1,8 +1,6 @@
 
 
 
-draw.io flowchart
-
 
 
 Main Menu
@@ -180,7 +178,13 @@ tabletop RPG where players split the burden of GM by type
 - npm local server -
 open Command Prompt
 navigate to www-site-latest
-type 'ws'
+enter command: ws
+open http://localhost:8000 in a browser
+
+- python local server -
+open Command Prompt
+navigate to www-site-latest
+enter command: python -m http.server
 open http://localhost:8000 in a browser
 
 - client js references -
@@ -201,10 +205,6 @@ set loop once
 
 
 - todo -
-fix create not working
-  -see if we can add generated code as key - yep - done
-  -change to new parameters - done
-  -make sure we can read input fields still - done
 implement new UI design
   -add jiggle to buttons
 decide more of the design
@@ -212,7 +212,10 @@ decide more of the design
 
 
 - done -
-
+fix create not working - done
+  -see if we can add generated code as key - yep - done
+  -change to new parameters - done
+  -make sure we can read input fields still - done
 figure out ui library for player avatar display on main screen - done
   -plan to use animated png - done
   -Peter export png sequence from toonboom, I convert to animated png and commit those - done

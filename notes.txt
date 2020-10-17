@@ -205,8 +205,11 @@ set loop once
 
 
 - todo -
+set up react for buttons and views
 implement new UI design
   -add jiggle to buttons
+figure out how to listen for room changes
+figure out how to hide API key
 decide more of the design
 
 

@@ -175,6 +175,12 @@ tabletop RPG where players split the burden of GM by type
 
 
 
+- npm react webpack service -
+open Command Prompt
+navigate to react/story-mixer-online
+enter command: npm run start
+open http://localhost:3000 in a browser
+
 - npm local server -
 open Command Prompt
 navigate to www-site-latest
@@ -188,7 +194,7 @@ enter command: python -m http.server
 open http://localhost:8000 in a browser
 
 - client js references -
-review for client side ideas - https://css-tricks.com/building-a-real-time-chat-app-with-react-and-firebase/
+react and firebase - https://css-tricks.com/building-a-real-time-chat-app-with-react-and-firebase/
 
 - github -
 https://github.com/vazor222/StoryMixerOnline
@@ -205,6 +211,7 @@ set loop once
 
 
 - todo -
+finish building out pages in react - https://css-tricks.com/building-a-real-time-chat-app-with-react-and-firebase/
 set up react for buttons and views
 implement new UI design
   -add jiggle to buttons

@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import FairyMascotSplashImage from './Fairy_Mascot.jpg';
+import FairyMascotSplashImage from '../assets/Fairy_Mascot.jpg';
+import GymGuySuccessImage from '../assets/GymGuySuccess.png';
 
-export default class SignUp extends Component {
+export default class Home extends Component {
 	render() {
 		const gymGuyAvatarStyle = {
 			width:380,
@@ -23,7 +24,7 @@ export default class SignUp extends Component {
 				<hr />
 				{/* debug start test avatar */}
 				<div id="avatar-container" style={gymGuyAvatarStyle}>
-					<img id="testavatar" style={imgStyle} src="img/GymGuySuccess.png" /><br />
+					<img id="testavatar" style={imgStyle} src={GymGuySuccessImage} /><br />
 				</div>
 				{/* debug end test avatar */}
 				<div id="join">
@@ -48,7 +49,8 @@ export default class SignUp extends Component {
 					<button id="stop_listening_button" onClick="stopListening();">Stop Listening</button><br />
 				</div>
 				<hr />
-				By using this website you agree that we are not liable for your use of our game, any content you submit is fair use, and you will not disrupt or harass other players.
+				By using this website you agree that we are not liable for your use of our game, any content you submit is fair use, and you will not disrupt or harass other players.<br />
+				<br />
 				<Link to="/info">Info</Link> {/*make this a circled "i" info button*/}
 				<script src="https://www.gstatic.com/firebasejs/7.6.1/firebase-app.js"></script>
 				<script src="https://www.gstatic.com/firebasejs/7.6.1/firebase-firestore.js"></script>

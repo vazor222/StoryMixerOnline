@@ -1,7 +1,6 @@
+/* eslint-disable react/jsx-no-target-blank */
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import FairyMascotSplashImage from '../assets/Fairy_Mascot.jpg';
-import GymGuySuccessImage from '../assets/GymGuySuccess.png';
 
 export default class Home extends Component {
 	render() {

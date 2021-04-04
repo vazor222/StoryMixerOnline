@@ -39,8 +39,20 @@ class App extends Component {
       loading: false
     });
   }
+  
+  // needs to be a lambda because this can be called by other classes and 
+  // a normal function would mess up the "this" reference
+  handleRouteChange = (path) => {
+		console.log("handleRouteChange called: "+path);
+		this.setState({
+			redirect: path
+		});
+  }
 
   render() {
+		if( this.state.redirect ) {
+			return <Router><Redirect to={this.state.redirect} /></Router>
+		}
     return this.state.loading === true ? (
       <div className="spinner-border text-success" role="status">
         <span className="sr-only">Loading...</span>
@@ -48,21 +60,29 @@ class App extends Component {
     ) : (
         <Router>
           <Switch>
-            <Route exact path="/" component={Home} />
+            <Route exact
+							path="/"
+							render={(props) => (
+								<Home {...props} onRouteChange={this.handleRouteChange} />
+							)}
+						/>
             <PublicRoute
               path="/info"
-              authenticated={this.state.authenticated}
-              component={Info}
+              render={(props) => (
+								<Info {...props} onRouteChange={this.handleRouteChange} />
+							)}
             />
             <PublicRoute
               path="/signup"
-              authenticated={this.state.authenticated}
-              component={Signup}
+              render={(props) => (
+								<Signup {...props} onRouteChange={this.handleRouteChange} />
+							)}
             />
             <PublicRoute
               path="/login"
-              authenticated={this.state.authenticated}
-              component={Login}
+              render={(props) => (
+								<Login {...props} onRouteChange={this.handleRouteChange} />
+							)}
             />
           </Switch>
         </Router>

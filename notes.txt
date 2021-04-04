@@ -1,6 +1,6 @@
 
 
-
+2-10 players
 
 
 Main Menu
@@ -175,17 +175,17 @@ tabletop RPG where players split the burden of GM by type
 
 
 
-- npm react webpack service -
-open Command Prompt
-navigate to react/story-mixer-online
-enter command: npm run start
-open http://localhost:3000 in a browser
-
 - npm local server -
 open Command Prompt
 navigate to www-site-latest
 enter command: ws
 open http://localhost:8000 in a browser
+
+- npm react webpack service -
+open Command Prompt
+navigate to react/story-mixer-online
+enter command: npm run start
+open http://localhost:3000 in a browser
 
 - python local server -
 open Command Prompt
@@ -203,9 +203,11 @@ https://github.com/vazor222/StoryMixerOnline
 https://console.firebase.google.com/u/0/project/story-mixer-online/
 
 - animated png maker -
-Peter export png sequence from toonboom
-https://ezgif.com/apng-maker/ with 4.2 as the frametime
-crop to 380 x 500
+Peter export apng from spine (was png sequence from toonboom)
+https://ezgif.com/apng-maker/ with 24 frames per second => 4.2 as the frametime
+try to export at 380 x 480
+website will crop from the top if needed (vamp, jock)
+website can modify margins too
 make reverse
 set loop once
 

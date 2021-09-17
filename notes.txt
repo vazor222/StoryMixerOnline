@@ -211,15 +211,29 @@ website can modify margins too
 make reverse
 set loop once
 
+- Peter tasks -
+concept dragon and cute animal
+finish character animations
+rework ui concepts to include characters
+playtest and feedback
+
 
 - todo -
 finish building out pages in react - https://css-tricks.com/building-a-real-time-chat-app-with-react-and-firebase/
-set up react for buttons and views
+  -lift state up to App (figure out how to read state in child / Home and /lobby Lobby?)
+https://reactjs.org/docs/state-and-lifecycle.html
+https://reactjs.org/docs/lifting-state-up.html#lifting-state-up
+   -just got onStateChange working so Home can send creator name to App, but can Lobby read creator name?
+  -clean up all the debug rooms
+handle detecting navigate away/close browser to close rooms?
+add new animations for character select
 implement new UI design
   -add jiggle to buttons
 figure out how to listen for room changes
 figure out how to hide API key
 decide more of the design
+create a production bundle
+  -use `npm run build`
 
 
 

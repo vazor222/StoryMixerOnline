@@ -16,7 +16,7 @@ function generateRoomCode()
 		String(Math.floor(Math.random()*1000)).padStart(3, '0');
 }
 
-export function createRoom(creator_player_name, app)
+export function createRoom(creator_player_name, app, roomCreatedCallback)
 {
 	console.log("createRoom called! creator_player_name:"+creator_player_name);
 
@@ -24,6 +24,7 @@ export function createRoom(creator_player_name, app)
 
 	try
 	{
+		// makes the room entry in the database
 		db.collection('rooms').doc(newRoomCode).set({
 			code: newRoomCode,
 			creator: creator_player_name,
@@ -31,7 +32,7 @@ export function createRoom(creator_player_name, app)
 		})
 		.then(() => {
 			console.log("Document written! id:"+newRoomCode);
-			console.log(app.state);
+			roomCreatedCallback(newRoomCode);
 		})
 		.catch((error) => {
 			console.error("Error adding room! id:"+newRoomCode+" error:"+error);
@@ -43,4 +44,7 @@ export function createRoom(creator_player_name, app)
 	}
 }
 
-// makes the room entry in the database
+export function joinRoomFromForm()
+{
+	console.log("joinRoomFromForm called!");
+}

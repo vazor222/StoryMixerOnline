@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { createRoom } from '../helpers/rooms';
+import { createRoom, joinRoomFromForm } from '../helpers/rooms';
 import FairyMascotSplashImage from '../assets/Fairy_Mascot.jpg';
 import GymGuySuccessImage from '../assets/GymGuySuccess.png';
 import BlueHairIdleImage from '../assets/blue_idle.png';
@@ -10,9 +10,7 @@ export default class Home extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			error: null,
-			creator_player_name: '',
-			roomCodeToJoin: '',
+			error: null
 		};
 		this.handleCreatorPlayerNameChange = this.handleCreatorPlayerNameChange.bind(this);
 		this.handleCreateSubmit = this.handleCreateSubmit.bind(this);
@@ -25,17 +23,19 @@ export default class Home extends Component {
 	}
 	
 	handleCreatorPlayerNameChange(event) {
-		this.setState({
-			creator_player_name: event.target.value
-		});
+		this.props.onStateChange("creator_player_name", event.target.value);
 	}
 	
 	handleCreateSubmit(event) {
 		event.preventDefault();
 		this.setState({ error: '' });
 		try {
-			createRoom(this.state.creator_player_name, this);
-			this.props.onRouteChange("/lobby");  // redirect to lobby
+			createRoom(this.state.creator_player_name, this, (newRoomCode) => {
+				this.props.onStateChange("roomCodeToJoin", newRoomCode);
+				console.log("Home room created callback");
+				console.log(this.app.state);
+				this.props.history.replace("/lobby");  // redirect to lobby
+			});
 		} catch (error) {
 			this.setState({ error: error.message });
 		}
@@ -76,7 +76,7 @@ export default class Home extends Component {
 					<input id="room_code" /><br />
 					Player Name:<br />
 					<input id="player_name" /><br />
-					<button id="join_button" onClick="joinRoomFromForm();">Join</button><br />
+					<button id="join_button" onClick={joinRoomFromForm}>Join</button><br />
 				</div>
 				<hr />
 				<div id="create">
@@ -86,12 +86,6 @@ export default class Home extends Component {
 						<input onChange={this.handleCreatorPlayerNameChange} id="creator_player_name" value={this.state.creator_player_name} /><br />
 						<button type="submit" id="create_button">Create</button><br />
 					</form>
-				</div>
-				<hr />
-				<div id="test">
-					# Debug Test #<br />
-					stop listening?<br />
-					<button id="stop_listening_button" onClick="stopListening();">Stop Listening</button><br />
 				</div>
 				<hr />
 				<div align="right" style={{fontSize:"72px"}}>

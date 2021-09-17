@@ -7,30 +7,21 @@ import {
 } from "react-router-dom";
 import Home from './pages/Home';
 import Info from './pages/Info';
+import Lobby from './pages/Lobby';
 import Chat from './pages/Chat';
 import Signup from './pages/Signup';
 import Login from './pages/Login';
 import './styles.css';
 
 
-function PublicRoute({ component: Component, ...rest }) {
-  return (
-    <Route
-      {...rest}
-      render={props => (
-          <Component {...props} />
-        )
-      }
-    />
-  );
-}
-
-
 class App extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
-      loading: true
+      loading: true,
+			creator_player_name: '',
+			roomCodeToJoin: '',
+			chosen_character: ''
     };
   }
 
@@ -42,17 +33,12 @@ class App extends Component {
   
   // needs to be a lambda because this can be called by other classes and 
   // a normal function would mess up the "this" reference
-  handleRouteChange = (path) => {
-		console.log("handleRouteChange called: "+path);
-		this.setState({
-			redirect: path
-		});
+  handleStateChange = (name, value) => {
+		console.log("handleStateChange called: "+name+","+value);
+		this.setState({name: value});
   }
 
   render() {
-		if( this.state.redirect ) {
-			return <Router><Redirect to={this.state.redirect} /></Router>
-		}
     return this.state.loading === true ? (
       <div className="spinner-border text-success" role="status">
         <span className="sr-only">Loading...</span>
@@ -63,25 +49,19 @@ class App extends Component {
             <Route exact
 							path="/"
 							render={(props) => (
-								<Home {...props} onRouteChange={this.handleRouteChange} />
+								<Home {...props} onStateChange={this.handleStateChange} />
 							)}
 						/>
-            <PublicRoute
+            <Route exact
               path="/info"
               render={(props) => (
-								<Info {...props} onRouteChange={this.handleRouteChange} />
+								<Info {...props} />
 							)}
             />
-            <PublicRoute
-              path="/signup"
+            <Route exact
+              path="/lobby"
               render={(props) => (
-								<Signup {...props} onRouteChange={this.handleRouteChange} />
-							)}
-            />
-            <PublicRoute
-              path="/login"
-              render={(props) => (
-								<Login {...props} onRouteChange={this.handleRouteChange} />
+								<Lobby {...props} onStateChange={this.handleStateChange} />
 							)}
             />
           </Switch>

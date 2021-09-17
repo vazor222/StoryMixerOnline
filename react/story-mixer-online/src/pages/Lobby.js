@@ -9,10 +9,16 @@ export default class Lobby extends Component {
 
 	constructor(props) {
 		super(props);
+		console.log("Lobby ctor");
+		console.log("props");
+		console.log(props);
+		console.log("state before");
+		console.log(this.state);
 		this.state = {
-			error: null,
-			chosen_character: ''
+			error: null
 		};
+		console.log("state after");
+		console.log(this.state);
 		this.handleCharacterChange = this.handleCharacterChange.bind(this);
 		this.handleStartGameSubmit = this.handleStartGameSubmit.bind(this);
 	}
@@ -39,6 +45,11 @@ export default class Lobby extends Component {
 			this.setState({ error: error.message });
 		}
 	}
+	
+	handleCancel(event) {
+		event.preventDefault();
+		console.log("TODO: cancel/exit lobby/close lobby/delete room");
+	}
 
 	render() {
 		const gymGuyAvatarStyle = {
@@ -62,6 +73,9 @@ export default class Lobby extends Component {
 		return (
 			<div>
 				<p>Waiting for other players...</p>
+				<p>To play: Go to [this host] and use this Game Room Code:<br />
+				{this.props.roomCodeToJoin}<br />
+				and then fill in your Player Name, and then click Join!</p>
 				<img src={FairyMascotSplashImage} alt="Fairy Mascot" style={{width:"100%"}} /><br />
 				<hr />
 				{/* debug start test avatar */}
@@ -69,15 +83,22 @@ export default class Lobby extends Component {
 					<img id="testavatar" style={imgStyle} src={BlueHairIdleImage} alt="GymGuyTest"/><br />
 				</div>
 				{/* debug end test avatar */}
+				<hr />
 				<div id="startGame">
 					<form onSubmit={this.handleStartGameSubmit}>
 						<b>Start Story Mixer!</b><br />
 						<button id="start_game_button" type="submit">Start Game</button><br />
 					</form>
 				</div>
+				<div id="cancel">
+					<form onSubmit={this.handleCancel}>
+						<b>Cancel and exit lobby.</b><br />
+						<button id="cancel_button" type="submit">Cancel</button><br />
+					</form>
+				</div>
 				<hr />
 				<div align="right" style={{fontSize:"72px"}}>
-					<Link to="/info">Info</Link> {/*make this a circled "i" info button*/}
+					<Link to="/info">Info</Link> {/* TODO: make this a circled "i" info button*/}
 				</div>
 				By using this website you agree that we are not liable for your use of our game, any content you submit is fair use, and you will not disrupt or harass other players.<br />
 				<br />

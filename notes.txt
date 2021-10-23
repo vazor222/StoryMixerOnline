@@ -234,7 +234,8 @@ figure out how to hide API key
 decide more of the design
 create a production bundle
   -use `npm run build`
-
+advertise
+  -make all the character’s win and defeat animations into free animated text stickers?
 
 
 - done -

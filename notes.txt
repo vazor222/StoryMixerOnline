@@ -212,6 +212,7 @@ make reverse
 set loop once
 
 - Peter tasks -
+rework jock and vamp
 concept dragon and cute animal
 finish character animations
 rework ui concepts to include characters
@@ -220,10 +221,12 @@ playtest and feedback
 
 - todo -
 finish building out pages in react - https://css-tricks.com/building-a-real-time-chat-app-with-react-and-firebase/
-  -lift state up to App (figure out how to read state in child / Home and /lobby Lobby?)
+  -lift state up to App (figure out how to read state in child / Home and /lobby Lobby)
 https://reactjs.org/docs/state-and-lifecycle.html
 https://reactjs.org/docs/lifting-state-up.html#lifting-state-up
-   -just got onStateChange working so Home can send creator name to App, but can Lobby read creator name?
+    -just got onStateChange working so Home can send creator name to App, but can Lobby read creator name? yes - done
+    -can Home send two things to App which are then read by Lobby? yes - done
+    -make Lobby show the creatorPlayerName too
   -clean up all the debug rooms
 handle detecting navigate away/close browser to close rooms?
 add new animations for character select

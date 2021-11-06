@@ -19,9 +19,9 @@ class App extends Component {
     super(props);
     this.state = {
       loading: true,
-			creator_player_name: '',
+			creatorPlayerName: '',
 			roomCodeToJoin: '',
-			chosen_character: ''
+			chosenCharacter: ''
     };
   }
 
@@ -35,7 +35,9 @@ class App extends Component {
   // a normal function would mess up the "this" reference
   handleStateChange = (name, value) => {
 		console.log("handleStateChange called: "+name+","+value);
-		this.setState({name: value});
+		var newState = {};
+		newState[name] = value;
+		this.setState(newState);
   }
 
   render() {
@@ -46,10 +48,13 @@ class App extends Component {
     ) : (
         <Router>
           <Switch>
-            <Route exact
+						<Route exact
 							path="/"
 							render={(props) => (
-								<Home {...props} onStateChange={this.handleStateChange} />
+								<Home {...props} 
+									creatorPlayerName={this.state.creatorPlayerName} 
+									onStateChange={this.handleStateChange} 
+								/>
 							)}
 						/>
             <Route exact
@@ -61,7 +66,10 @@ class App extends Component {
             <Route exact
               path="/lobby"
               render={(props) => (
-								<Lobby {...props} onStateChange={this.handleStateChange} />
+								<Lobby {...props} 
+									roomCodeToJoin={this.state.roomCodeToJoin} 
+									creatorPlayerName={this.state.creatorPlayerName} 
+									onStateChange={this.handleStateChange} />
 							)}
             />
           </Switch>

@@ -21,6 +21,8 @@ export function createRoom(creator_player_name, app, roomCreatedCallback)
 	console.log("createRoom called! creator_player_name:"+creator_player_name);
 
 	var newRoomCode = generateRoomCode();
+	
+	console.log("newRoomCode:"+newRoomCode);
 
 	try
 	{

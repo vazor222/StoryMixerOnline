@@ -9,16 +9,9 @@ export default class Lobby extends Component {
 
 	constructor(props) {
 		super(props);
-		console.log("Lobby ctor");
-		console.log("props");
-		console.log(props);
-		console.log("state before");
-		console.log(this.state);
 		this.state = {
 			error: null
 		};
-		console.log("state after");
-		console.log(this.state);
 		this.handleCharacterChange = this.handleCharacterChange.bind(this);
 		this.handleStartGameSubmit = this.handleStartGameSubmit.bind(this);
 	}

@@ -16,24 +16,19 @@ export default class Home extends Component {
 		this.handleCreateSubmit = this.handleCreateSubmit.bind(this);
 	}
 	
-	handleChange(event) {
-		this.setState({
-			[event.target.name]: event.target.value
-		});
-	}
-	
 	handleCreatorPlayerNameChange(event) {
-		this.props.onStateChange("creator_player_name", event.target.value);
+		this.props.onStateChange("creatorPlayerName", event.target.value);
 	}
 	
 	handleCreateSubmit(event) {
 		event.preventDefault();
 		this.setState({ error: '' });
 		try {
-			createRoom(this.state.creator_player_name, this, (newRoomCode) => {
+			console.log("handleCreateSubmit calling createRoom room creatorPlayerName:"+this.props.creatorPlayerName);
+			createRoom(this.props.creatorPlayerName, this, (newRoomCode) => {
 				this.props.onStateChange("roomCodeToJoin", newRoomCode);
 				console.log("Home room created callback");
-				console.log(this.app.state);
+				console.log(this.props);
 				this.props.history.replace("/lobby");  // redirect to lobby
 			});
 		} catch (error) {
@@ -83,7 +78,7 @@ export default class Home extends Component {
 					<form onSubmit={this.handleCreateSubmit}>
 						<b>Create a game?</b><br />
 						Creator Player Name:<br />
-						<input onChange={this.handleCreatorPlayerNameChange} id="creator_player_name" value={this.state.creator_player_name} /><br />
+						<input onChange={this.handleCreatorPlayerNameChange} id="creator_player_name" /><br />
 						<button type="submit" id="create_button">Create</button><br />
 					</form>
 				</div>

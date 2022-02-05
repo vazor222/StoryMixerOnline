@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { createRoom } from '../helpers/rooms';
+import { listenToRoom } from '../helpers/rooms';
 import FairyMascotSplashImage from '../assets/Fairy_Mascot.jpg';
 import GymGuySuccessImage from '../assets/GymGuySuccess.png';
 import BlueHairIdleImage from '../assets/blue_idle.png';
@@ -10,10 +10,19 @@ export default class Lobby extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
+			players: [],
 			error: null
 		};
 		this.handleCharacterChange = this.handleCharacterChange.bind(this);
 		this.handleStartGameSubmit = this.handleStartGameSubmit.bind(this);
+		
+		// TODO: display randomly assigned avatar
+		
+		console.log("calling listenToRoom on lobby startup");
+		console.log(props);
+		console.log(props.roomCodeToJoin);
+		console.log(this.handleRoomPlayersUpdated);
+		listenToRoom(props.roomCodeToJoin, this.handleRoomPlayersUpdated);
 	}
 	
 	handleChange(event) {
@@ -27,6 +36,14 @@ export default class Lobby extends Component {
 			chosen_character: event.target.id
 		});
 		// TODO: update borders
+	}
+	
+	handleRoomPlayersUpdated(players) {
+		console.log("handleRoomPlayersUpdated called");
+		console.log(players);
+		
+		// put players in player display list (players by itself is a shortcut to "players: players")
+		this.setState({ players });
 	}
 	
 	handleStartGameSubmit(event) {
@@ -69,7 +86,18 @@ export default class Lobby extends Component {
 				<p>To play: Go to [this host] and use this Game Room Code:<br />
 				{this.props.roomCodeToJoin}<br />
 				and then fill in your Player Name, and then click Join!</p>
-				<img src={FairyMascotSplashImage} alt="Fairy Mascot" style={{width:"100%"}} /><br />
+				Players joined so far:<br />
+				{this.props.creatorPlayerName} (Room Owner)<br /> {/* TODO: display list of users and if == creatorPlayerName then say Room Owner */}
+				<div className="players">
+					{this.state.players.map(player => {
+						return <p>{player}</p>
+						//if(player == creatorPlayerName)
+						//	return {player} (Room Creator)<br />
+						//else
+						//	return {player}<br />
+						//return <p key={player.timestamp}>{player.content}</p>
+					})}
+				</div>
 				<hr />
 				{/* debug start test avatar */}
 				<div id="avatar-container" style={gymGuyAvatarStyle}>
@@ -80,6 +108,7 @@ export default class Lobby extends Component {
 				<div id="startGame">
 					<form onSubmit={this.handleStartGameSubmit}>
 						<b>Start Story Mixer!</b><br />
+						(Press this when everyone has joined.)<br />
 						<button id="start_game_button" type="submit">Start Game</button><br />
 					</form>
 				</div>

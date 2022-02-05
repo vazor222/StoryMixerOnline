@@ -226,7 +226,13 @@ https://reactjs.org/docs/state-and-lifecycle.html
 https://reactjs.org/docs/lifting-state-up.html#lifting-state-up
     -just got onStateChange working so Home can send creator name to App, but can Lobby read creator name? yes - done
     -can Home send two things to App which are then read by Lobby? yes - done
-    -make Lobby show the creatorPlayerName too
+    -make Lobby show the creatorPlayerName too - done
+    -fix issue with listenToRoom being called twice on lobby join
+    -fix issue with db.ref not being a function
+    -allow user to join
+    -make Lobby listen for changes to player list and update it (and their chosen avatars)
+    -display which player is the Room Creator with an added " (Room Creator)"
+    -add avatar selection to lobby
   -clean up all the debug rooms
 handle detecting navigate away/close browser to close rooms?
 add new animations for character select

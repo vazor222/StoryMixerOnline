@@ -46,7 +46,39 @@ export function createRoom(creator_player_name, app, roomCreatedCallback)
 	}
 }
 
-export function joinRoomFromForm()
+export async function joinRoomFromForm(roomCodeToJoin, joinPlayerName, roomJoinedCallback)
 {
-	console.log("joinRoomFromForm called!");
+	console.log("joinRoomFromForm called! roomCodeToJoin:"+roomCodeToJoin);
+
+	try
+	{
+		// update the room entry in the database to add ourselves to the player list
+		await db.ref('rooms/'+roomCodeToJoin+'/players').push(joinPlayerName);
+		roomJoinedCallback();
+	}
+	catch(err)
+	{
+		console.error(err);
+	}
+}
+
+export function listenToRoom(roomCode, roomPlayersUpdateCallback)
+{
+	console.log("listenToRoom called - roomCode:"+roomCode);
+	try
+	{
+		db.ref("rooms/"+roomCode+"/players").on("value", snapshot => {
+			let players = [];
+			snapshot.forEach((snap) => {
+				players.push(snap.val());
+			});
+			console.log("got players");
+			console.log(players);
+			roomPlayersUpdateCallback(players);
+		});
+	}
+	catch(error)
+	{
+		console.error("ERROR: "+error);
+	}
 }

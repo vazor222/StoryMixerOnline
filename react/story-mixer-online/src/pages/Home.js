@@ -10,14 +10,53 @@ export default class Home extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
+			joinRoomCode: '',
+			joinPlayerName: '',
 			error: null
 		};
 		this.handleCreatorPlayerNameChange = this.handleCreatorPlayerNameChange.bind(this);
 		this.handleCreateSubmit = this.handleCreateSubmit.bind(this);
 	}
 	
+	handleJoinRoomCodeChange(event) {
+		this.setState({joinRoomCode: event.target.value});
+	}
+	
+	handleJoinPlayerNameChange(event) {
+		console.log("handleJoinPlayerNameChange");
+		console.log(event);
+		this.setState({joinPlayerName: event.target.value});
+	}
+	
 	handleCreatorPlayerNameChange(event) {
 		this.props.onStateChange("creatorPlayerName", event.target.value);
+	}
+	
+	handleJoinClick(event) {
+		event.preventDefault();
+		if( this.state.joinRoomCode.length != 5 )
+		{
+			console.error('Invalid room code!');
+			console.log(this.state);
+			console.log(this.state.joinRoomCode);
+			console.log(this.state.error);
+			alert('Invalid room code!');
+			this.setState({ error: 'Invalid room code!' });
+			console.log(this.state.error);
+			return;
+		}
+		this.setState({ error: '' });
+		try {
+			console.log("handleJoinClick calling joinRoomFromForm room joinPlayerName:"+this.state.joinPlayerName);
+			joinRoomFromForm(this.state.joinRoomCode, this.state.joinPlayerName, () => {
+				this.props.onStateChange("roomCodeToJoin", this.state.joinRoomCode);
+				console.log("Home room joined callback");
+				console.log(this.props);
+				this.props.history.replace("/lobby");  // redirect to lobby
+			});
+		} catch (error) {
+			this.setState({ error: error.message });
+		}
 	}
 	
 	handleCreateSubmit(event) {
@@ -65,13 +104,16 @@ export default class Home extends Component {
 					<img id="testavatar" style={imgStyle} src={BlueHairIdleImage} alt="GymGuyTest"/><br />
 				</div>
 				{/* debug end test avatar */}
+				<div id="error">
+					{this.state.error ? <p>{this.state.error}</p> : null}
+				</div>
 				<div id="join">
 					<b>Join an existing game?</b><br />
 					Game Room Code:<br />
-					<input id="room_code" /><br />
+					<input onChange={this.handleJoinRoomCodeChange} id="room_code" /><br />
 					Player Name:<br />
-					<input id="player_name" /><br />
-					<button id="join_button" onClick={joinRoomFromForm}>Join</button><br />
+					<input onChange={this.handleJoinPlayerNameChange} id="player_name" /><br />
+					<button id="join_button" onClick={this.handleJoinClick}>Join</button><br />
 				</div>
 				<hr />
 				<div id="create">

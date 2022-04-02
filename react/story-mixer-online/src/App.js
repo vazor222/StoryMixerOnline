@@ -34,7 +34,7 @@ class App extends Component {
 	// needs to be a lambda because this can be called by other classes and 
 	// a normal function would mess up the "this" reference
 	handleStateChange = (name, value) => {
-		console.log("handleStateChange called: "+name+","+value);
+		console.log("handleStateChange called- "+name+":"+value);
 		var newState = {};
 		newState[name] = value;
 		this.setState(newState);

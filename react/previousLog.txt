@@ -1,0 +1,78 @@
+handleJoinPlayerNameChange Home.js:29
+Object { dispatchConfig: {…}, _targetInst: {…}, _dispatchListeners: handleJoinPlayerNameChange(), _dispatchInstances: {…}, nativeEvent: input, type: "change", target: input#player_name, currentTarget: input#player_name
+, eventPhase: 3, bubbles: true, … }
+Home.js:30
+handleJoinPlayerNameChange Home.js:29
+Object { dispatchConfig: {…}, _targetInst: {…}, _dispatchListeners: handleJoinPlayerNameChange(), _dispatchInstances: {…}, nativeEvent: input, type: "change", target: input#player_name, currentTarget: input#player_name
+, eventPhase: 3, bubbles: true, … }
+Home.js:30
+handleJoinPlayerNameChange Home.js:29
+Object { dispatchConfig: {…}, _targetInst: {…}, _dispatchListeners: handleJoinPlayerNameChange(), _dispatchInstances: {…}, nativeEvent: input, type: "change", target: input#player_name, currentTarget: input#player_name
+, eventPhase: 3, bubbles: true, … }
+Home.js:30
+handleJoinClick calling joinRoomFromForm room joinPlayerName:troll2 Home.js:53
+joinRoomFromForm called! roomCodeToJoin:NT280 rooms.js:56
+Object { __: {…}, f_: {…}, d_: null, firestore: {…}, lf: {…} }
+rooms.js:62
+Found room:NT280 rooms.js:66
+Object { code: "NT280", players: (2) […], creator: "nodependabot" }
+rooms.js:67
+roomPlayers before rooms.js:69
+Array [ "nodependabot", "dependabotfree" ]
+rooms.js:70
+roomPlayers after rooms.js:72
+Array(3) [ "nodependabot", "dependabotfree", "troll2" ]
+rooms.js:73
+Room joined! roomCodeToJoin:NT280 joinPlayerName:troll2 rooms.js:75
+handleStateChange called- roomCodeToJoin:NT280 App.js:37
+Home room joined callback Home.js:56
+Object { history: {…}, location: {…}, match: {…}, staticContext: undefined, creatorPlayerName: "", onStateChange: handleStateChange(name, value)
+ }
+Home.js:57
+calling listenToRoom on lobby startup Lobby.js:21
+Object { history: {…}, location: {…}, match: {…}, staticContext: undefined, roomCodeToJoin: "NT280", creatorPlayerName: "", onStateChange: handleStateChange(name, value)
+ }
+Lobby.js:22
+NT280 Lobby.js:23
+function handleRoomPlayersUpdated(players)
+Lobby.js:24
+listenToRoom called - roomCode:NT280 rooms.js:97
+ERROR: TypeError: _services_firebase__WEBPACK_IMPORTED_MODULE_0__.db.ref is not a function index.js:1
+    e index.js:1
+    listenToRoom rooms.js:113
+    Lobby Lobby.js:25
+    React 8
+    unstable_runWithPriority scheduler.development.js:653
+    React 6
+    unlisten Router.js:34
+    listener history.js:155
+    notifyListeners history.js:173
+    notifyListeners history.js:172
+    setState history.js:288
+    replace history.js:402
+    confirmTransitionTo history.js:145
+    replace history.js:385
+    handleJoinClick Home.js:58
+    joinRoomFromFormAsync rooms.js:76
+    (Async: promise callback)
+    joinRoomFromFormAsync rooms.js:74
+    (Async: promise callback)
+    joinRoomFromFormAsync rooms.js:63
+    joinRoomFromForm rooms.js:51
+    handleJoinClick Home.js:54
+    React 17
+    unstable_runWithPriority scheduler.development.js:653
+    React 18
+    unstable_runWithPriority scheduler.development.js:653
+    React 6
+    js index.js:6
+    Webpack 7
+calling listenToRoom on lobby startup Lobby.js:21
+Object { history: {…}, location: {…}, match: {…}, staticContext: undefined, roomCodeToJoin: "NT280", creatorPlayerName: "", onStateChange: handleStateChange(name, value)
+ }
+Lobby.js:22
+NT280 Lobby.js:23
+function handleRoomPlayersUpdated(players)
+Lobby.js:24
+listenToRoom called - roomCode:NT280 rooms.js:97
+ERROR: TypeError: _services_firebase__WEBPACK_IMPORTED_MODULE_0__.db.ref is not a function

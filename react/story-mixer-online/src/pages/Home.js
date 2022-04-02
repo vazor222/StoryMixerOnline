@@ -14,7 +14,10 @@ export default class Home extends Component {
 			joinPlayerName: '',
 			error: null
 		};
+		this.handleJoinRoomCodeChange = this.handleJoinRoomCodeChange.bind(this);
 		this.handleCreatorPlayerNameChange = this.handleCreatorPlayerNameChange.bind(this);
+		this.handleJoinPlayerNameChange = this.handleJoinPlayerNameChange.bind(this);
+		this.handleJoinClick = this.handleJoinClick.bind(this);
 		this.handleCreateSubmit = this.handleCreateSubmit.bind(this);
 	}
 	
@@ -34,7 +37,7 @@ export default class Home extends Component {
 	
 	handleJoinClick(event) {
 		event.preventDefault();
-		if( this.state.joinRoomCode.length != 5 )
+		if( this.state.joinRoomCode.length !== 5 )
 		{
 			console.error('Invalid room code!');
 			console.log(this.state);

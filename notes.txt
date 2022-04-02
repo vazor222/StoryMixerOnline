@@ -212,7 +212,6 @@ make reverse
 set loop once
 
 - Peter tasks -
-rework jock and vamp
 concept dragon and cute animal
 finish character animations
 rework ui concepts to include characters
@@ -220,6 +219,7 @@ playtest and feedback
 
 
 - todo -
+check email for security advisory on storymixeronline and try to fix
 finish building out pages in react - https://css-tricks.com/building-a-real-time-chat-app-with-react-and-firebase/
   -lift state up to App (figure out how to read state in child / Home and /lobby Lobby)
 https://reactjs.org/docs/state-and-lifecycle.html
@@ -248,6 +248,9 @@ advertise
 
 
 - done -
+ping pong vamp 1-1-2-3-4-4-3-2-1-1 etc. for idle - done
+build failure and idle and success - done
+determine how to crop - use ezgif.com - done
 fix create not working - done
   -see if we can add generated code as key - yep - done
   -change to new parameters - done

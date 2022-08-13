@@ -27,10 +27,15 @@ export function createRoom(creator_player_name, app, roomCreatedCallback)
 	try
 	{
 		// makes the room entry in the database
+		var roomPlayers = {};
+		roomPlayers[creator_player_name] = {
+					name: creator_player_name,
+					portrait: 0,
+					selftrait: ""};
 		db.collection('rooms').doc(newRoomCode).set({
 			code: newRoomCode,
 			creator: creator_player_name,
-			players: [creator_player_name]
+			players: roomPlayers
 		})
 		.then(() => {
 			console.log("Document written! id:"+newRoomCode);
@@ -68,7 +73,11 @@ async function joinRoomFromFormAsync(roomCodeToJoin, joinPlayerName, roomJoinedC
 				var roomPlayers = room.data().players;
 				console.log("roomPlayers before");
 				console.log(roomPlayers);
-				roomPlayers.push(joinPlayerName);
+				roomPlayers[joinPlayerName] = {
+					name: joinPlayerName,
+					portrait: 0,
+					selftrait: ""
+				}
 				console.log("roomPlayers after");
 				console.log(roomPlayers);
 				roomRef.update({players: roomPlayers}).then(() => {
@@ -102,11 +111,9 @@ export function listenToRoom(roomCode, roomPlayersUpdateCallback)
 			if( room.exists )
 			{
 				console.log("Found listen room:"+room.data());
-				roomRef.on("value", snapshot => {
-					let players = [];
-					snapshot.forEach((snap) => {
-						players.push(snap.val());
-					});
+				roomRef.onSnapshot((snapshot) => {
+					console.log("Got room update:"+snapshot.data());
+					let players = snapshot.data().players;
 					console.log("got players");
 					console.log(players);
 					roomPlayersUpdateCallback(players);

@@ -10,26 +10,29 @@ export default class Lobby extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			players: [],
+			players: {},
 			error: null
 		};
 		this.handleCharacterChange = this.handleCharacterChange.bind(this);
 		this.handleStartGameSubmit = this.handleStartGameSubmit.bind(this);
-		
+		this.handleRoomPlayersUpdated = this.handleRoomPlayersUpdated.bind(this);
+	}
+	
+	componentDidMount() {
 		// TODO: display randomly assigned avatar
 		
 		console.log("calling listenToRoom on lobby startup");
-		console.log(props);
-		console.log(props.roomCodeToJoin);
+		console.log(this.props);
+		console.log(this.props.roomCodeToJoin);
 		console.log(this.handleRoomPlayersUpdated);
-		listenToRoom(props.roomCodeToJoin, this.handleRoomPlayersUpdated);
+		listenToRoom(this.props.roomCodeToJoin, this.handleRoomPlayersUpdated);
 	}
 	
-	handleChange(event) {
-		this.setState({
-			[event.target.name]: event.target.value
-		});
-	}
+	//handleChange(event) {
+	//	this.setState({
+	//		[event.target.name]: event.target.value
+	//	});
+	//}
 	
 	handleCharacterChange(event) {
 		this.setState({
@@ -87,16 +90,12 @@ export default class Lobby extends Component {
 				{this.props.roomCodeToJoin}<br />
 				and then fill in your Player Name, and then click Join!</p>
 				Players joined so far:<br />
-				{this.props.creatorPlayerName} (Room Owner)<br /> {/* TODO: display list of users and if == creatorPlayerName then say Room Owner */}
 				<div className="players">
-					{this.state.players.map(player => {
-						return <p>{player}</p>
-						//if(player == creatorPlayerName)
-						//	return {player} (Room Creator)<br />
-						//else
-						//	return {player}<br />
+					{Object.entries(this.state.players).map(([key, value]) => (
+						<p key={key}>{key} portrait:{value.portrait}</p>
+						//<p key={key}>{key}{key == this.props.creatorPlayerName? " (Room Owner)" : null}</p>
 						//return <p key={player.timestamp}>{player.content}</p>
-					})}
+					))}
 				</div>
 				<hr />
 				{/* debug start test avatar */}

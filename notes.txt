@@ -216,10 +216,13 @@ set loop once
 finish character animations
 rework ui concepts to include characters
 playtest and feedback
+redo/touch up animations as needed
+wishlist: add in optional funny animations like the pig smiling on defeat which only play one in a thousand times
 
 
 - todo -
 get room listening working and display player list on host and client
+character select (portrait) in lobby
 finish building out pages in react - https://css-tricks.com/building-a-real-time-chat-app-with-react-and-firebase/
   -lift state up to App (figure out how to read state in child / Home and /lobby Lobby)
 https://reactjs.org/docs/state-and-lifecycle.html

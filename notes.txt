@@ -214,6 +214,8 @@ set loop once
 
 - Peter tasks -
 finish character animations
+  -last time: finished pig
+  -next up: dragon
 rework ui concepts to include characters
 playtest and feedback
 redo/touch up animations as needed

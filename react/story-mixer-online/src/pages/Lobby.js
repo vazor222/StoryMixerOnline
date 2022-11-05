@@ -15,6 +15,7 @@ export default class Lobby extends Component {
 		};
 		this.handleCharacterChange = this.handleCharacterChange.bind(this);
 		this.handleStartGameSubmit = this.handleStartGameSubmit.bind(this);
+		this.handleCancel = this.handleCancel.bind(this);
 		this.handleRoomPlayersUpdated = this.handleRoomPlayersUpdated.bind(this);
 	}
 	
@@ -62,6 +63,8 @@ export default class Lobby extends Component {
 	handleCancel(event) {
 		event.preventDefault();
 		console.log("TODO: cancel/exit lobby/close lobby/delete room");
+		
+		this.props.history.replace("/");  // redirect to home
 	}
 
 	render() {
@@ -85,16 +88,14 @@ export default class Lobby extends Component {
 		};
 		return (
 			<div>
-				<p>Waiting for other players...</p>
-				<p>To play: Go to [this host] and use this Game Room Code:<br />
-				{this.props.roomCodeToJoin}<br />
-				and then fill in your Player Name, and then click Join!</p>
-				Players joined so far:<br />
-				<div className="players">
-					{Object.entries(this.state.players).map(([key, value]) => (
-						<p key={key}>{key} portrait:{value.portrait}</p>
-						//<p key={key}>{key}{key == this.props.creatorPlayerName? " (Room Owner)" : null}</p>
-						//return <p key={player.timestamp}>{player.content}</p>
+				<p>Troupe Code</p>
+				<p>{this.props.roomCodeToJoin}</p>
+				<div className="playerListContainer">
+					{Object.entries(this.state.players).map(([key, value], index) => (
+						<div className="lobbyBox" key={"playerdiv"+index+""+key}>
+							<div className="lobbyNameBox">{key}</div><br />
+							<img className="lobbyNameThumb" src={BlueHairIdleImage} />
+						</div>
 					))}
 				</div>
 				<hr />
@@ -118,9 +119,6 @@ export default class Lobby extends Component {
 					</form>
 				</div>
 				<hr />
-				<div align="right" style={{fontSize:"72px"}}>
-					<Link to="/info">Info</Link> {/* TODO: make this a circled "i" info button*/}
-				</div>
 				By using this website you agree that we are not liable for your use of our game, any content you submit is fair use, and you will not disrupt or harass other players.<br />
 				<br />
 			</div>

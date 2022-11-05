@@ -22,6 +22,8 @@ export default class Home extends Component {
 	}
 	
 	handleJoinRoomCodeChange(event) {
+		console.log("handleJoinRoomCodeChange");
+		console.log(event);
 		this.setState({joinRoomCode: event.target.value});
 	}
 	
@@ -37,6 +39,12 @@ export default class Home extends Component {
 	
 	handleJoinClick(event) {
 		event.preventDefault();
+		// TODO: remove these debug default value setters for final release
+		if( this.state.joinRoomCode.length == 0 )
+		{
+			this.state.joinRoomCode = "BG263";
+			this.state.joinPlayerName = "joiner8136";
+		}
 		if( this.state.joinRoomCode.length !== 5 )
 		{
 			console.error('Invalid room code!');
@@ -129,7 +137,7 @@ export default class Home extends Component {
 				</div>
 				<hr />
 				<div align="right" style={{fontSize:"72px"}}>
-					<Link to="/info">Info</Link> {/*make this a circled "i" info button*/}
+					<Link to="/info">Info</Link> {/*make this a circled "?" info button*/}
 				</div>
 				By using this website you agree that we are not liable for your use of our game, any content you submit is fair use, and you will not disrupt or harass other players.<br />
 				<br />

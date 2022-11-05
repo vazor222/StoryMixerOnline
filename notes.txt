@@ -11,7 +11,16 @@ How to Play (shows instructions)
 Room Lobby
 Shows room code
 Shows players joined
-Start Game
+Start Game (host only)
+
+layout and display of player list
+  -show room code at top (pub code, group code, troupe code)
+  -show thumbnail icons of characters under players who choose them
+  -show random character playing idle anim under the playerlist
+    -arrows left and right to select characters
+    -success anim when you click them again to indicate
+
+
 
 Character Creation
 
@@ -216,6 +225,7 @@ set loop once
 finish character animations
   -last time: finished pig
   -next up: dragon
+make arrow buttons
 rework ui concepts to include characters
 playtest and feedback
 redo/touch up animations as needed
@@ -224,7 +234,13 @@ wishlist: add in optional funny animations like the pig smiling on defeat which 
 
 - todo -
 figure out layout and display of player list
+  -show thumbnail icons of characters under players who choose them
+  -show random character playing idle anim under the playerlist
+    -arrows left and right to select characters (duplicates ok)
+    -success anim when you click them again to indicate you chose them
+  -start game and cancel buttons below that (only host)
 character select (use portrait) in lobby
+display font
 finish building out pages in react - https://css-tricks.com/building-a-real-time-chat-app-with-react-and-firebase/
   -lift state up to App (figure out how to read state in child / Home and /lobby Lobby)
 https://reactjs.org/docs/state-and-lifecycle.html
@@ -239,6 +255,7 @@ https://reactjs.org/docs/lifting-state-up.html#lifting-state-up
     -display which player is the Room Creator with an added " (Room Creator)"
     -add avatar selection to lobby
   -clean up all the debug rooms
+show character limit when you are typing?
 handle detecting navigate away/close browser to close rooms?
 add new animations for character select
 implement new UI design

@@ -1,0 +1,68 @@
+
+body {
+	margin:10px;
+	font-family:"Trebuchet MS", Arial, Helvetica, sans-serif
+}
+
+#box1, #box2{
+	width:200px;
+	height:200px;
+	margin:10px;
+	padding:10px;
+}
+
+#box1 {
+	background:#c00;
+}
+
+#box2 {
+	background:#ff0;
+}
+
+h2, p  {
+	padding:5px;
+}
+
+#box1 p, #box2 p {
+	white-space:pre;
+	font-size:smaller;
+	font-family:monospace;
+}
+
+div.playerListContainer {
+	border: 1px solid green;  /* TODO: remove this for release */
+	margin: 10px;
+	display: flex;
+	flex-flow: row wrap;
+}
+
+div.lobbyBox {
+	border: 1px solid black;  /* TODO: remove this for release */
+	padding: 5px;
+	text-align: center;
+}
+
+div.lobbyNameBox {
+	position: relative;
+	width: 300px;
+	height: 30px;
+	text-align: center;
+	background: gray;
+	border-radius: 8px;
+}
+
+img.lobbyNameThumb {
+	margin: 0;
+	width: 128px;
+}
+
+#border {
+  border: 1px solid black;
+}
+
+table, td {
+  border: 1px solid black;
+  margin-left: auto;
+  margin-right: auto;
+}
+

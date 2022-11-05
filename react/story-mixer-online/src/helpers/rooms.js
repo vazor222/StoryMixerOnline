@@ -73,6 +73,12 @@ async function joinRoomFromFormAsync(roomCodeToJoin, joinPlayerName, roomJoinedC
 				var roomPlayers = room.data().players;
 				console.log("roomPlayers before");
 				console.log(roomPlayers);
+				/*  TODO: enable this before release
+				if( roomPlayers[joinPlayerName] !== undefined ) {
+					console.error("player name "+joinPlayerName+" is taken!");
+					window.alert("Player name "+joinPlayerName+" is taken! Please try again.");
+					return;
+				}*/
 				roomPlayers[joinPlayerName] = {
 					name: joinPlayerName,
 					portrait: 0,

@@ -22,8 +22,8 @@ export default class Home extends Component {
 				<p>Code, Design - vazor - <a href="http://vazor222.com/" target="_blank">http://vazor222.com/</a></p>
 				
 				<h3>About</h3>
-				<p>This game was developed in vazor's spare time over the past few years. It is inspired by the original tabletop prototype of the same name which is mean to be a fun introduction to the idea of roleplaying a character with friends, and a casual party game anyone can play.</p>
-				<p>You can learn more about vazor and get in contact with feedback or questions by posting @vazor222 on Twitter, or joining the IGDA Utah group on Google, or joining the Experimental Gameplay group on LinkedIn.</p>
+				<p>This game was developed in vazor's spare time over the past few years. It is inspired by the original tabletop prototype of the same name. The game is meant to be an introduction to the idea of tabletop roleplaying games, but also a fun casual party game anyone can play.</p>
+				<p>You can learn more about vazor and send feedback or questions by posting @vazor222 on Twitter, or by joining the IGDA Utah group on Google, or by joining the Experimental Gameplay group on LinkedIn.</p>
 				
 				<Link to="/">Home</Link>
 			</div>

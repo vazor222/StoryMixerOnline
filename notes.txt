@@ -234,6 +234,7 @@ wishlist: add in optional funny animations like the pig smiling on defeat which 
 
 
 - todo -
+revert/simplify the onLoad stuff (don't need to wait for end of animation to switch to victory animation, but do keep the wait for victory animation to play and then return to idle)
 figure out layout and display of player list
   -show thumbnail icons (scaled down but use the regular animations) of characters under players who choose them
   -figure out rounding edges

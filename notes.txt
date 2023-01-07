@@ -222,10 +222,11 @@ make reverse
 set loop once
 
 - Peter tasks -
+rework character animations to fit in 380 x 480 frame
+rework character victory and defeat animations to have a built in 1 second pause at the end
 finish character animations
-  -last time: finished pig
-  -next up: dragon
-make arrow buttons
+  -last time: finished dragon
+  -next up: pirate
 rework ui concepts to include characters
 playtest and feedback
 redo/touch up animations as needed
@@ -234,12 +235,12 @@ wishlist: add in optional funny animations like the pig smiling on defeat which 
 
 - todo -
 figure out layout and display of player list
-  -show thumbnail icons of characters under players who choose them
+  -show thumbnail icons (scaled down but use the regular animations) of characters under players who choose them
+  -figure out rounding edges
   -show random character playing idle anim under the playerlist
-    -arrows left and right to select characters (duplicates ok)
-    -success anim when you click them again to indicate you chose them
+    -success anim when you click them to indicate you chose them
   -start game and cancel buttons below that (only host)
-character select (use portrait) in lobby
+character select in lobby
 display font
 finish building out pages in react - https://css-tricks.com/building-a-real-time-chat-app-with-react-and-firebase/
   -lift state up to App (figure out how to read state in child / Home and /lobby Lobby)

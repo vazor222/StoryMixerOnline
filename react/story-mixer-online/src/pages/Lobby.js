@@ -4,6 +4,10 @@ import { listenToRoom } from '../helpers/rooms';
 import FairyMascotSplashImage from '../assets/Fairy_Mascot.jpg';
 import GymGuySuccessImage from '../assets/GymGuySuccess.png';
 import BlueHairIdleImage from '../assets/blue_idle.png';
+import BlueHairVictoryImage from '../assets/blue_victory.png';
+import DragonIdleImage from '../assets/dragon_idle.gif';
+
+var clicked = false;
 
 export default class Lobby extends Component {
 
@@ -17,6 +21,9 @@ export default class Lobby extends Component {
 		this.handleStartGameSubmit = this.handleStartGameSubmit.bind(this);
 		this.handleCancel = this.handleCancel.bind(this);
 		this.handleRoomPlayersUpdated = this.handleRoomPlayersUpdated.bind(this);
+		this.testAvatarImageLoaded = this.testAvatarImageLoaded.bind(this);
+		this.testAvatarImageLooped = this.testAvatarImageLooped.bind(this);
+		this.testAvatarImageClicked = this.testAvatarImageClicked.bind(this);
 	}
 	
 	componentDidMount() {
@@ -66,8 +73,33 @@ export default class Lobby extends Component {
 		
 		this.props.history.replace("/");  // redirect to home
 	}
+	
+	
+	testAvatarImageLoaded() {
+		console.log("test avatar loaded");
+		setInterval(this.testAvatarImageLooped, 6700);
+	}
+	
+	testAvatarImageLooped() {
+		if( clicked ) {
+			document.getElementById('testavatar').src = BlueHairVictoryImage;
+			setTimeout(this.testAvatarReset, 1000);
+			clicked = false;
+		}
+	}
+	
+	testAvatarReset() {
+		document.getElementById('testavatar').src = BlueHairIdleImage;
+	}
+
+	testAvatarImageClicked(e) {
+		console.log("test avatar image clicked t:"+e.target);
+		document.getElementById('avatar-container').style.border = "5px solid yellow";
+		clicked = true;
+	}
 
 	render() {
+		// TODO: move to style.css?
 		const gymGuyAvatarStyle = {
 			width:380,
 			height:480,
@@ -101,9 +133,19 @@ export default class Lobby extends Component {
 				<hr />
 				{/* debug start test avatar */}
 				<div id="avatar-container" style={gymGuyAvatarStyle}>
-					<img id="testavatar" style={imgStyle} src={BlueHairIdleImage} alt="GymGuyTest"/><br />
+					<img onLoad={this.testAvatarImageLoaded} onClick={this.testAvatarImageClicked} id="testavatar" style={imgStyle} src={BlueHairIdleImage} alt="GymGuyTest"/><br />
 				</div>
 				{/* debug end test avatar */}
+				{/* debug start test2 avatar */}
+				<div id="avatar-container" style={gymGuyAvatarStyle}>
+					<img onload={this.testAvatarImageLoaded} onclick={this.testAvatarImageClicked} id="test2avatar" style={imgStyle} src={GymGuySuccessImage} alt="GymGuyTest"/><br />
+				</div>
+				{/* debug end test2 avatar */}
+				{/* debug start test3 avatar */}
+				<div id="avatar-container" style={gymGuyAvatarStyle}>
+					<img onload={this.testAvatarImageLoaded} onclick={this.testAvatarImageClicked} id="test3avatar" style={imgStyle} src={DragonIdleImage} alt="GymGuyTest"/><br />
+				</div>
+				{/* debug end test3 avatar */}
 				<hr />
 				<div id="startGame">
 					<form onSubmit={this.handleStartGameSubmit}>

@@ -234,6 +234,7 @@ wishlist: add in optional funny animations like the pig smiling on defeat which 
 
 
 - todo -
+add ninja and piglet to lobby portraits
 figure out layout and display of player list
   -show thumbnail icons (scaled down but use the regular animations) of characters under players who choose them
   -figure out rounding edges

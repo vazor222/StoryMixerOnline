@@ -234,7 +234,6 @@ wishlist: add in optional funny animations like the pig smiling on defeat which 
 
 
 - todo -
-revert/simplify the onLoad stuff (don't need to wait for end of animation to switch to victory animation, but do keep the wait for victory animation to play and then return to idle)
 figure out layout and display of player list
   -show thumbnail icons (scaled down but use the regular animations) of characters under players who choose them
   -figure out rounding edges
@@ -242,6 +241,7 @@ figure out layout and display of player list
     -success anim when you click them to indicate you chose them
   -start game and cancel buttons below that (only host)
 character select in lobby
+  -TODO comments in Lobby.js
 display font
 finish building out pages in react - https://css-tricks.com/building-a-real-time-chat-app-with-react-and-firebase/
   -lift state up to App (figure out how to read state in child / Home and /lobby Lobby)

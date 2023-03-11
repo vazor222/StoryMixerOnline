@@ -88,7 +88,7 @@ async function joinRoomFromFormAsync(roomCodeToJoin, joinPlayerName, roomJoinedC
 				console.log(roomPlayers);
 				roomRef.update({players: roomPlayers}).then(() => {
 					console.log("Room joined! roomCodeToJoin:"+roomCodeToJoin+" joinPlayerName:"+joinPlayerName);
-					roomJoinedCallback();
+					roomJoinedCallback(room.creator);
 				}).catch((updateError) => {
 					console.log("Error joining room:"+roomCodeToJoin+" joinPlayerName:"+joinPlayerName);
 				});
@@ -136,5 +136,56 @@ export function listenToRoom(roomCode, roomPlayersUpdateCallback)
 	catch(err)
 	{
 		console.error("ERROR: "+err);
+	}
+}
+
+export function updatePlayerInRoom(roomCode, player, playerInRoomUpdatedCallback)
+{
+	console.log("updatePlayerInRoom called! roomCode:"+roomCode+" player:"+player);
+
+	try
+	{
+		// update the room entry in the database and update ourselves in the player list
+		var roomRef = db.collection('rooms').doc(roomCode);
+		console.log(roomRef);
+		roomRef.get().then((room) => {
+			if( room.exists )
+			{
+				console.log("Found room:"+roomCode);
+				console.log(room.data());
+				var roomPlayers = room.data().players;
+				console.log("roomPlayers before");
+				console.log(roomPlayers);
+				if( player.name !== this.props.playerName ) {
+					console.error("attempt to update player that is not yourself!");
+					window.alert("Server error: invalid player action, please refresh and try again.");
+					return;
+				}
+				if( roomPlayers[player.name] === undefined ) {
+					console.error("player name "+player.name+" not found!");
+					window.alert("Server error: no longer in room, please refresh and try again.");
+					return;
+				}
+				roomPlayers[player.name] = player;
+				console.log("roomPlayers after");
+				console.log(roomPlayers);
+				roomRef.update({players: roomPlayers}).then(() => {
+					console.log("Player updated! roomCode:"+roomCode+" player.name:"+player.name);
+					playerInRoomUpdatedCallback();
+				}).catch((updateError) => {
+					console.log("Error updating player in room:"+roomCode+" player.name:"+player.namee);
+				});
+			}
+			else
+			{
+				console.log("Room not found:"+roomCode);
+			}
+		}).catch((error) => {
+			console.log(error+" roomCode:"+roomCode);
+		});
+	}
+	catch(err)
+	{
+		console.error(err);
 	}
 }

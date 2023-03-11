@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { createRoom, joinRoomFromForm } from '../helpers/rooms';
 import FairyMascotSplashImage from '../assets/Fairy_Mascot.jpg';
-import GymGuySuccessImage from '../assets/GymGuySuccess.png';
+import GymGuySuccessImage from '../assets/GymGuy_victory.png';
 import BlueHairIdleImage from '../assets/blue_idle.png';
 
 export default class Home extends Component {
@@ -40,7 +40,7 @@ export default class Home extends Component {
 	handleJoinClick(event) {
 		event.preventDefault();
 		// TODO: remove these debug default value setters for final release
-		if( this.state.joinRoomCode.length == 0 )
+		if( this.state.joinRoomCode.length === 0 )
 		{
 			this.state.joinRoomCode = "BG263";
 			this.state.joinPlayerName = "joiner8136";
@@ -59,8 +59,10 @@ export default class Home extends Component {
 		this.setState({ error: '' });
 		try {
 			console.log("handleJoinClick calling joinRoomFromForm room joinPlayerName:"+this.state.joinPlayerName);
-			joinRoomFromForm(this.state.joinRoomCode, this.state.joinPlayerName, () => {
+			joinRoomFromForm(this.state.joinRoomCode, this.state.joinPlayerName, (creatorPlayerName) => {
 				this.props.onStateChange("roomCodeToJoin", this.state.joinRoomCode);
+				this.props.onStateChange("playerName", this.state.joinPlayerName);
+				this.props.onStateChange("creatorPlayerName", creatorPlayerName);
 				console.log("Home room joined callback");
 				console.log(this.props);
 				this.props.history.replace("/lobby");  // redirect to lobby
@@ -77,6 +79,8 @@ export default class Home extends Component {
 			console.log("handleCreateSubmit calling createRoom room creatorPlayerName:"+this.props.creatorPlayerName);
 			createRoom(this.props.creatorPlayerName, this, (newRoomCode) => {
 				this.props.onStateChange("roomCodeToJoin", newRoomCode);
+				this.props.onStateChange("playerName", this.props.creatorPlayerName);
+				this.props.onStateChange("creatorPlayerName", this.props.creatorPlayerName);
 				console.log("Home room created callback");
 				console.log(this.props);
 				this.props.history.replace("/lobby");  // redirect to lobby

@@ -21,6 +21,7 @@ class App extends Component {
 			loading: true,
 			creatorPlayerName: '',
 			roomCodeToJoin: '',
+			playerName: '',
 			chosenCharacter: ''
 		};
 	}

@@ -222,11 +222,11 @@ make reverse
 set loop once
 
 - Peter tasks -
-rework character animations to fit in 380 x 480 frame
+rework character animations to fit in 380 x 480 frame (just the robot is left I think)
 rework character victory and defeat animations to have a built in 1 second pause at the end
 finish character animations
-  -last time: finished dragon
-  -next up: pirate
+  -last time: pirate rigged
+  -next up: pirate animation 
 rework ui concepts to include characters
 playtest and feedback
 redo/touch up animations as needed
@@ -234,7 +234,8 @@ wishlist: add in optional funny animations like the pig smiling on defeat which 
 
 
 - todo -
-add ninja and piglet to lobby portraits
+vampire needs animation extended (or custom timing exception)
+get robot and update asset (or resize myself like I did vampire)
 figure out layout and display of player list
   -show thumbnail icons (scaled down but use the regular animations) of characters under players who choose them
   -figure out rounding edges
@@ -273,6 +274,10 @@ advertise
 
 
 - done -
+vampire needs cropping, can't redo animation - done
+  -scale 134%
+  -crop 56 13 380 480
+add ninja and piglet to lobby portraits
 revert security updates or learn new react api - reverted updates and it worked again - done
 check email for security advisory on storymixeronline and try to fix - done
 ping pong vamp 1-1-2-3-4-4-3-2-1-1 etc. for idle - done

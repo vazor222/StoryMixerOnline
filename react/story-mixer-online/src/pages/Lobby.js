@@ -14,7 +14,21 @@ import FoxCopVictoryImage from '../assets/fox_Victory.png';
 import DragonIdleImage from '../assets/Dragon-Idle.gif';
 import DragonDefeatImage from '../assets/Dragon-Defeat.gif';
 import DragonVictoryImage from '../assets/Dragon-Victory.gif';
+import NinjaIdleImage from '../assets/Ninja-idle.png';
+import NinjaDefeatImage from '../assets/Ninja-defeat.png';
+import NinjaVictoryImage from '../assets/Ninja-victory.png';
+import PigletIdleImage from '../assets/Piglet_Idle.png';
+import PigletDefeatImage from '../assets/Piglet_Defeat.png';
+import PigletVictoryImage from '../assets/Piglet_Victory.png';
+import VampIdleImage from '../assets/vamp_Idle.png';
+import VampDefeatImage from '../assets/vamp_Defeat.png';
+import VampVictoryImage from '../assets/vamp_Victory.png';
+import RobotIdleImage from '../assets/robot_Idle.png';
+import RobotDefeatImage from '../assets/robot_Defeat.png';
+import RobotVictoryImage from '../assets/robot_Victory.png';
 
+
+// this also determines the portraitIndex stored in firebase?
 const portraits = [
 	{
 		idle: BlueHairIdleImage,
@@ -35,7 +49,27 @@ const portraits = [
 		idle: DragonIdleImage,
 		success: DragonVictoryImage,
 		failure: DragonDefeatImage
-	}
+	},
+	{
+    idle: NinjaIdleImage,
+    success: NinjaVictoryImage,
+    failure: NinjaDefeatImage
+  },
+	{
+    idle: PigletIdleImage,
+    success: PigletVictoryImage,
+    failure: PigletDefeatImage
+  },
+	{
+    idle: VampIdleImage,
+    success: VampVictoryImage,
+    failure: VampDefeatImage
+  },
+	{
+    idle: RobotIdleImage,
+    success: RobotVictoryImage,
+    failure: RobotDefeatImage
+  }
 ];
 
 function portraitReset(portraitImage, index) {
@@ -141,12 +175,6 @@ export default class Lobby extends Component {
 
 	render() {
 		// TODO: move to style.css?
-		const gymGuyAvatarStyle = {
-			width:380,
-			height:480,
-			overflow:'hidden',
-			border:'5px solid black'
-		};
 		const gymGuyImgStyle = {
 			marginTop:-10,
 			marginRight:0,
@@ -175,8 +203,8 @@ export default class Lobby extends Component {
 				{/* show all the portraits and let the player click to select their avatar */}
 				<div className="portraitSelectionContainer">
 					{Object.entries(portraits).map(([key, value], index) => (
-						<div id={"avatar-container"+index} style={gymGuyAvatarStyle}>
-							<img onClick={(e) => this.portraitSelectionImageClicked(e, index)} id={"portrait"+index} style={imgStyle} src={value.idle} alt={value.idle+index}/><br />
+						<div id={"avatar-container"+index} className="lobbyAvatarStyle">
+							<img onClick={(e) => this.portraitSelectionImageClicked(e, index)} id={"portrait"+index} style={imgStyle} src={value.idle} alt={value.idle+index}/>
 						</div>
 					))}
 				</div>

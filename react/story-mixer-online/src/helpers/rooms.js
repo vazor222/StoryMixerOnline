@@ -16,7 +16,7 @@ function generateRoomCode()
 		String(Math.floor(Math.random()*1000)).padStart(3, '0');
 }
 
-export function createRoom(creator_player_name, app, roomCreatedCallback)
+export function createRoom(creator_player_name, roomCreatedCallback)
 {
 	console.log("createRoom called! creator_player_name:"+creator_player_name);
 

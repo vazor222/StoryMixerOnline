@@ -232,6 +232,12 @@ playtest and feedback
 redo/touch up animations as needed
 wishlist: add in optional funny animations like the pig smiling on defeat which only play one in a thousand times
 
+- BoDaly tasks -
+update node to 19.3.0
+if it fails, revert back to:
+node version v10.16.3
+npm version 6.9.0
+
 
 - todo -
 vampire needs animation extended (or custom timing exception)

@@ -234,6 +234,9 @@ wishlist: add in optional funny animations like the pig smiling on defeat which 
 
 
 - todo -
+revert local node installation to:
+node --version v10.16.3
+npm --version 6.9.0
 vampire needs animation extended (or custom timing exception)
 get robot and update asset (or resize myself like I did vampire)
 figure out layout and display of player list

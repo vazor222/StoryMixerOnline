@@ -1,21 +1,20 @@
-import React, { Component, useState } from 'react';
+import React, { Component, useContext, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { createRoom, joinRoomFromForm } from '../helpers/rooms';
 import FairyMascotSplashImage from '../assets/Fairy_Mascot.jpg';
 import GymGuySuccessImage from '../assets/GymGuy_victory.png';
 import BlueHairIdleImage from '../assets/blue_idle.png';
+import { useAppCtx } from '../store';
 
 export default function Home() {
 	const [ joinRoomCode, setJoinRoomCode ] = useState('');
 	const [ joinPlayerName, setJoinPlayerName ] = useState('');
 	const [ creatorPlayerName, setCreatorPlayerName ] = useState();
-	const [ playerName, setPlayerName ] = useState('');
-	const [ roomCodeToJoin, setRoomCodeToJoin ] = useState('');
 	const [ password, setPassword ] = useState('');
 	const [ email, setEmail ] = useState('');
-
 	const [ error, setError ] = useState(null);
 	const navigate = useNavigate();
+	const appCtx = useAppCtx()
 
 
 	const handleJoinRoomCodeChange = (e) => {
@@ -48,11 +47,11 @@ export default function Home() {
 		try {
 			console.log("handleJoinClick calling joinRoomFromForm room joinPlayerName:"+joinPlayerName);
 			joinRoomFromForm(joinRoomCode, joinPlayerName, (creatorPlayerName) => {
-				setRoomCodeToJoin(joinRoomCode);
-				setPlayerName(joinPlayerName);
+				appCtx.setRoomCode(joinRoomCode);
+				appCtx.setPlayerName(joinPlayerName);
 				setCreatorPlayerName(creatorPlayerName);
 				console.log("Home room joined callback");
-				navigate('lobby');
+				navigate('/lobby');
 			});
 		} catch (error) {
 			setError(error.message);
@@ -65,10 +64,10 @@ export default function Home() {
 		try {
 			console.log("handleCreateSubmit calling createRoom room creatorPlayerName:"+creatorPlayerName);
 			createRoom(creatorPlayerName, (newRoomCode) => {
-				setRoomCodeToJoin(newRoomCode);
-				setPlayerName(creatorPlayerName);
+				appCtx.setRoomCode(newRoomCode);
+				appCtx.setPlayerName(creatorPlayerName);
 				console.log("Home room created callback");
-				navigate("lobby");  // redirect to lobby
+				navigate('/lobby');  // redirect to lobby
 			});
 		} catch (error) {
 			setError(error.message);

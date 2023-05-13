@@ -1,5 +1,4 @@
-import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect, useReducer } from 'react';
 import { listenToRoom, updatePlayerInRoom } from '../helpers/rooms';
 import FairyMascotSplashImage from '../assets/Fairy_Mascot.jpg';
 import GymGuyIdleImage from '../assets/GymGuy_idle.png';
@@ -26,6 +25,8 @@ import VampVictoryImage from '../assets/vamp_Victory.png';
 import RobotIdleImage from '../assets/robot_Idle.png';
 import RobotDefeatImage from '../assets/robot_Defeat.png';
 import RobotVictoryImage from '../assets/robot_Victory.png';
+import { useAppCtx } from '../store';
+import { useNavigate } from 'react-router-dom';
 
 
 // this also determines the portraitIndex stored in firebase?
@@ -76,79 +77,86 @@ function portraitReset(portraitImage, index) {
 	portraitImage.src = portraits[index].idle;
 }
 
-export default class Lobby extends Component {
-
-	constructor(props) {
-		super(props);
-		this.state = {
-			players: {},
-			error: null
-		};
-		this.handleStartGameSubmit = this.handleStartGameSubmit.bind(this);
-		this.handleCancel = this.handleCancel.bind(this);
-		this.handleRoomPlayersUpdated = this.handleRoomPlayersUpdated.bind(this);
-		//this.testAvatarImageLoaded = this.testAvatarImageLoaded.bind(this);
-		//this.testAvatarImageLooped = this.testAvatarImageLooped.bind(this);
-		this.portraitSelectionImageClicked = this.portraitSelectionImageClicked.bind(this);
-	}
+export default function Lobby() {
+	const navigate = useNavigate();
+	const { roomCode, playerName } = useAppCtx();
+	const [{chosenCharacter, players, error}, dispatch] = useReducer((state, action) => {
+		switch(action.type){
+			case 'setChosenCharacter': return {...state, chosenCharacter: action.payload};
+			case 'setError': return {...state, error: action.payload};
+			case 'setPlayers': return {...state, players: action.payload};
+			default: return;
+		}
+	},
+	{
+		chosenCharacter: null,
+		error: '',
+		players: [{
+			name: playerName
+		}]
+	})
 	
-	componentDidMount() {
-		// TODO: display randomly assigned avatar
-		
-		console.log("calling listenToRoom on lobby startup");
-		console.log(this.props);
-		console.log(this.props.roomCodeToJoin);
-		console.log(this.handleRoomPlayersUpdated);
-		listenToRoom(this.props.roomCodeToJoin, this.handleRoomPlayersUpdated);
-	}
+	// TODO: display randomly assigned avatar
+	useEffect(() => {
+		listenToRoom( roomCode, handleRoomPlayersUpdated );
+	}, [roomCode])
 	
 	//handleChange(event) {
-	//	this.setState({
+	//	setState({
 	//		[event.target.name]: event.target.value
 	//	});
 	//}
 	
-	handleCharacterChange(event) {
-		// TODO: update borders
-	}
+	// handleCharacterChange(e) {
+	// 	// TODO: update borders
+	// }
 	
-	handleRoomPlayersUpdated(players) {
+	function handleRoomPlayersUpdated(p) {
+		const newPlayers = {...p}
 		console.log("handleRoomPlayersUpdated called");
-		console.log(players);
+		console.log(newPlayers);
 		
 		// put players in player display list (players by itself is a shortcut to "players: players")
-		this.setState({ players });
+		dispatch({
+			type: 'setPlayers',
+			payload: newPlayers
+		});
 	}
 	
-	handleStartGameSubmit(event) {
+	function handleStartGameSubmit(event) {
 		event.preventDefault();
-		this.setState({ error: '' });
+		dispatch({
+			type: 'setError',
+			payload: ''
+		});
 		try {
-			// TODO: this.setState({ redirect: "/trait" }); ?
+			// TODO: setState({ redirect: "/trait" }); ?
 		} catch (error) {
-			this.setState({ error: error.message });
+			dispatch({
+				type: 'setError',
+				payload: error.message
+			});
 		}
 	}
 	
-	handleCancel(event) {
+	function handleCancel(event) {
 		event.preventDefault();
 		console.log("TODO: cancel/exit lobby/close lobby/delete room");
-		
-		this.props.history.replace("/");  // redirect to home
+		navigate("/");  // redirect to home
 	}
 	
 	// bind and link this up in img tag onLoad event to run
 	//testAvatarImageLoaded(e) {
 	//	// fires whenever any animation is loaded (e.g. on click, and on revert to idle)
 	//	console.log("test avatar loaded w:"+e.target.id);
-	//	//setInterval(this.testAvatarImageLooped, 6700);
+	//	//setInterval(testAvatarImageLooped, 6700);
 	//}
 	
 	//testAvatarImageLooped() {
 	//	console.log("test avatar looped");
 	//}
 
-	portraitSelectionImageClicked(e, index) {
+	function portraitSelectionImageClicked(e, index) {
 		console.log("portrait image clicked t:"+e.target.id+" index:"+index);
 		// un-highlight all borders, and then highlight the clicked one
 		for (let i = 0; i < portraits.length; ++i) {
@@ -156,76 +164,76 @@ export default class Lobby extends Component {
 		}
 		e.target.parentElement.style.border = "5px solid yellow";
 		// update the player's portrait in firebase
-		this.setState({
-			chosen_character: index
+		dispatch({
+			type: 'setChosenCharacter',
+			payload: index
 		});
 		try {
-			console.log("portraitSelectionImageClicked calling updatePlayerInRoom joinPlayerName:"+this.state.joinPlayerName);
-			updatePlayerInRoom(this.state.joinRoomCode, this.state.joinPlayerName, () => {
+			console.log("portraitSelectionImageClicked calling updatePlayerInRoom playerName:"+playerName);
+			updatePlayerInRoom( roomCode, playerName, () => {
 				console.log("Lobby player updated callback");
-				console.log(this.props);
 			});
 		} catch (error) {
-			this.setState({ error: error.message });
+			dispatch({
+				type: 'setError',
+				payload: error.message
+			});
 		}
 		// play the success animation
 		e.target.src = portraits[index].success;
 		setTimeout(portraitReset.bind(null, e.target, index), 2000);
 	}
-
-	render() {
 		// TODO: move to style.css?
-		const gymGuyImgStyle = {
-			marginTop:-10,
-			marginRight:0,
-			marginBottom:0,
-			marginLeft:-350
-		};
-		const imgStyle = {
-			marginTop:0,
-			marginRight:0,
-			marginBottom:0,
-			marginLeft:0
-		};
-		return (
-			<div>
-				<p>Troupe Code</p>
-				<p>{this.props.roomCodeToJoin}</p>
-				<div className="playerListContainer">
-					{Object.entries(this.state.players).map(([key, value], index) => (
-						<div className="lobbyBox" key={"playerdiv"+index+""+key}>
-							<div className="lobbyNameBox">{key}</div><br />
-							<img className="lobbyNameThumb" src={BlueHairIdleImage} alt={BlueHairIdleImage+index} />
-						</div>
-					))}
-				</div>
-				<hr />
-				{/* show all the portraits and let the player click to select their avatar */}
-				<div className="portraitSelectionContainer">
-					{Object.entries(portraits).map(([key, value], index) => (
-						<div id={"avatar-container"+index} className="lobbyAvatarStyle">
-							<img onClick={(e) => this.portraitSelectionImageClicked(e, index)} id={"portrait"+index} style={imgStyle} src={value.idle} alt={value.idle+index}/>
-						</div>
-					))}
-				</div>
-				<hr />
-				<div id="startGame">
-					<form onSubmit={this.handleStartGameSubmit}>
-						<b>Start Story Mixer!</b><br />
-						(Press this when everyone has joined.)<br />
-						<button id="start_game_button" type="submit">Start Game</button><br />
-					</form>
-				</div>
-				<div id="cancel">
-					<form onSubmit={this.handleCancel}>
-						<b>Cancel and exit lobby.</b><br />
-						<button id="cancel_button" type="submit">Cancel</button><br />
-					</form>
-				</div>
-				<hr />
-				By using this website you agree that we are not liable for your use of our game, any content you submit is fair use, and you will not disrupt or harass other players.<br />
-				<br />
+	const gymGuyImgStyle = {
+		marginTop:-10,
+		marginRight:0,
+		marginBottom:0,
+		marginLeft:-350
+	};
+	const imgStyle = {
+		marginTop:0,
+		marginRight:0,
+		marginBottom:0,
+		marginLeft:0
+	};
+	return (
+		<div>
+			<p>Troupe Code</p>
+			<p>{roomCode}</p>
+			<div className="playerListContainer">
+				{Object.entries(players).map((player, index) => (
+					<div className="lobbyBox" key={"playerdiv"+index+""+player.name}>
+						<div className="lobbyNameBox">{player.name}</div><br />
+						<img className="lobbyNameThumb" src={BlueHairIdleImage} alt={BlueHairIdleImage+index} />
+					</div>
+				))}
 			</div>
-		)
-	}
+			<hr />
+			{/* show all the portraits and let the player click to select their avatar */}
+			<div className="portraitSelectionContainer">
+				{Object.entries(portraits).map(([key, value], index) => (
+					<div id={"avatar-container"+index} className="lobbyAvatarStyle">
+						<img onClick={(e) => portraitSelectionImageClicked(e, index)} id={"portrait"+index} style={imgStyle} src={value.idle} alt={value.idle+index}/>
+					</div>
+				))}
+			</div>
+			<hr />
+			<div id="startGame">
+				<form onSubmit={handleStartGameSubmit}>
+					<b>Start Story Mixer!</b><br />
+					(Press this when everyone has joined.)<br />
+					<button id="start_game_button" type="submit">Start Game</button><br />
+				</form>
+			</div>
+			<div id="cancel">
+				<form onSubmit={handleCancel}>
+					<b>Cancel and exit lobby.</b><br />
+					<button id="cancel_button" type="submit">Cancel</button><br />
+				</form>
+			</div>
+			<hr />
+			By using this website you agree that we are not liable for your use of our game, any content you submit is fair use, and you will not disrupt or harass other players.<br />
+			<br />
+		</div>
+	)
 }

@@ -1,10 +1,12 @@
-import React, { Component, useContext, useState } from 'react';
+import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { createRoom, joinRoomFromForm } from '../helpers/rooms';
 import FairyMascotSplashImage from '../assets/Fairy_Mascot.jpg';
 import GymGuySuccessImage from '../assets/GymGuy_victory.png';
 import BlueHairIdleImage from '../assets/blue_idle.png';
 import { useAppCtx } from '../store';
+import { AppBar, Grid, Box, Card, TextField, Typography, alpha, useTheme, CardMedia, FormControl, Input, Button, FormLabel, styled, Divider, FormGroup, Alert, IconButton } from '@mui/material';
+import InfoIcon from '@mui/icons-material/HelpRounded'
 
 export default function Home() {
 	const [ joinRoomCode, setJoinRoomCode ] = useState('');
@@ -14,8 +16,21 @@ export default function Home() {
 	const [ email, setEmail ] = useState('');
 	const [ error, setError ] = useState(null);
 	const navigate = useNavigate();
-	const appCtx = useAppCtx()
+	const appCtx = useAppCtx();
+	const theme = useTheme();
 
+	const StyledTextField = styled(TextField)(({theme})=>({
+			backgroundColor: theme.palette.background.paper,
+			borderRadius: 4,
+	}))
+	const StyledFormGroup = styled(FormGroup)(({theme})=>({
+		marginBottom: theme.spacing(2)
+	}))
+	const StyledFormControl = styled(FormControl)(({theme})=>({
+		padding: theme.spacing(3),
+		minWidth: 275,
+		textAlign: 'left'
+	}))
 
 	const handleJoinRoomCodeChange = (e) => {
 		console.log("handleJoinRoomCodeChange");
@@ -94,40 +109,113 @@ export default function Home() {
 	};
 
 	return (
-		<div>
-			<p>Welcome to Story Mixer Online! A cooperative storytelling game for people who like to come up with ideas and combine them with others.</p>
-			<img src={FairyMascotSplashImage} alt="Fairy Mascot" style={{width:"100%"}} /><br />
-			<hr />
+		<Grid container>
+			<AppBar position='static'
+				sx={{ 
+					backgroundColor: theme.palette.primary.main,
+					bottomBorder: `3px solid ${theme.palette.secondary.light}`
+				}}
+			>
+				<Box padding={2} display={'flex'} alignItems={'center'} columnGap={2}>
+					<Box
+						sx={{
+							backgroundRepeat: 'no-repeat',
+							backgroundImage: `url(${FairyMascotSplashImage})`,
+							backgroundPosition: 'center',
+							backgroundSize: 'cover',
+							height: 100,
+							width: 150,
+							marginTop: -2,
+							marginBottom: -2,
+						}}
+					/>
+					<Typography variant='h5' component={'span'}>Welcome to Story Mixer Online! </Typography>
+					<Typography variant='h6' component={'span'} color={alpha(theme.palette.common.white, 0.75)}>A cooperative storytelling game for people who like to come up with ideas and combine them with others.</Typography>
+				</Box>
+			</AppBar>
+			{/* <Box
+					component={'img'}
+					src={FairyMascotSplashImage}
+					alt="Fairy Mascot"
+			/> */}
+
+			{/* <img src={FairyMascotSplashImage} alt="Fairy Mascot" style={{width:"100%"}} /><br /> */}
+
 			{/* debug start test avatar */}
-			<div id="avatar-container" style={gymGuyAvatarStyle}>
-				<img id="testavatar" style={imgStyle} src={BlueHairIdleImage} alt="GymGuyTest"/><br />
-			</div>
-			{/* debug end test avatar */}
-			<div id="error">
-				{error ? <p>{error}</p> : null}
-			</div>
-			<div id="join">
-				<b>Join an existing game?</b><br />
-				Game Room Code:<br />
-				<input onChange={handleJoinRoomCodeChange} id="room_code" /><br />
-				Player Name:<br />
-				<input onChange={handleJoinPlayerNameChange} id="player_name" /><br />
-				<button id="join_button" onClick={handleJoinClick}>Join</button><br />
-			</div>
-			<hr />
-			<div id="create">
-				<form onSubmit={handleCreateSubmit}>
-					<b>Create a game?</b><br />
-					Creator Player Name:<br />
-					<input onChange={(e) => {setCreatorPlayerName(e.target.value)}} value={creatorPlayerName} id="creator_player_name" /><br />
-					<button type="submit" id="create_button">Create</button><br />
-				</form>
-			</div>
-			<hr />
-			<div align="right" style={{fontSize:"72px"}}>
-				<Link to="/info">Info</Link> {/*make this a circled "?" info button*/}
-			</div>
-			By using this website you agree that we are not liable for your use of our game, any content you submit is fair use, and you will not disrupt or harass other players.<br />
+			<Grid item
+				padding={4}
+				xs={12}
+				sx={{
+					backgroundColor: theme.palette.primary.light,
+					justifyContent: 'center'
+				}}
+			>
+				<Card sx={{ borderLeft: `10px solid ${theme.palette.secondary.main}` }}>
+						<Grid container>
+							<Grid item
+								xs={5}
+								sx={{
+									backgroundImage: `url(${BlueHairIdleImage})`,
+									backgroundColor: theme.palette.background.default,
+									backgroundRepeat: 'no-repeat',
+									backgroundPositionY: 'bottom',
+									backgroundPositionX: 'center'
+								}}
+							/>
+							<Grid item
+								xs={7}
+								sx={{
+									backgroundColor: alpha(theme.palette.primary.light, 0.25),
+									textAlign: 'center',
+									paddingLeft: 4,
+									paddingRight: 4
+								}}
+							>
+								<StyledFormControl id="join">
+									<Typography variant='h5' marginBottom={3}>Join an existing game?</Typography>
+									<StyledFormGroup>
+										<FormLabel>Player Name:</FormLabel>
+										<StyledTextField variant='outlined' onChange={handleJoinPlayerNameChange} id="player_name" />
+									</StyledFormGroup>
+									<StyledFormGroup>
+										<FormLabel>Game Room Code:</FormLabel>
+										<StyledTextField variant='outlined' onChange={handleJoinRoomCodeChange} id="room_code" />
+									</StyledFormGroup>
+									<Button id="join_button" variant='contained' color='secondary' onClick={handleJoinClick}>Join</Button>
+								</StyledFormControl>
+								<Divider />
+								<StyledFormControl id="create">
+									<Typography variant='h5' marginBottom={3}>Create a game?</Typography>
+									<StyledFormGroup>
+										<FormLabel>Player Name:</FormLabel>
+										<StyledTextField variant='outlined' onChange={handleJoinPlayerNameChange} id="player_name" />
+									</StyledFormGroup>
+									<Button id="create_button" variant='contained' color='secondary' type='submit'>Create</Button>
+								</StyledFormControl>
+							</Grid>
+						</Grid>
+				</Card>
+			</Grid>
+			{
+				error ?
+				<Alert severity="error" sx={{ width: '100%' }}>{error ? error : null}</Alert> :
+				null
+			}
+			<Grid item padding={4} sx={{
+				display: 'flex',
+				columnGap: 3,
+				alignItems: 'center',
+				width: '100%',
+				justifyContent: 'space-between',
+			}}>
+				<Typography variant='caption' color={theme.palette.info.main}>
+					By using this website you agree that we are not liable for your use of our game,
+					any content you submit is fair use, and you will not disrupt or harass other players.
+				</Typography>
+				<Button variant='outlined' to="/info" startIcon={<InfoIcon color='secondary' />}>
+						Info
+				</Button>
+			</Grid>
 			<br />
 			<script src="index.js"></script>
 			<script>
@@ -151,6 +239,6 @@ export default function Home() {
 				<hr></hr>
 				<p>Already have an account? <Link to="/login">Login</Link></p>
 			</form>
-		</div>
+		</Grid>
 	)
 }

@@ -5,8 +5,9 @@ import FairyMascotSplashImage from '../assets/Fairy_Mascot.jpg';
 import GymGuySuccessImage from '../assets/GymGuy_victory.png';
 import BlueHairIdleImage from '../assets/blue_idle.png';
 import { useAppCtx } from '../store';
-import { AppBar, Grid, Box, Card, TextField, Typography, alpha, useTheme, CardMedia, FormControl, Input, Button, FormLabel, styled, Divider, FormGroup, Alert, IconButton } from '@mui/material';
-import InfoIcon from '@mui/icons-material/HelpRounded'
+import { AppBar, Grid, Box, Card, TextField, Typography, alpha, useTheme, FormControl, Button, FormLabel, styled, Divider, FormGroup, Alert } from '@mui/material';
+import InfoIcon from '@mui/icons-material/HelpRounded';
+import SendIcon from '@mui/icons-material/Send';
 
 export default function Home() {
 	const [ joinRoomCode, setJoinRoomCode ] = useState('');
@@ -109,15 +110,19 @@ export default function Home() {
 	};
 
 	return (
-		<Grid container>
+		<Grid container
+			sx={{
+				backgroundColor: alpha(theme.palette.primary.light, .125),
+			}}
+		>
 			<AppBar position='static'
 				sx={{ 
-					backgroundColor: theme.palette.primary.main,
+					backgroundColor: theme.palette.primary.light,
 					bottomBorder: `3px solid ${theme.palette.secondary.light}`
 				}}
 			>
-				<Box padding={2} display={'flex'} alignItems={'center'} columnGap={2}>
-					<Box
+				<Box padding={2} borderLeft={'10px solid '+theme.palette.secondary.main}>
+					{/* <Box
 						sx={{
 							backgroundRepeat: 'no-repeat',
 							backgroundImage: `url(${FairyMascotSplashImage})`,
@@ -128,9 +133,9 @@ export default function Home() {
 							marginTop: -2,
 							marginBottom: -2,
 						}}
-					/>
-					<Typography variant='h5' component={'span'}>Welcome to Story Mixer Online! </Typography>
-					<Typography variant='h6' component={'span'} color={alpha(theme.palette.common.white, 0.75)}>A cooperative storytelling game for people who like to come up with ideas and combine them with others.</Typography>
+					/> */}
+					<Typography variant='h5'>Welcome to Story Mixer Online! </Typography>
+					<Typography variant='subtitle1' color={alpha(theme.palette.common.white, 0.75)}>A cooperative storytelling game for people who like to come up with ideas and combine them with others.</Typography>
 				</Box>
 			</AppBar>
 			{/* <Box
@@ -143,30 +148,30 @@ export default function Home() {
 
 			{/* debug start test avatar */}
 			<Grid item
-				padding={4}
+				paddingLeft={5}
+				paddingRight={5}
+				paddingBottom={8}
+				paddingTop={5}
 				xs={12}
 				sx={{
-					backgroundColor: theme.palette.primary.light,
-					justifyContent: 'center'
+					justifyContent: 'center',
+					display: 'flex'
 				}}
 			>
-				<Card sx={{ borderLeft: `10px solid ${theme.palette.secondary.main}` }}>
+				<Card
+					sx={{
+						borderLeft: `10px solid ${theme.palette.secondary.main}`,
+						width: '80%',
+						maxWidth: theme.breakpoints.values.md,
+						boxShadow: theme.shadows[4]
+					}}
+				>
 						<Grid container>
 							<Grid item
 								xs={5}
 								sx={{
-									backgroundImage: `url(${BlueHairIdleImage})`,
-									backgroundColor: theme.palette.background.default,
-									backgroundRepeat: 'no-repeat',
-									backgroundPositionY: 'bottom',
-									backgroundPositionX: 'center'
-								}}
-							/>
-							<Grid item
-								xs={7}
-								sx={{
-									backgroundColor: alpha(theme.palette.primary.light, 0.25),
-									textAlign: 'center',
+									backgroundColor: alpha(theme.palette.primary.light, .3),
+									textAlign: 'left',
 									paddingLeft: 4,
 									paddingRight: 4
 								}}
@@ -193,6 +198,16 @@ export default function Home() {
 									<Button id="create_button" variant='contained' color='secondary' type='submit'>Create</Button>
 								</StyledFormControl>
 							</Grid>
+							<Grid item xs={7}
+								sx={{
+									backgroundImage: `url(${BlueHairIdleImage})`,
+									backgroundColor: theme.palette.background.default,
+									backgroundRepeat: 'no-repeat',
+									backgroundPositionY: 'bottom',
+									backgroundPositionX: 'center',
+									backgroundSize: 'cover',
+								}}
+							/>
 						</Grid>
 				</Card>
 			</Grid>
@@ -201,12 +216,51 @@ export default function Home() {
 				<Alert severity="error" sx={{ width: '100%' }}>{error ? error : null}</Alert> :
 				null
 			}
-			<Grid item padding={4} sx={{
+			<Grid item
+				xs={12}
+				padding={2}
+				sx={{ 
+					backgroundColor: theme.palette.primary.light,
+					color: 'common.white',
+					justifyContent: 'center',
+					display: 'flex'
+				}}
+			>
+				<FormControl sx={{ textAlign: 'center', display: 'flex', justifyContent: 'center', maxWidth: theme.breakpoints.values.sm, }}>
+					<Typography variant='h5'>
+						Sign Up to <Link to="/">Chatty</Link>
+					</Typography>
+					<FormGroup sx={{ justifyContent: 'center' }}>
+						<TextField
+							size='small'
+							placeholder="Email"
+							name="email"
+							type="email"
+							onChange={(e) => {setEmail(e.target.value)}}
+							value={email}
+							sx={{ m:1 }}
+						/>
+						<TextField
+							size='small'
+							placeholder="Password"
+							name="password"
+							onChange={(e) => {setPassword(e.target.value)}}
+							value={password}
+							type="password"
+							sx={{ m:1 }}
+						/>
+						<Button type="submit" endIcon={<SendIcon />}>Sign up</Button>
+					</FormGroup>
+					<p>Already have an account? <Link to="/login">Login</Link></p>
+				</FormControl>
+			</Grid>
+			<Grid item padding={2} sx={{
 				display: 'flex',
 				columnGap: 3,
 				alignItems: 'center',
 				width: '100%',
 				justifyContent: 'space-between',
+				backgroundColor: theme.palette.background.default
 			}}>
 				<Typography variant='caption' color={theme.palette.info.main}>
 					By using this website you agree that we are not liable for your use of our game,
@@ -216,29 +270,10 @@ export default function Home() {
 						Info
 				</Button>
 			</Grid>
-			<br />
 			<script src="index.js"></script>
 			<script>
 				console.log("main index.html finished loading");
 			</script>
-			<form>
-				<h1>
-					Sign Up to <Link to="/">Chatty</Link>
-				</h1>
-				<p>Fill in the form below to create an account.</p>
-				<div>
-					<input placeholder="Email" name="email" type="email" onChange={(e) => {setEmail(e.target.value)}} value={email}></input>
-				</div>
-				<div>
-					<input placeholder="Password" name="password" onChange={(e) => {setPassword(e.target.value)}} value={password} type="password"></input>
-				</div>
-				<div>
-					{error ? <p>{error}</p> : null}
-					<button type="submit">Sign up</button>
-				</div>
-				<hr></hr>
-				<p>Already have an account? <Link to="/login">Login</Link></p>
-			</form>
 		</Grid>
 	)
 }

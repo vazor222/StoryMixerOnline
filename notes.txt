@@ -232,11 +232,14 @@ playtest and feedback
 redo/touch up animations as needed
 wishlist: add in optional funny animations like the pig smiling on defeat which only play one in a thousand times
 
+- BoDaly tasks -
+updated node to 19.3.0, rebooted and tried it
+failed and reverted back to:
+node version v10.16.3
+npm version 6.9.0
+
 
 - todo -
-revert local node installation to:
-node --version v10.16.3
-npm --version 6.9.0
 vampire needs animation extended (or custom timing exception)
 get robot and update asset (or resize myself like I did vampire)
 figure out layout and display of player list

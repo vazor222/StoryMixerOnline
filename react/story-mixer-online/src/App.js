@@ -69,6 +69,7 @@ class App extends Component {
 						render={(props) => (
 							<Lobby {...props} 
 								roomCodeToJoin={this.state.roomCodeToJoin} 
+								playerName={this.state.playerName} 
 								creatorPlayerName={this.state.creatorPlayerName} 
 								onStateChange={this.handleStateChange} />
 						)}

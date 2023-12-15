@@ -73,7 +73,7 @@ async function joinRoomFromFormAsync(roomCodeToJoin, joinPlayerName, roomJoinedC
 				var roomPlayers = room.data().players;
 				console.log("roomPlayers before");
 				console.log(roomPlayers);
-				/*  TODO: enable this before release
+				/*  TODO: check for duplicate names
 				if( roomPlayers[joinPlayerName] !== undefined ) {
 					console.error("player name "+joinPlayerName+" is taken!");
 					window.alert("Player name "+joinPlayerName+" is taken! Please try again.");
@@ -87,8 +87,8 @@ async function joinRoomFromFormAsync(roomCodeToJoin, joinPlayerName, roomJoinedC
 				console.log("roomPlayers after");
 				console.log(roomPlayers);
 				roomRef.update({players: roomPlayers}).then(() => {
-					console.log("Room joined! roomCodeToJoin:"+roomCodeToJoin+" joinPlayerName:"+joinPlayerName);
-					roomJoinedCallback(room.creator);
+					console.log("Room joined! roomCodeToJoin:"+roomCodeToJoin+" joinPlayerName:"+joinPlayerName+" creator:"+room.data().creator);
+					roomJoinedCallback(room.data().creator);
 				}).catch((updateError) => {
 					console.log("Error joining room:"+roomCodeToJoin+" joinPlayerName:"+joinPlayerName);
 				});
@@ -156,13 +156,8 @@ export function updatePlayerInRoom(roomCode, player, playerInRoomUpdatedCallback
 				var roomPlayers = room.data().players;
 				console.log("roomPlayers before");
 				console.log(roomPlayers);
-				if( player.name !== this.props.playerName ) {
-					console.error("attempt to update player that is not yourself!");
-					window.alert("Server error: invalid player action, please refresh and try again.");
-					return;
-				}
 				if( roomPlayers[player.name] === undefined ) {
-					console.error("player name "+player.name+" not found!");
+					console.error("player "+player.name+" not found!");
 					window.alert("Server error: no longer in room, please refresh and try again.");
 					return;
 				}
@@ -173,7 +168,7 @@ export function updatePlayerInRoom(roomCode, player, playerInRoomUpdatedCallback
 					console.log("Player updated! roomCode:"+roomCode+" player.name:"+player.name);
 					playerInRoomUpdatedCallback();
 				}).catch((updateError) => {
-					console.log("Error updating player in room:"+roomCode+" player.name:"+player.namee);
+					console.log("Error updating player in room:"+roomCode+" player.name:"+player.name);
 				});
 			}
 			else

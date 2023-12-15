@@ -60,6 +60,7 @@ export default class Home extends Component {
 		try {
 			console.log("handleJoinClick calling joinRoomFromForm room joinPlayerName:"+this.state.joinPlayerName);
 			joinRoomFromForm(this.state.joinRoomCode, this.state.joinPlayerName, (creatorPlayerName) => {
+				console.log("roomJoinedCallback this.state.joinRoomCode:"+this.state.joinRoomCode+" this.state.joinPlayerName:"+this.state.joinPlayerName+" creatorPlayerName:"+creatorPlayerName);
 				this.props.onStateChange("roomCodeToJoin", this.state.joinRoomCode);
 				this.props.onStateChange("playerName", this.state.joinPlayerName);
 				this.props.onStateChange("creatorPlayerName", creatorPlayerName);
@@ -68,6 +69,7 @@ export default class Home extends Component {
 				this.props.history.replace("/lobby");  // redirect to lobby
 			});
 		} catch (error) {
+			// TODO: handle name collisions
 			this.setState({ error: error.message });
 		}
 	}
@@ -141,7 +143,7 @@ export default class Home extends Component {
 				</div>
 				<hr />
 				<div align="right" style={{fontSize:"72px"}}>
-					<Link to="/info">Info</Link> {/*make this a circled "?" info button*/}
+					<Link to="/info">Info</Link> {/*TODO: make this a circled "?" info button*/}
 				</div>
 				By using this website you agree that we are not liable for your use of our game, any content you submit is fair use, and you will not disrupt or harass other players.<br />
 				<br />

@@ -98,6 +98,7 @@ export default class Lobby extends Component {
 		console.log("calling listenToRoom on lobby startup");
 		console.log(this.props);
 		console.log(this.props.roomCodeToJoin);
+		console.log(this.props.playerName);
 		console.log(this.handleRoomPlayersUpdated);
 		listenToRoom(this.props.roomCodeToJoin, this.handleRoomPlayersUpdated);
 	}
@@ -160,10 +161,19 @@ export default class Lobby extends Component {
 			chosen_character: index
 		});
 		try {
-			console.log("portraitSelectionImageClicked calling updatePlayerInRoom joinPlayerName:"+this.state.joinPlayerName);
-			updatePlayerInRoom(this.state.joinRoomCode, this.state.joinPlayerName, () => {
+			console.log("portraitSelectionImageClicked calling updatePlayerInRoom player:"+this.props.playerName+" this.props.roomCodeToJoin:"+this.props.roomCodeToJoin);
+			var newPlayerData = {};
+			newPlayerData.name = this.props.playerName;
+			newPlayerData.portrait = index;
+			newPlayerData.selftrait = "";
+			newPlayerData.othertrait = "";
+			newPlayerData.obstacle = "";
+			newPlayerData.story = "";
+			newPlayerData.vote = "";
+			updatePlayerInRoom(this.props.roomCodeToJoin, newPlayerData, () => {
 				console.log("Lobby player updated callback");
 				console.log(this.props);
+				// portrait changed
 			});
 		} catch (error) {
 			this.setState({ error: error.message });
@@ -189,18 +199,22 @@ export default class Lobby extends Component {
 		};
 		return (
 			<div>
-				<p>Troupe Code</p>
+				<h2>Troupe Code</h2>
 				<p>{this.props.roomCodeToJoin}</p>
+				<h2>Room Creator</h2>
+				<p>{this.props.creatorPlayerName}</p>
+				<h2>Player List</h2>
 				<div className="playerListContainer">
 					{Object.entries(this.state.players).map(([key, value], index) => (
 						<div className="lobbyBox" key={"playerdiv"+index+""+key}>
 							<div className="lobbyNameBox">{key}</div><br />
-							<img className="lobbyNameThumb" src={BlueHairIdleImage} alt={BlueHairIdleImage+index} />
+							<img className="lobbyNameThumb" src={portraits[value.portrait].idle} alt={portraits[value.portrait].idle} />
 						</div>
 					))}
 				</div>
 				<hr />
 				{/* show all the portraits and let the player click to select their avatar */}
+				<h2>Select Your Avatar</h2>
 				<div className="portraitSelectionContainer">
 					{Object.entries(portraits).map(([key, value], index) => (
 						<div id={"avatar-container"+index} className="lobbyAvatarStyle">

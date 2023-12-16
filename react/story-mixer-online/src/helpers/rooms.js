@@ -107,7 +107,7 @@ async function joinRoomFromFormAsync(roomCodeToJoin, joinPlayerName, roomJoinedC
 	}
 }
 
-export function listenToRoom(roomCode, roomPlayersUpdateCallback)
+export function listenToRoom(roomCode, roomPlayersUpdateCallback, setUnsubscribeFuncCallback)
 {
 	console.log("listenToRoom called - roomCode:"+roomCode);
 	try
@@ -117,13 +117,15 @@ export function listenToRoom(roomCode, roomPlayersUpdateCallback)
 			if( room.exists )
 			{
 				console.log("Found listen room:"+room.data());
-				roomRef.onSnapshot((snapshot) => {
+				var unsubscribeFunc = roomRef.onSnapshot((snapshot) => {
 					console.log("Got room update:"+snapshot.data());
 					let players = snapshot.data().players;
 					console.log("got players");
 					console.log(players);
 					roomPlayersUpdateCallback(players);
 				});
+				console.log("unsubscribeFunc:"+unsubscribeFunc);
+				setUnsubscribeFuncCallback(unsubscribeFunc);
 			}
 			else
 			{
@@ -145,7 +147,7 @@ export function updatePlayerInRoom(roomCode, player, playerInRoomUpdatedCallback
 
 	try
 	{
-		// update the room entry in the database and update ourselves in the player list
+		// update the room entry in the database and update the player in the player list
 		var roomRef = db.collection('rooms').doc(roomCode);
 		console.log(roomRef);
 		roomRef.get().then((room) => {
@@ -158,7 +160,7 @@ export function updatePlayerInRoom(roomCode, player, playerInRoomUpdatedCallback
 				console.log(roomPlayers);
 				if( roomPlayers[player.name] === undefined ) {
 					console.error("player "+player.name+" not found!");
-					window.alert("Server error: no longer in room, please refresh and try again.");
+					window.alert("Server error: no longer in room, please restart the game (by having everyone browse back to the beginning and refresh) and try again.");
 					return;
 				}
 				roomPlayers[player.name] = player;

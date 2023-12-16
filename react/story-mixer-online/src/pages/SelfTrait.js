@@ -28,7 +28,7 @@ import RobotDefeatImage from '../assets/robot_Defeat.png';
 import RobotVictoryImage from '../assets/robot_Victory.png';
 
 
-// this also determines the portraitIndex stored in firebase?
+// this also determines the portraitIndex stored in firebase
 const portraits = [
 	{
 		idle: BlueHairIdleImage,
@@ -76,32 +76,28 @@ function portraitReset(portraitImage, index) {
 	portraitImage.src = portraits[index].idle;
 }
 
-export default class Lobby extends Component {
+export default class SelfTrait extends Component {
 
 	constructor(props) {
 		super(props);
 		this.state = {
-			players: {},
+			playerSelfTrait: "",
 			error: null
 		};
 		this.roomUnsubscribeFunc = null;
-		this.handleStartGameSubmit = this.handleStartGameSubmit.bind(this);
-		this.handleCancel = this.handleCancel.bind(this);
 		this.handleRoomPlayersUpdated = this.handleRoomPlayersUpdated.bind(this);
 		this.setRoomUnsubscribeFunc = this.setRoomUnsubscribeFunc.bind(this);
-		//this.testAvatarImageLoaded = this.testAvatarImageLoaded.bind(this);
-		//this.testAvatarImageLooped = this.testAvatarImageLooped.bind(this);
-		this.portraitSelectionImageClicked = this.portraitSelectionImageClicked.bind(this);
+		this.handleSelfTraitInputTextChange = this.handleSelfTraitInputTextChange.bind(this);
+		this.handleSelfTraitSubmit = this.handleSelfTraitSubmit.bind(this);
+		this.handleNext = this.handleNext.bind(this);
 	}
-	
+
 	componentDidMount() {
-		// TODO: display randomly assigned avatar
-		
-		console.log("calling listenToRoom on lobby startup");
+		console.log("calling listenToRoom on SelfTrait startup");
 		console.log(this.props);
 		console.log(this.props.roomCodeToJoin);
 		console.log(this.props.playerName);
-		console.log(this.handleRoomPlayersUpdated);
+		console.log(this.props.playerPortraitIndex);
 		listenToRoom(this.props.roomCodeToJoin, this.handleRoomPlayersUpdated, this.setRoomUnsubscribeFunc);
 	}
 	
@@ -116,10 +112,6 @@ export default class Lobby extends Component {
 	//	});
 	//}
 	
-	handleCharacterChange(event) {
-		// TODO: update borders
-	}
-	
 	handleRoomPlayersUpdated(players) {
 		console.log("handleRoomPlayersUpdated called");
 		console.log(players);
@@ -132,112 +124,73 @@ export default class Lobby extends Component {
 		this.roomUnsubscribeFunc = roomUnsubscribeFunc;
 	}
 	
-	handleStartGameSubmit(event) {
-		event.preventDefault();
-		this.props.history.replace("/selftrait");  // redirect to selftrait
+	handleSelfTraitInputTextChange(event) {
+		console.log("handleSelfTraitInputTextChange");
+		console.log(event);
+		this.setState({playerSelfTrait: event.target.value});
 	}
 	
-	handleCancel(event) {
+	handleSelfTraitSubmit(event) {
 		event.preventDefault();
-		console.log("TODO: cancel/exit lobby/close lobby/delete room");
 		
-		this.props.history.replace("/");  // redirect to home
-	}
-	
-	// bind and link this up in img tag onLoad event to run
-	//testAvatarImageLoaded(e) {
-	//	// fires whenever any animation is loaded (e.g. on click, and on revert to idle)
-	//	console.log("test avatar loaded w:"+e.target.id);
-	//	//setInterval(this.testAvatarImageLooped, 6700);
-	//}
-	
-	//testAvatarImageLooped() {
-	//	console.log("test avatar looped");
-	//}
-
-	portraitSelectionImageClicked(e, index) {
-		console.log("portrait image clicked t:"+e.target.id+" index:"+index);
-		// un-highlight all borders, and then highlight the clicked one
-		for (let i = 0; i < portraits.length; ++i) {
-			document.getElementById("avatar-container"+i).style.border = '5px solid black';
-		}
-		e.target.parentElement.style.border = "5px solid yellow";
-		// update the player's portrait in firebase
+		var selfTraitText = this.state.playerSelfTrait;
+		console.log("selfTraitText:"+selfTraitText);
+		
+		// update the player's selftrait in firebase
 		try {
-			console.log("portraitSelectionImageClicked calling updatePlayerInRoom player:"+this.props.playerName+" this.props.roomCodeToJoin:"+this.props.roomCodeToJoin);
+			console.log("handleSelfTraitSubmit calling updatePlayerInRoom player:"+this.props.playerName+" this.props.roomCodeToJoin:"+this.props.roomCodeToJoin);
 			var newPlayerData = {};
 			newPlayerData.name = this.props.playerName;
-			newPlayerData.portrait = index;
-			newPlayerData.selftrait = "";
+			newPlayerData.portrait = this.props.playerPortraitIndex;
+			newPlayerData.selftrait = selfTraitText;
 			newPlayerData.othertrait = "";
 			newPlayerData.obstacle = "";
 			newPlayerData.story = "";
 			newPlayerData.vote = "";
 			updatePlayerInRoom(this.props.roomCodeToJoin, newPlayerData, () => {
-				console.log("Lobby player updated callback");
-				// portrait changed, update app state
-				this.props.onStateChange("playerPortraitIndex", index);
+				console.log("SelfTrait player updated callback");
+				// self trait changed, update app state
+				this.props.onStateChange("selfTrait", selfTraitText);
 				console.log(this.props);
+				// TODO: disable Submit button or something
 			});
 		} catch (error) {
 			this.setState({ error: error.message });
 		}
-		// play the success animation
-		e.target.src = portraits[index].success;
-		setTimeout(portraitReset.bind(null, e.target, index), 2000);
+		
+		// TODO: play victory animation
+	}
+	
+	handleNext(event) {
+		event.preventDefault();
+		
+		this.props.history.replace("/othertrait");  // redirect to othertrait
 	}
 
 	render() {
-		// TODO: move to style.css?
-		const gymGuyImgStyle = {
-			marginTop:-10,
-			marginRight:0,
-			marginBottom:0,
-			marginLeft:-350
-		};
-		const imgStyle = {
-			marginTop:0,
-			marginRight:0,
-			marginBottom:0,
-			marginLeft:0
-		};
 		return (
 			<div>
-				<h2>{this.props.roomCodeToJoin == 'VZ222'? "Troup Code (Wow you got the vazor222 code! Lucky!)" : "Troupe Code"}</h2>
-				<p>{this.props.roomCodeToJoin}</p>
-				<h2>Room Creator</h2>
-				<p>{this.props.creatorPlayerName}</p>
-				<h2>Player List</h2>
-				<div className="playerListContainer">
-					{Object.entries(this.state.players).map(([key, value], index) => (
-						<div key={"playerdiv"+index+""+key} className="lobbyBox">
-							<div className="lobbyNameBox">{key}</div><br />
-							<img className="lobbyNameThumb" src={portraits[value.portrait].idle} alt={portraits[value.portrait].idle} />
-						</div>
-					))}
+				<h2>Player</h2>
+				<div className="traitBox">
+					<div className="traitNameBox">{this.props.playerName}</div><br />
+					<img className="traitNameThumb" src={portraits[this.props.playerPortraitIndex].idle} alt={portraits[this.props.playerPortraitIndex].idle} />
 				</div>
 				<hr />
-				{/* show all the portraits and let the player click to select their avatar */}
-				<h2>Select Your Avatar</h2>
-				<div className="portraitSelectionContainer">
-					{Object.entries(portraits).map(([key, value], index) => (
-						<div id={"avatar-container"+index} key={"avatar-container-"+index+"-"+key} className="lobbyAvatarStyle">
-							<img onClick={(e) => this.portraitSelectionImageClicked(e, index)} id={"portrait"+index} style={imgStyle} src={value.idle} alt={value.idle+index}/>
-						</div>
-					))}
-				</div>
-				<hr />
-				<div id="startGame">
-					<form onSubmit={this.handleStartGameSubmit}>
-						<b>Start Story Mixer!</b><br />
-						(Press this when everyone has joined.)<br />
-						<button id="start_game_button" type="submit">Start Game</button><br />
+				{/* allow the player to enter a trait for themselves */}
+				<h2>Enter Trait</h2>
+				<p>Enter a trait for your character. It can be a look, an attitude, a strength/weakness, skill, power, like/dislike, etc.</p>
+				<div id="submitSelfTrait">
+					<form onSubmit={this.handleSelfTraitSubmit}>
+						<input type="text" onChange={this.handleSelfTraitInputTextChange} id="selfTraitInput" name="selfTraitInput" placeholder="Can fly" /><br />
+						<button id="selfTraitSubmitButton" type="submit">Submit</button><br />
 					</form>
 				</div>
-				<div id="cancel">
-					<form onSubmit={this.handleCancel}>
-						<b>Cancel and exit lobby.</b><br />
-						<button id="cancel_button" type="submit">Cancel</button><br />
+				<hr />
+				<h2>Next Step</h2>
+				<div id="next">
+					<form onSubmit={this.handleNext}>
+						<b>Do not</b> press this until everyone has finished writing and submitted their trait.<br />
+						<button id="nextButton" type="submit">Next</button><br />
 					</form>
 				</div>
 				<hr />

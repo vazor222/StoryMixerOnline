@@ -8,6 +8,8 @@ import {
 import Home from './pages/Home';
 import Info from './pages/Info';
 import Lobby from './pages/Lobby';
+import SelfTrait from './pages/SelfTrait';
+import OtherTrait from './pages/OtherTrait';
 import Chat from './pages/Chat';
 import Signup from './pages/Signup';
 import Login from './pages/Login';
@@ -22,7 +24,12 @@ class App extends Component {
 			creatorPlayerName: '',
 			roomCodeToJoin: '',
 			playerName: '',
-			chosenCharacter: ''
+			playerPortraitIndex: 0,
+			selfTrait: '',
+			otherTrait: '',
+			obstacle: '',
+			story: '',
+			vote: 0
 		};
 	}
 
@@ -71,6 +78,27 @@ class App extends Component {
 								roomCodeToJoin={this.state.roomCodeToJoin} 
 								playerName={this.state.playerName} 
 								creatorPlayerName={this.state.creatorPlayerName} 
+								onStateChange={this.handleStateChange} />
+						)}
+					/>
+					<Route exact
+						path="/selftrait"
+						render={(props) => (
+							<SelfTrait {...props} 
+								roomCodeToJoin={this.state.roomCodeToJoin} 
+								playerName={this.state.playerName} 
+								playerPortraitIndex={this.state.playerPortraitIndex} 
+								onStateChange={this.handleStateChange} />
+						)}
+					/>
+					<Route exact
+						path="/othertrait"
+						render={(props) => (
+							<OtherTrait {...props} 
+								roomCodeToJoin={this.state.roomCodeToJoin} 
+								playerName={this.state.playerName} 
+								playerPortraitIndex={this.state.playerPortraitIndex} 
+								selfTrait={this.state.selfTrait} 
 								onStateChange={this.handleStateChange} />
 						)}
 					/>

@@ -76,24 +76,26 @@ function portraitReset(portraitImage, index) {
 	portraitImage.src = portraits[index].idle;
 }
 
-export default class SelfTrait extends Component {
+export default class Obstacle extends Component {
 
 	constructor(props) {
 		super(props);
 		this.state = {
-			playerSelfTrait: "",
+			players: {},
+			targetPlayerData: {},
+			obstacle: "",
 			error: null
 		};
 		this.roomUnsubscribeFunc = null;
 		this.handleRoomPlayersUpdated = this.handleRoomPlayersUpdated.bind(this);
 		this.setRoomUnsubscribeFunc = this.setRoomUnsubscribeFunc.bind(this);
-		this.handleSelfTraitInputTextChange = this.handleSelfTraitInputTextChange.bind(this);
-		this.handleSelfTraitSubmit = this.handleSelfTraitSubmit.bind(this);
+		this.handleObstacleInputTextChange = this.handleObstacleInputTextChange.bind(this);
+		this.handleObstacleSubmit = this.handleObstacleSubmit.bind(this);
 		this.handleNext = this.handleNext.bind(this);
 	}
 
 	componentDidMount() {
-		console.log("calling listenToRoom on SelfTrait startup");
+		console.log("calling listenToRoom on Obstacle startup");
 		console.log(this.props);
 		console.log(this.props.roomCodeToJoin);
 		console.log(this.props.playerName);
@@ -116,80 +118,92 @@ export default class SelfTrait extends Component {
 		console.log("handleRoomPlayersUpdated called");
 		console.log(players);
 		
-		// put players in player display list (players by itself is a shortcut to "players: players")
-		this.setState({ players });
+		// get target player (the player you will set their obstacle for)
+		var playerNames = Object.keys(players);
+		console.log(playerNames);
+		var targetPlayerIndex = playerNames.indexOf(this.props.playerName)-1;
+		if( targetPlayerIndex < 0 ) {
+			targetPlayerIndex = playerNames.length-1;
+		}
+		console.log("targetPlayerIndex:"+targetPlayerIndex);
+		console.log(Object.values(players));
+		console.log(Object.values(players)[targetPlayerIndex]);
+		this.setState({players: players, targetPlayerData: Object.values(players)[targetPlayerIndex]});
 	}
 	
 	setRoomUnsubscribeFunc(roomUnsubscribeFunc) {
 		this.roomUnsubscribeFunc = roomUnsubscribeFunc;
 	}
 	
-	handleSelfTraitInputTextChange(event) {
-		console.log("handleSelfTraitInputTextChange");
-		console.log(event);
-		this.setState({playerSelfTrait: event.target.value});
+	handleObstacleInputTextChange(event) {
+		this.setState({obstacle: event.target.value});
 	}
 	
-	handleSelfTraitSubmit(event) {
+	handleObstacleSubmit(event) {
 		event.preventDefault();
 		
-		var selfTraitText = this.state.playerSelfTrait;
-		console.log("selfTraitText:"+selfTraitText);
+		var obstacleText = this.state.obstacle;
+		console.log("obstacleText:"+obstacleText);
 		
-		// update the player's selftrait in firebase
+		// update the player's obstacle in firebase
 		try {
-			console.log("handleSelfTraitSubmit calling updatePlayerInRoom player:"+this.props.playerName+" this.props.roomCodeToJoin:"+this.props.roomCodeToJoin);
-			var newPlayerData = {};
-			newPlayerData.name = this.props.playerName;
-			newPlayerData.portrait = this.props.playerPortraitIndex;
-			newPlayerData.selftrait = selfTraitText;
-			newPlayerData.othertrait = "";
-			newPlayerData.obstacle = "";
-			newPlayerData.story = "";
-			newPlayerData.votes = 0;
-			updatePlayerInRoom(this.props.roomCodeToJoin, newPlayerData, () => {
-				console.log("SelfTrait player updated callback");
-				// self trait changed, update app state
-				this.props.onStateChange("selfTrait", selfTraitText);
+			console.log("handleObstacleSubmit calling updatePlayerInRoom player:"+this.props.playerName+" this.props.roomCodeToJoin:"+this.props.roomCodeToJoin);
+			var targetPlayerData = this.state.targetPlayerData;
+			console.log(targetPlayerData);
+			targetPlayerData.obstacle = obstacleText;
+			console.log(targetPlayerData);
+			updatePlayerInRoom(this.props.roomCodeToJoin, targetPlayerData, () => {
+				console.log("Obstacle player updated callback");
+				// obstacle changed, update app state
+				this.props.onStateChange("obstacle", obstacleText);
 				console.log(this.props);
-				// TODO: disable Submit button or something
+				console.log(targetPlayerData);
+				this.setState(targetPlayerData);
 			});
 		} catch (error) {
 			this.setState({ error: error.message });
 		}
 		
-		// TODO: play victory animation
+		// TODO: play success animation
 	}
 	
 	handleNext(event) {
 		event.preventDefault();
 		
-		this.props.history.replace("/othertrait");  // redirect to othertrait
+		this.props.history.replace("/story");  // redirect to story
 	}
 
 	render() {
 		return (
 			<div>
-				<h2>Player</h2>
-				<div className="traitBox">
-					<div className="traitNameBox">{this.props.playerName}</div><br />
-					<img className="traitNameThumb" src={portraits[this.props.playerPortraitIndex].idle} alt={portraits[this.props.playerPortraitIndex].idle} />
+				<h2>Target Player</h2>
+				<div className="obstacleBox">
+					<div className="traitNameBox">{this.state.targetPlayerData.name}</div><br />
+					<div className="traitNameBox1">{console.log("traitNameBox1:"+this.state) && this.state}</div><br />
+					<div className="traitNameBox15">{console.log(this.state) && this.state}</div><br />
+					<div className="traitNameBox2">{console.log("traitNameBox2:"+this.state.targetPlayerData.name) && this.state.targetPlayerData.name}</div><br />
+					<div className="traitNameBox3">{console.log(this.state.targetPlayerData.portrait) && this.state.targetPlayerData.portrait}</div><br />
+					<div className="traitNameBox4">{console.log(portraits) && portraits}</div><br />
+					<div className="traitNameBox5">{this.state.targetPlayerData.portrait && Object.keys(portraits[this.state.targetPlayerData.portrait])}</div><br />
+					<img className="obstacleThumb" src={this.state.targetPlayerData.portrait != undefined && portraits[this.state.targetPlayerData.portrait].idle} alt={this.state.targetPlayerData.portrait != undefined && portraits[this.state.targetPlayerData.portrait].idle} /><br />
+					<p>Self Trait: {this.state.targetPlayerData.selftrait}</p>
+					<p>Other Trait: {this.state.targetPlayerData.othertrait}</p>
 				</div>
 				<hr />
-				{/* allow the player to enter a trait for themselves */}
-				<h2>Enter Trait</h2>
-				<p>Enter a trait for your character. It can be a look, an attitude, a strength/weakness, skill, power, like/dislike, etc.</p>
-				<div id="submitSelfTrait">
-					<form onSubmit={this.handleSelfTraitSubmit}>
-						<input type="text" onChange={this.handleSelfTraitInputTextChange} id="selfTraitInput" name="selfTraitInput" placeholder="Can fly" /><br />
-						<button id="selfTraitSubmitButton" type="submit">Submit</button><br />
+				{/* allow the player to enter an obstacle for another player */}
+				<h2>Enter Obstacle</h2>
+				<p>Now enter an obstacle for this other player's character. It can be an event, roadblock, enemy, challenge, goal, scene, etc. that they have to face.</p>
+				<div id="submitObstacle">
+					<form onSubmit={this.handleObstacleSubmit}>
+						<input type="text" onChange={this.handleObstacleInputTextChange} id="obstacleInput" name="obstacleInput" placeholder="You meet a stranger" /><br />
+						<button id="obstacleSubmitButton" type="submit">Submit</button><br />
 					</form>
 				</div>
 				<hr />
 				<h2>Next Step</h2>
 				<div id="next">
 					<form onSubmit={this.handleNext}>
-						<b>Do not</b> press this until everyone has finished writing and submitted their trait.<br />
+						<b>Do not</b> press this until everyone has finished writing the obstacle for the other player and submitted it.<br />
 						<button id="nextButton" type="submit">Next</button><br />
 					</form>
 				</div>

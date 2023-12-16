@@ -76,24 +76,23 @@ function portraitReset(portraitImage, index) {
 	portraitImage.src = portraits[index].idle;
 }
 
-export default class SelfTrait extends Component {
+export default class Vote extends Component {
 
 	constructor(props) {
 		super(props);
 		this.state = {
-			playerSelfTrait: "",
+			players: {},
 			error: null
 		};
 		this.roomUnsubscribeFunc = null;
 		this.handleRoomPlayersUpdated = this.handleRoomPlayersUpdated.bind(this);
 		this.setRoomUnsubscribeFunc = this.setRoomUnsubscribeFunc.bind(this);
-		this.handleSelfTraitInputTextChange = this.handleSelfTraitInputTextChange.bind(this);
-		this.handleSelfTraitSubmit = this.handleSelfTraitSubmit.bind(this);
+		this.handleVoteSubmit = this.handleVoteSubmit.bind(this);
 		this.handleNext = this.handleNext.bind(this);
 	}
 
 	componentDidMount() {
-		console.log("calling listenToRoom on SelfTrait startup");
+		console.log("calling listenToRoom on Vote startup");
 		console.log(this.props);
 		console.log(this.props.roomCodeToJoin);
 		console.log(this.props.playerName);
@@ -116,7 +115,6 @@ export default class SelfTrait extends Component {
 		console.log("handleRoomPlayersUpdated called");
 		console.log(players);
 		
-		// put players in player display list (players by itself is a shortcut to "players: players")
 		this.setState({ players });
 	}
 	
@@ -124,72 +122,65 @@ export default class SelfTrait extends Component {
 		this.roomUnsubscribeFunc = roomUnsubscribeFunc;
 	}
 	
-	handleSelfTraitInputTextChange(event) {
-		console.log("handleSelfTraitInputTextChange");
-		console.log(event);
-		this.setState({playerSelfTrait: event.target.value});
-	}
-	
-	handleSelfTraitSubmit(event) {
+	handleVoteSubmit(event) {
 		event.preventDefault();
 		
-		var selfTraitText = this.state.playerSelfTrait;
-		console.log("selfTraitText:"+selfTraitText);
+		// find the player that was voted
+		var votePlayerName = event.target.name;
+		console.log("votePlayerName:"+votePlayerName);
 		
-		// update the player's selftrait in firebase
+		// update the vote count in firebase
 		try {
-			console.log("handleSelfTraitSubmit calling updatePlayerInRoom player:"+this.props.playerName+" this.props.roomCodeToJoin:"+this.props.roomCodeToJoin);
-			var newPlayerData = {};
-			newPlayerData.name = this.props.playerName;
-			newPlayerData.portrait = this.props.playerPortraitIndex;
-			newPlayerData.selftrait = selfTraitText;
-			newPlayerData.othertrait = "";
-			newPlayerData.obstacle = "";
-			newPlayerData.story = "";
-			newPlayerData.votes = 0;
-			updatePlayerInRoom(this.props.roomCodeToJoin, newPlayerData, () => {
-				console.log("SelfTrait player updated callback");
-				// self trait changed, update app state
-				this.props.onStateChange("selfTrait", selfTraitText);
-				console.log(this.props);
-				// TODO: disable Submit button or something
+			console.log("handleVoteSubmit calling updatePlayerInRoom player:"+this.props.playerName+" this.props.roomCodeToJoin:"+this.props.roomCodeToJoin);
+			// get target player (the player you are voting for)
+			var playerNames = Object.keys(this.state.players);
+			console.log(playerNames);
+			var targetPlayerData = this.state.players[votePlayerName];
+			console.log(targetPlayerData);
+			targetPlayerData.votes++;
+			console.log(targetPlayerData);
+			updatePlayerInRoom(this.props.roomCodeToJoin, targetPlayerData, () => {
+				console.log("Vote player updated callback");
+				// TODO: show that vote was counted
 			});
 		} catch (error) {
 			this.setState({ error: error.message });
 		}
-		
-		// TODO: play victory animation
 	}
 	
 	handleNext(event) {
 		event.preventDefault();
 		
-		this.props.history.replace("/othertrait");  // redirect to othertrait
+		this.props.history.replace("/end");
 	}
 
 	render() {
 		return (
 			<div>
-				<h2>Player</h2>
-				<div className="traitBox">
-					<div className="traitNameBox">{this.props.playerName}</div><br />
-					<img className="traitNameThumb" src={portraits[this.props.playerPortraitIndex].idle} alt={portraits[this.props.playerPortraitIndex].idle} />
-				</div>
-				<hr />
-				{/* allow the player to enter a trait for themselves */}
-				<h2>Enter Trait</h2>
-				<p>Enter a trait for your character. It can be a look, an attitude, a strength/weakness, skill, power, like/dislike, etc.</p>
-				<div id="submitSelfTrait">
-					<form onSubmit={this.handleSelfTraitSubmit}>
-						<input type="text" onChange={this.handleSelfTraitInputTextChange} id="selfTraitInput" name="selfTraitInput" placeholder="Can fly" /><br />
-						<button id="selfTraitSubmitButton" type="submit">Submit</button><br />
-					</form>
+				{/* show all the portraits and let the player click to select their avatar */}
+				<h2>Vote</h2>
+				<p>Vote for your favorites or for each one that entertained you.</p><br />
+				<div className="voteSelectionContainer">
+					{Object.entries(this.state.players).map(([key, value], index) => (
+						<div id={"story"+index} key={"story-"+index+"-"+key} className="storyDiv">
+							<p>Name: {value.name}</p>
+							<img src={portraits[value.portrait].idle} alt={portraits[value.portrait].idle+index} /><br />
+							<p>Self Trait: {value.selftrait}</p>
+							<p>Other Trait: {value.othertrait}</p>
+							<p>Obstacle: {value.obstacle}</p>
+							<p>Story: {value.story}</p>
+							<form onSubmit={this.handleVoteSubmit}>
+								<button id={index+"VoteButton"} name={value.name} type="submit">Vote</button><br />
+							</form>
+							<hr />
+						</div>
+					))}
 				</div>
 				<hr />
 				<h2>Next Step</h2>
 				<div id="next">
 					<form onSubmit={this.handleNext}>
-						<b>Do not</b> press this until everyone has finished writing and submitted their trait.<br />
+						<b>Do not</b> press this until everyone has finished submitting their votes.<br />
 						<button id="nextButton" type="submit">Next</button><br />
 					</form>
 				</div>

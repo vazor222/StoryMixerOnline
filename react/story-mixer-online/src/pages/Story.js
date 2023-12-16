@@ -76,24 +76,24 @@ function portraitReset(portraitImage, index) {
 	portraitImage.src = portraits[index].idle;
 }
 
-export default class SelfTrait extends Component {
+export default class Story extends Component {
 
 	constructor(props) {
 		super(props);
 		this.state = {
-			playerSelfTrait: "",
+			playerStory: "",
 			error: null
 		};
 		this.roomUnsubscribeFunc = null;
 		this.handleRoomPlayersUpdated = this.handleRoomPlayersUpdated.bind(this);
 		this.setRoomUnsubscribeFunc = this.setRoomUnsubscribeFunc.bind(this);
-		this.handleSelfTraitInputTextChange = this.handleSelfTraitInputTextChange.bind(this);
-		this.handleSelfTraitSubmit = this.handleSelfTraitSubmit.bind(this);
+		this.handleStoryInputTextChange = this.handleStoryInputTextChange.bind(this);
+		this.handleStorySubmit = this.handleStorySubmit.bind(this);
 		this.handleNext = this.handleNext.bind(this);
 	}
 
 	componentDidMount() {
-		console.log("calling listenToRoom on SelfTrait startup");
+		console.log("calling listenToRoom on Story startup");
 		console.log(this.props);
 		console.log(this.props.roomCodeToJoin);
 		console.log(this.props.playerName);
@@ -115,81 +115,75 @@ export default class SelfTrait extends Component {
 	handleRoomPlayersUpdated(players) {
 		console.log("handleRoomPlayersUpdated called");
 		console.log(players);
-		
-		// put players in player display list (players by itself is a shortcut to "players: players")
-		this.setState({ players });
+		console.log(players[this.props.playerName]);
+		this.setState({ players: players, playerData: players[this.props.playerName] });
 	}
 	
 	setRoomUnsubscribeFunc(roomUnsubscribeFunc) {
 		this.roomUnsubscribeFunc = roomUnsubscribeFunc;
 	}
 	
-	handleSelfTraitInputTextChange(event) {
-		console.log("handleSelfTraitInputTextChange");
+	handleStoryInputTextChange(event) {
+		console.log("handleStoryInputTextChange");
 		console.log(event);
-		this.setState({playerSelfTrait: event.target.value});
+		this.setState({playerStory: event.target.value});
 	}
 	
-	handleSelfTraitSubmit(event) {
+	handleStorySubmit(event) {
 		event.preventDefault();
 		
-		var selfTraitText = this.state.playerSelfTrait;
-		console.log("selfTraitText:"+selfTraitText);
+		var storyText = this.state.playerStory;
+		console.log("storyText:"+storyText);
 		
-		// update the player's selftrait in firebase
+		// update the player's story in firebase
 		try {
-			console.log("handleSelfTraitSubmit calling updatePlayerInRoom player:"+this.props.playerName+" this.props.roomCodeToJoin:"+this.props.roomCodeToJoin);
-			var newPlayerData = {};
-			newPlayerData.name = this.props.playerName;
-			newPlayerData.portrait = this.props.playerPortraitIndex;
-			newPlayerData.selftrait = selfTraitText;
-			newPlayerData.othertrait = "";
-			newPlayerData.obstacle = "";
-			newPlayerData.story = "";
-			newPlayerData.votes = 0;
+			console.log("handleStorySubmit calling updatePlayerInRoom player:"+this.props.playerName+" this.props.roomCodeToJoin:"+this.props.roomCodeToJoin);
+			var newPlayerData = this.state.playerData;
+			newPlayerData.story = storyText;
 			updatePlayerInRoom(this.props.roomCodeToJoin, newPlayerData, () => {
-				console.log("SelfTrait player updated callback");
-				// self trait changed, update app state
-				this.props.onStateChange("selfTrait", selfTraitText);
+				console.log("Story player updated callback");
+				// story changed, update app state
+				this.props.onStateChange("story", storyText);
 				console.log(this.props);
-				// TODO: disable Submit button or something
+				// TODO: show "Submitted!" next to button or something
 			});
 		} catch (error) {
 			this.setState({ error: error.message });
 		}
-		
-		// TODO: play victory animation
 	}
 	
 	handleNext(event) {
 		event.preventDefault();
 		
-		this.props.history.replace("/othertrait");  // redirect to othertrait
+		this.props.history.replace("/vote");  // redirect to voting scene
 	}
 
 	render() {
 		return (
 			<div>
 				<h2>Player</h2>
-				<div className="traitBox">
-					<div className="traitNameBox">{this.props.playerName}</div><br />
-					<img className="traitNameThumb" src={portraits[this.props.playerPortraitIndex].idle} alt={portraits[this.props.playerPortraitIndex].idle} />
+				<div className="storyBox">
+					<div className="storyNameBox">{this.props.playerName}</div><br />
+					<img className="storyThumb" src={portraits[this.props.playerPortraitIndex].idle} alt={portraits[this.props.playerPortraitIndex].idle} />
+					<p>Self Trait: {this.props.selfTrait}</p>
+					<p>Other Trait: {this.props.otherTrait}</p>
+					<p>Obstacle: {this.props.obstacle}</p>
 				</div>
 				<hr />
-				{/* allow the player to enter a trait for themselves */}
-				<h2>Enter Trait</h2>
-				<p>Enter a trait for your character. It can be a look, an attitude, a strength/weakness, skill, power, like/dislike, etc.</p>
-				<div id="submitSelfTrait">
-					<form onSubmit={this.handleSelfTraitSubmit}>
-						<input type="text" onChange={this.handleSelfTraitInputTextChange} id="selfTraitInput" name="selfTraitInput" placeholder="Can fly" /><br />
-						<button id="selfTraitSubmitButton" type="submit">Submit</button><br />
+				{/* the player writes a story */}
+				<h2>Enter Story</h2>
+				<p>You have a character with traits and an event to face. Enter a story telling us what your character does.</p>
+				<div id="submitStory">
+					<form onSubmit={this.handleStorySubmit}>
+						<input type="text" onChange={this.handleStoryInputTextChange} id="storyInput" name="storyInput" placeholder="I use my trait..." /><br />
+						<button id="storySubmitButton" type="submit">Submit</button><br />
 					</form>
 				</div>
 				<hr />
 				<h2>Next Step</h2>
 				<div id="next">
 					<form onSubmit={this.handleNext}>
-						<b>Do not</b> press this until everyone has finished writing and submitted their trait.<br />
+						<b>Do not</b> press this until everyone has finished writing and submitted their story.<br />
 						<button id="nextButton" type="submit">Next</button><br />
 					</form>
 				</div>

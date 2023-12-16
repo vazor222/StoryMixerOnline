@@ -172,7 +172,7 @@ export default class Lobby extends Component {
 			newPlayerData.othertrait = "";
 			newPlayerData.obstacle = "";
 			newPlayerData.story = "";
-			newPlayerData.vote = "";
+			newPlayerData.votes = 0;
 			updatePlayerInRoom(this.props.roomCodeToJoin, newPlayerData, () => {
 				console.log("Lobby player updated callback");
 				// portrait changed, update app state
@@ -230,7 +230,7 @@ export default class Lobby extends Component {
 				<div id="startGame">
 					<form onSubmit={this.handleStartGameSubmit}>
 						<b>Start Story Mixer!</b><br />
-						(Press this when everyone has joined.)<br />
+						(Everyone should press this after everyone has joined.)<br />
 						<button id="start_game_button" type="submit">Start Game</button><br />
 					</form>
 				</div>

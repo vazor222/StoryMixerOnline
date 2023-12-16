@@ -10,6 +10,10 @@ import Info from './pages/Info';
 import Lobby from './pages/Lobby';
 import SelfTrait from './pages/SelfTrait';
 import OtherTrait from './pages/OtherTrait';
+import Obstacle from './pages/Obstacle';
+import Story from './pages/Story';
+import Vote from './pages/Vote';
+import End from './pages/End';
 import Chat from './pages/Chat';
 import Signup from './pages/Signup';
 import Login from './pages/Login';
@@ -29,7 +33,7 @@ class App extends Component {
 			otherTrait: '',
 			obstacle: '',
 			story: '',
-			vote: 0
+			votes: 0
 		};
 	}
 
@@ -99,6 +103,59 @@ class App extends Component {
 								playerName={this.state.playerName} 
 								playerPortraitIndex={this.state.playerPortraitIndex} 
 								selfTrait={this.state.selfTrait} 
+								onStateChange={this.handleStateChange} />
+						)}
+					/>
+					<Route exact
+						path="/obstacle"
+						render={(props) => (
+							<Obstacle {...props} 
+								roomCodeToJoin={this.state.roomCodeToJoin} 
+								playerName={this.state.playerName} 
+								playerPortraitIndex={this.state.playerPortraitIndex} 
+								selfTrait={this.state.selfTrait} 
+								otherTrait={this.state.otherTrait} 
+								onStateChange={this.handleStateChange} />
+						)}
+					/>
+					<Route exact
+						path="/story"
+						render={(props) => (
+							<Story {...props} 
+								roomCodeToJoin={this.state.roomCodeToJoin} 
+								playerName={this.state.playerName} 
+								playerPortraitIndex={this.state.playerPortraitIndex} 
+								selfTrait={this.state.selfTrait} 
+								otherTrait={this.state.otherTrait} 
+								obstacle={this.state.obstacle} 
+								onStateChange={this.handleStateChange} />
+						)}
+					/>
+					<Route exact
+						path="/vote"
+						render={(props) => (
+							<Vote {...props} 
+								roomCodeToJoin={this.state.roomCodeToJoin} 
+								playerName={this.state.playerName} 
+								playerPortraitIndex={this.state.playerPortraitIndex} 
+								selfTrait={this.state.selfTrait} 
+								otherTrait={this.state.otherTrait} 
+								obstacle={this.state.obstacle} 
+								story={this.state.story} 
+								onStateChange={this.handleStateChange} />
+						)}
+					/>
+					<Route exact
+						path="/end"
+						render={(props) => (
+							<End {...props} 
+								roomCodeToJoin={this.state.roomCodeToJoin} 
+								playerName={this.state.playerName} 
+								playerPortraitIndex={this.state.playerPortraitIndex} 
+								selfTrait={this.state.selfTrait} 
+								otherTrait={this.state.otherTrait} 
+								obstacle={this.state.obstacle} 
+								story={this.state.story} 
 								onStateChange={this.handleStateChange} />
 						)}
 					/>

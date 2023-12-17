@@ -128,7 +128,7 @@ export default class Home extends Component {
 					<form onSubmit={this.handleJoinSubmit}>
 						<b>Join an existing game?</b><br />
 						Game Room Code (case sensitive):<br />
-						<input autocomplete="off" onChange={this.handleJoinRoomCodeChange} id="room_code" /><br />
+						<input autoComplete="off" onChange={this.handleJoinRoomCodeChange} id="room_code" /><br />
 						Player Name:<br />
 						<input onChange={this.handleJoinPlayerNameChange} id="player_name" /><br />
 						<button type="submit" id="join_button">Join</button><br />
@@ -153,7 +153,7 @@ export default class Home extends Component {
 				<script>
 					console.log("main index.html finished loading");
 				</script>
-				<form onSubmit={this.handleSubmit}>
+				{/*<form onSubmit={this.handleSubmit}>
 					<h1>
 						Sign Up to <Link to="/">Chatty</Link>
 					</h1>
@@ -170,7 +170,7 @@ export default class Home extends Component {
 					</div>
 					<hr></hr>
 					<p>Already have an account? <Link to="/login">Login</Link></p>
-				</form>
+				</form>*/}
 			</div>
 		)
 	}

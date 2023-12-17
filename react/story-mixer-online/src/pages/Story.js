@@ -166,8 +166,8 @@ export default class Story extends Component {
 					<div className="storyNameBox">{this.props.playerName}</div><br />
 					<img className="storyThumb" src={portraits[this.props.playerPortraitIndex].idle} alt={portraits[this.props.playerPortraitIndex].idle} />
 					<p>Self Trait: {this.props.selfTrait}</p>
-					<p>Other Trait: {this.props.otherTrait}</p>
-					<p>Obstacle: {this.props.obstacle}</p>
+					<p>Other Trait: {this.state.playerData != undefined? this.state.playerData.otherTrait : undefined}</p>
+					<p>Obstacle: {this.state.playerData != undefined? this.state.playerData.obstacle : undefined}</p>
 				</div>
 				<hr />
 				{/* the player writes a story */}

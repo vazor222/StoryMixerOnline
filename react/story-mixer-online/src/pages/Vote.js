@@ -126,7 +126,7 @@ export default class Vote extends Component {
 		event.preventDefault();
 		
 		// find the player that was voted
-		var votePlayerName = event.target.name;
+		var votePlayerName = event.target.firstChild.name;
 		console.log("votePlayerName:"+votePlayerName);
 		
 		// update the vote count in firebase

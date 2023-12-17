@@ -30,7 +30,7 @@ class App extends Component {
 			playerName: '',
 			playerPortraitIndex: 0,
 			selfTrait: '',
-			otherTrait: '',
+			otherTrait: '',  // TODO: clean out otherTrait and obstacle since they are from remote players and we have to get them from database anyway?
 			obstacle: '',
 			story: '',
 			votes: 0

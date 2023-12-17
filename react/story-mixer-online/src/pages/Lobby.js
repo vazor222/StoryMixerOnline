@@ -230,7 +230,7 @@ export default class Lobby extends Component {
 				<div id="startGame">
 					<form onSubmit={this.handleStartGameSubmit}>
 						<b>Start Story Mixer!</b><br />
-						(Everyone should press this after everyone has joined.)<br />
+						(Everyone should press this after everyone has joined and selected their avatar.)<br />
 						<button id="start_game_button" type="submit">Start Game</button><br />
 					</form>
 				</div>

@@ -114,20 +114,23 @@ export default class End extends Component {
 	handleRoomPlayersUpdated(players) {
 		console.log("handleRoomPlayersUpdated called");
 		console.log(players);
-		
 		var highestScore = 0;
 		var winners = [];
-		for( var player in players ) {
+		for( var pk in players ) {
+			var player = players[pk];
 			if( player.votes > highestScore ) {
 				highestScore = player.votes;
 			}
 		}
-		for( var player in players ) {
+		for( var pk in players ) {
+			var player = players[pk];
 			if( player.votes == highestScore ) {
-				winners.push(player.name);
+				winners.push(pk);
 			}
 		}
-		
+		console.log("highestScore:"+highestScore);
+		console.log("winners:");
+		console.log(winners);
 		this.setState({ players: players, winners: winners });
 	}
 	
@@ -151,7 +154,7 @@ export default class End extends Component {
 					{Object.entries(this.state.players).map(([key, value], index) => (
 						<div id={"end"+index} key={"end-"+index+"-"+key} className="endDiv">
 							<p>Name: {value.name}</p>
-							<img src={this.state.winners.includes(value.name)? portraits[value.portrait].victory : portraits[value.portrait].defeat} alt={(this.state.winners.includes(value.name)? portraits[value.portrait].victory : portraits[value.portrait].defeat)+""+index} /><br />
+							<img src={this.state.winners.includes(value.name)? portraits[value.portrait].success : portraits[value.portrait].failure} alt={(this.state.winners.includes(value.name)? portraits[value.portrait].success : portraits[value.portrait].failure)+""+index} /><br />
 							<p>Votes: {value.votes}</p>
 							<hr />
 						</div>
@@ -159,7 +162,7 @@ export default class End extends Component {
 				</div>
 				<h2>Credits</h2>
 				<div id="credits">
-					<p>J Peter Jones - Art, Animation</p><br />
+					<p>J Peter Jones - Art, Animation</p>
 					<p>vazor - Design, Code</p><br />
 				</div>
 				<hr />

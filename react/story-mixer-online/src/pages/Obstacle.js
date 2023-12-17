@@ -154,8 +154,6 @@ export default class Obstacle extends Component {
 			console.log(targetPlayerData);
 			updatePlayerInRoom(this.props.roomCodeToJoin, targetPlayerData, () => {
 				console.log("Obstacle player updated callback");
-				// obstacle changed, update app state
-				this.props.onStateChange("obstacle", obstacleText);
 				console.log(this.props);
 				console.log(targetPlayerData);
 				this.setState(targetPlayerData);
@@ -179,13 +177,7 @@ export default class Obstacle extends Component {
 				<h2>Target Player</h2>
 				<div className="obstacleBox">
 					<div className="traitNameBox">{this.state.targetPlayerData.name}</div><br />
-					<div className="traitNameBox1">{console.log("traitNameBox1:"+this.state) && this.state}</div><br />
-					<div className="traitNameBox15">{console.log(this.state) && this.state}</div><br />
-					<div className="traitNameBox2">{console.log("traitNameBox2:"+this.state.targetPlayerData.name) && this.state.targetPlayerData.name}</div><br />
-					<div className="traitNameBox3">{console.log(this.state.targetPlayerData.portrait) && this.state.targetPlayerData.portrait}</div><br />
-					<div className="traitNameBox4">{console.log(portraits) && portraits}</div><br />
-					<div className="traitNameBox5">{this.state.targetPlayerData.portrait && Object.keys(portraits[this.state.targetPlayerData.portrait])}</div><br />
-					<img className="obstacleThumb" src={this.state.targetPlayerData.portrait != undefined && portraits[this.state.targetPlayerData.portrait].idle} alt={this.state.targetPlayerData.portrait != undefined && portraits[this.state.targetPlayerData.portrait].idle} /><br />
+					<img className="obstacleThumb" src={this.state.targetPlayerData.portrait != undefined ? portraits[this.state.targetPlayerData.portrait].idle : undefined} alt={this.state.targetPlayerData.portrait != undefined ? portraits[this.state.targetPlayerData.portrait].idle : undefined} /><br />
 					<p>Self Trait: {this.state.targetPlayerData.selftrait}</p>
 					<p>Other Trait: {this.state.targetPlayerData.othertrait}</p>
 				</div>

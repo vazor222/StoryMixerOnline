@@ -17,7 +17,7 @@ export default class Home extends Component {
 		this.handleJoinRoomCodeChange = this.handleJoinRoomCodeChange.bind(this);
 		this.handleCreatorPlayerNameChange = this.handleCreatorPlayerNameChange.bind(this);
 		this.handleJoinPlayerNameChange = this.handleJoinPlayerNameChange.bind(this);
-		this.handleJoinClick = this.handleJoinClick.bind(this);
+		this.handleJoinSubmit = this.handleJoinSubmit.bind(this);
 		this.handleCreateSubmit = this.handleCreateSubmit.bind(this);
 	}
 	
@@ -37,7 +37,7 @@ export default class Home extends Component {
 		this.props.onStateChange("creatorPlayerName", event.target.value);
 	}
 	
-	handleJoinClick(event) {
+	handleJoinSubmit(event) {
 		event.preventDefault();
 		// TODO: remove these debug default value setters for final release
 		if( this.state.joinRoomCode.length === 0 )
@@ -56,9 +56,9 @@ export default class Home extends Component {
 			console.log(this.state.error);
 			return;
 		}
-		this.setState({ error: '' });
+		this.setState({ error: ''});
 		try {
-			console.log("handleJoinClick calling joinRoomFromForm room joinPlayerName:"+this.state.joinPlayerName);
+			console.log("handleJoinSubmit calling joinRoomFromForm room "+this.state.joinRoomCode+" joinPlayerName:"+this.state.joinPlayerName);
 			joinRoomFromForm(this.state.joinRoomCode, this.state.joinPlayerName, (creatorPlayerName) => {
 				console.log("roomJoinedCallback this.state.joinRoomCode:"+this.state.joinRoomCode+" this.state.joinPlayerName:"+this.state.joinPlayerName+" creatorPlayerName:"+creatorPlayerName);
 				this.props.onStateChange("roomCodeToJoin", this.state.joinRoomCode);
@@ -125,12 +125,14 @@ export default class Home extends Component {
 					{this.state.error ? <p>{this.state.error}</p> : null}
 				</div>
 				<div id="join">
-					<b>Join an existing game?</b><br />
-					Game Room Code:<br />
-					<input onChange={this.handleJoinRoomCodeChange} id="room_code" /><br />
-					Player Name:<br />
-					<input onChange={this.handleJoinPlayerNameChange} id="player_name" /><br />
-					<button id="join_button" onClick={this.handleJoinClick}>Join</button><br />
+					<form onSubmit={this.handleJoinSubmit}>
+						<b>Join an existing game?</b><br />
+						Game Room Code (case sensitive):<br />
+						<input autocomplete="off" onChange={this.handleJoinRoomCodeChange} id="room_code" /><br />
+						Player Name:<br />
+						<input onChange={this.handleJoinPlayerNameChange} id="player_name" /><br />
+						<button type="submit" id="join_button">Join</button><br />
+					</form>
 				</div>
 				<hr />
 				<div id="create">

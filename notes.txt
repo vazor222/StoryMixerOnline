@@ -251,20 +251,20 @@ figure out layout and display of player list
 character select in lobby
   -TODO comments in Lobby.js
 display font
-finish building out pages in react - https://css-tricks.com/building-a-real-time-chat-app-with-react-and-firebase/
-  -lift state up to App (figure out how to read state in child / Home and /lobby Lobby)
-https://reactjs.org/docs/state-and-lifecycle.html
-https://reactjs.org/docs/lifting-state-up.html#lifting-state-up
-    -just got onStateChange working so Home can send creator name to App, but can Lobby read creator name? yes - done
-    -can Home send two things to App which are then read by Lobby? yes - done
-    -make Lobby show the creatorPlayerName too - done
-    -fix issue with listenToRoom being called twice on lobby join
-    -fix issue with db.ref not being a function
-    -allow user to join
-    -make Lobby listen for changes to player list and update it (and their chosen avatars)
-    -display which player is the Room Creator with an added " (Room Creator)"
-    -add avatar selection to lobby
-  -clean up all the debug rooms
+display which player is the Room Creator with an added " (Room Creator)"
+add avatar selection to lobby
+clean up all the debug rooms
+upload to website?
+https://blog.logrocket.com/9-ways-deploy-react-app-free/
+https://vercel.com/vazors-projects (cli didn't work out of the box)
+https://app.netlify.com/sites/vazor222/configuration/general (tried deploying here with package.json modified to have homepage /storymixeronline/ but just gave me a blank page)
+https://create-react-app.dev/docs/deployment/
+fix bug with 3+ players (self trait is blank?)
+fix bug with other trait being blank on /story
+change obstacle and story to textareas
+clean up debug logs?
+make it clean up rooms after game is over/if they cancel?
+add music?
 show character limit when you are typing?
 handle detecting navigate away/close browser to close rooms?
 add new animations for character select
@@ -277,9 +277,23 @@ create a production bundle
   -use `npm run build`
 advertise
   -make all the character’s win and defeat animations into free animated text stickers?
+make spirits of oquayo online?
+launch party?
 
 
 - done -
+finish building out pages in react - done
+  -https://css-tricks.com/building-a-real-time-chat-app-with-react-and-firebase/
+  -lift state up to App (figure out how to read state in child / Home and /lobby Lobby)
+https://reactjs.org/docs/state-and-lifecycle.html
+https://reactjs.org/docs/lifting-state-up.html#lifting-state-up
+    -just got onStateChange working so Home can send creator name to App, but can Lobby read creator name? yes - done
+    -can Home send two things to App which are then read by Lobby? yes - done
+    -make Lobby show the creatorPlayerName too - done
+    -fix issue with listenToRoom being called twice on lobby join
+    -fix issue with db.ref not being a function
+    -allow user to join
+    -make Lobby listen for changes to player list and update it (and their chosen avatars)
 vampire needs cropping, can't redo animation - done
   -scale 134%
   -crop 56 13 380 480

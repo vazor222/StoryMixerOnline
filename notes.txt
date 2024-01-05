@@ -195,6 +195,8 @@ open Command Prompt
 navigate to react/story-mixer-online
 enter command: npm run start
 open http://localhost:3000 in a browser
+create a production bundle: `npm run build`
+build and deploy with gh-pages: `npm run deploy`
 
 - python local server -
 open Command Prompt
@@ -254,11 +256,6 @@ display font
 display which player is the Room Creator with an added " (Room Creator)"
 add avatar selection to lobby
 clean up all the debug rooms
-upload to website?
-https://blog.logrocket.com/9-ways-deploy-react-app-free/
-https://vercel.com/vazors-projects (cli didn't work out of the box)
-https://app.netlify.com/sites/vazor222/configuration/general (tried deploying here with package.json modified to have homepage /storymixeronline/ but just gave me a blank page)
-https://create-react-app.dev/docs/deployment/
 fix bug with 3+ players (self trait is blank?)
 fix bug with other trait being blank on /story
 change obstacle and story to textareas
@@ -273,8 +270,6 @@ implement new UI design
 figure out how to listen for room changes
 figure out how to hide API key
 decide more of the design
-create a production bundle
-  -use `npm run build`
 advertise
   -make all the character’s win and defeat animations into free animated text stickers?
 make spirits of oquayo online?
@@ -282,6 +277,15 @@ launch party?
 
 
 - done -
+upload to website - done
+  https://blog.logrocket.com/9-ways-deploy-react-app-free/
+  https://vercel.com/vazors-projects (cli didn't work out of the box)
+firebase (cli not compatible with my current nodejs)
+  https://app.netlify.com/sites/vazor222/configuration/general (tried deploying here with package.json modified to have homepage /storymixeronline/ but just gave me a blank page)
+  github pages seemed to work too but then also gave me a blank page
+  surge also seemed to work but then also gave me a blank page
+  fixed blank page by changing to HashRouter and fixing homepage value
+  https://create-react-app.dev/docs/deployment/
 finish building out pages in react - done
   -https://css-tricks.com/building-a-real-time-chat-app-with-react-and-firebase/
   -lift state up to App (figure out how to read state in child / Home and /lobby Lobby)

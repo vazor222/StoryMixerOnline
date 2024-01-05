@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/StoryMixerOnline/precache-manifest.f286ae0f672ee6154cb5515b2eb14efd.js"
+  "/StoryMixerOnline/precache-manifest.c1dbd06ce71aa9f5bd667bf792021dab.js"
 );
 
 self.addEventListener('message', (event) => {

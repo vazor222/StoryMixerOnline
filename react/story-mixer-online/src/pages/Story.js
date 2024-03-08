@@ -172,7 +172,7 @@ export default class Story extends Component {
 				<hr />
 				{/* the player writes a story */}
 				<h2>Enter Story</h2>
-				<p>You have a character with traits and an event to face. Enter a story telling us what your character does.</p>
+				<p>You have a character with traits and an obstacle to face. Enter a story telling us what your character does.</p>
 				<div id="submitStory">
 					<form onSubmit={this.handleStorySubmit}>
 						<input type="text" onChange={this.handleStoryInputTextChange} id="storyInput" name="storyInput" placeholder="I use my trait..." /><br />

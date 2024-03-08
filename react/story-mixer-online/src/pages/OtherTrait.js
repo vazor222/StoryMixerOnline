@@ -164,7 +164,7 @@ export default class OtherTrait extends Component {
 			this.setState({ error: error.message });
 		}
 		
-		// TODO: play defeat animation
+		// TODO: play defeat animation?
 	}
 	
 	handleNext(event) {

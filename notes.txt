@@ -18,7 +18,7 @@ layout and display of player list
   -show thumbnail icons of characters under players who choose them
   -show random character playing idle anim under the playerlist
     -arrows left and right to select characters
-    -success anim when you click them again to indicate
+    -success anim when you click them again to indicate choice
 
 
 

@@ -138,9 +138,9 @@ export default class Story extends Component {
 		// update the player's story in firebase
 		try {
 			console.log("handleStorySubmit calling updatePlayerInRoom player:"+this.props.playerName+" this.props.roomCodeToJoin:"+this.props.roomCodeToJoin);
-			var newPlayerData = this.state.playerData;
-			newPlayerData.story = storyText;
-			updatePlayerInRoom(this.props.roomCodeToJoin, newPlayerData, () => {
+			var updateStoryPlayerData = this.state.playerData;
+			updateStoryPlayerData.story = storyText;
+			updatePlayerInRoom(this.props.roomCodeToJoin, updateStoryPlayerData, () => {
 				console.log("Story player updated callback");
 				// story changed, update app state
 				this.props.onStateChange("story", storyText);
@@ -166,7 +166,7 @@ export default class Story extends Component {
 					<div className="storyNameBox">{this.props.playerName}</div><br />
 					<img className="storyThumb" src={portraits[this.props.playerPortraitIndex].idle} alt={portraits[this.props.playerPortraitIndex].idle} />
 					<p>Self Trait: {this.props.selfTrait}</p>
-					<p>Other Trait: {this.state.playerData != undefined? this.state.playerData.otherTrait : undefined}</p>
+					<p>Other Trait: {this.state.playerData != undefined? this.state.playerData.othertrait : undefined}</p>
 					<p>Obstacle: {this.state.playerData != undefined? this.state.playerData.obstacle : undefined}</p>
 				</div>
 				<hr />

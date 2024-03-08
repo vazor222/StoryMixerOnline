@@ -170,15 +170,15 @@ export function updatePlayerInRoom(roomCode, player, playerInRoomUpdatedCallback
 					console.log("Player updated! roomCode:"+roomCode+" player.name:"+player.name);
 					playerInRoomUpdatedCallback();
 				}).catch((updateError) => {
-					console.log("Error updating player in room:"+roomCode+" player.name:"+player.name);
+					console.error("Error updating player in room:"+roomCode+" player.name:"+player.name);
 				});
 			}
 			else
 			{
-				console.log("Room not found:"+roomCode);
+				console.error("Room not found:"+roomCode);
 			}
 		}).catch((error) => {
-			console.log(error+" roomCode:"+roomCode);
+			console.error(error+" roomCode:"+roomCode);
 		});
 	}
 	catch(err)

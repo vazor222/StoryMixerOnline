@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/StoryMixerOnline/static/css/main.c2001cd7.chunk.css",
-    "main.js": "/StoryMixerOnline/static/js/main.1b39b128.chunk.js",
-    "main.js.map": "/StoryMixerOnline/static/js/main.1b39b128.chunk.js.map",
+    "main.js": "/StoryMixerOnline/static/js/main.b2bbafa9.chunk.js",
+    "main.js.map": "/StoryMixerOnline/static/js/main.b2bbafa9.chunk.js.map",
     "runtime-main.js": "/StoryMixerOnline/static/js/runtime-main.19903d10.js",
     "runtime-main.js.map": "/StoryMixerOnline/static/js/runtime-main.19903d10.js.map",
     "static/js/2.f38965b4.chunk.js": "/StoryMixerOnline/static/js/2.f38965b4.chunk.js",
     "static/js/2.f38965b4.chunk.js.map": "/StoryMixerOnline/static/js/2.f38965b4.chunk.js.map",
     "index.html": "/StoryMixerOnline/index.html",
-    "precache-manifest.10be4f5a9b0c157bfddfbc421f62a65c.js": "/StoryMixerOnline/precache-manifest.10be4f5a9b0c157bfddfbc421f62a65c.js",
+    "precache-manifest.6d2a85be318d27ec139d4687ec0c749a.js": "/StoryMixerOnline/precache-manifest.6d2a85be318d27ec139d4687ec0c749a.js",
     "service-worker.js": "/StoryMixerOnline/service-worker.js",
     "static/css/main.c2001cd7.chunk.css.map": "/StoryMixerOnline/static/css/main.c2001cd7.chunk.css.map",
     "static/js/2.f38965b4.chunk.js.LICENSE.txt": "/StoryMixerOnline/static/js/2.f38965b4.chunk.js.LICENSE.txt",
@@ -42,6 +42,6 @@
     "static/js/runtime-main.19903d10.js",
     "static/js/2.f38965b4.chunk.js",
     "static/css/main.c2001cd7.chunk.css",
-    "static/js/main.1b39b128.chunk.js"
+    "static/js/main.b2bbafa9.chunk.js"
   ]
 }

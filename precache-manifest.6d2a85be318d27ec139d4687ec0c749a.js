@@ -1,10 +1,10 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "021353be8737c07177a391501ec1036d",
+    "revision": "a87fdf174b28650351f6f74c236e1ecb",
     "url": "/StoryMixerOnline/index.html"
   },
   {
-    "revision": "8f96bc21d21a47be3f1c",
+    "revision": "c0d6d4da9f8a6995a778",
     "url": "/StoryMixerOnline/static/css/main.c2001cd7.chunk.css"
   },
   {
@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/StoryMixerOnline/static/js/2.f38965b4.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "8f96bc21d21a47be3f1c",
-    "url": "/StoryMixerOnline/static/js/main.1b39b128.chunk.js"
+    "revision": "c0d6d4da9f8a6995a778",
+    "url": "/StoryMixerOnline/static/js/main.b2bbafa9.chunk.js"
   },
   {
     "revision": "f736a0ae25f2db44e41d",

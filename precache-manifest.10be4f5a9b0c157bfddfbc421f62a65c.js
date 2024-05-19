@@ -1,23 +1,23 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "d88fd3e11e711698f3e54c5154502bdb",
+    "revision": "021353be8737c07177a391501ec1036d",
     "url": "/StoryMixerOnline/index.html"
   },
   {
-    "revision": "b3ea79a76daf46289727",
+    "revision": "8f96bc21d21a47be3f1c",
     "url": "/StoryMixerOnline/static/css/main.c2001cd7.chunk.css"
   },
   {
-    "revision": "cf9773b2630427602d59",
-    "url": "/StoryMixerOnline/static/js/2.933b1029.chunk.js"
+    "revision": "146457880ce6f57214c5",
+    "url": "/StoryMixerOnline/static/js/2.f38965b4.chunk.js"
   },
   {
     "revision": "b01cf20ee08477db845d02c3b279da13",
-    "url": "/StoryMixerOnline/static/js/2.933b1029.chunk.js.LICENSE.txt"
+    "url": "/StoryMixerOnline/static/js/2.f38965b4.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "b3ea79a76daf46289727",
-    "url": "/StoryMixerOnline/static/js/main.32570b59.chunk.js"
+    "revision": "8f96bc21d21a47be3f1c",
+    "url": "/StoryMixerOnline/static/js/main.1b39b128.chunk.js"
   },
   {
     "revision": "f736a0ae25f2db44e41d",

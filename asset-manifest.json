@@ -1,17 +1,17 @@
 {
   "files": {
     "main.css": "/StoryMixerOnline/static/css/main.c2001cd7.chunk.css",
-    "main.js": "/StoryMixerOnline/static/js/main.32570b59.chunk.js",
-    "main.js.map": "/StoryMixerOnline/static/js/main.32570b59.chunk.js.map",
+    "main.js": "/StoryMixerOnline/static/js/main.1b39b128.chunk.js",
+    "main.js.map": "/StoryMixerOnline/static/js/main.1b39b128.chunk.js.map",
     "runtime-main.js": "/StoryMixerOnline/static/js/runtime-main.19903d10.js",
     "runtime-main.js.map": "/StoryMixerOnline/static/js/runtime-main.19903d10.js.map",
-    "static/js/2.933b1029.chunk.js": "/StoryMixerOnline/static/js/2.933b1029.chunk.js",
-    "static/js/2.933b1029.chunk.js.map": "/StoryMixerOnline/static/js/2.933b1029.chunk.js.map",
+    "static/js/2.f38965b4.chunk.js": "/StoryMixerOnline/static/js/2.f38965b4.chunk.js",
+    "static/js/2.f38965b4.chunk.js.map": "/StoryMixerOnline/static/js/2.f38965b4.chunk.js.map",
     "index.html": "/StoryMixerOnline/index.html",
-    "precache-manifest.e7faebf8d051e959d53d65c18fce17ac.js": "/StoryMixerOnline/precache-manifest.e7faebf8d051e959d53d65c18fce17ac.js",
+    "precache-manifest.10be4f5a9b0c157bfddfbc421f62a65c.js": "/StoryMixerOnline/precache-manifest.10be4f5a9b0c157bfddfbc421f62a65c.js",
     "service-worker.js": "/StoryMixerOnline/service-worker.js",
     "static/css/main.c2001cd7.chunk.css.map": "/StoryMixerOnline/static/css/main.c2001cd7.chunk.css.map",
-    "static/js/2.933b1029.chunk.js.LICENSE.txt": "/StoryMixerOnline/static/js/2.933b1029.chunk.js.LICENSE.txt",
+    "static/js/2.f38965b4.chunk.js.LICENSE.txt": "/StoryMixerOnline/static/js/2.f38965b4.chunk.js.LICENSE.txt",
     "static/media/Dragon-Defeat.gif": "/StoryMixerOnline/static/media/Dragon-Defeat.308e1b3b.gif",
     "static/media/Dragon-Idle.gif": "/StoryMixerOnline/static/media/Dragon-Idle.87c7390a.gif",
     "static/media/Dragon-Victory.gif": "/StoryMixerOnline/static/media/Dragon-Victory.19a672f2.gif",
@@ -40,8 +40,8 @@
   },
   "entrypoints": [
     "static/js/runtime-main.19903d10.js",
-    "static/js/2.933b1029.chunk.js",
+    "static/js/2.f38965b4.chunk.js",
     "static/css/main.c2001cd7.chunk.css",
-    "static/js/main.32570b59.chunk.js"
+    "static/js/main.1b39b128.chunk.js"
   ]
 }

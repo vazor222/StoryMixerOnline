@@ -115,8 +115,18 @@ export default class Story extends Component {
 	handleRoomPlayersUpdated(players) {
 		console.log("handleRoomPlayersUpdated called");
 		console.log(players);
-		console.log(players[this.props.playerName]);
-		this.setState({ players: players, playerData: players[this.props.playerName] });
+		let myIndex = -1;
+		for (let i = 0; i < players.length; ++i) {
+			if( players[i].name === this.props.playerName ) {
+				myIndex = i;
+			}
+		}
+		if( myIndex < 0 ) {
+			console.error("player "+this.props.playerName+" not found!");
+			window.alert("Server error: no longer in room, please restart the game (by having everyone browse back to the beginning and refresh) and try again.");
+			return;
+		}
+		this.setState({ players: players, playerData: players[myIndex] });
 	}
 	
 	setRoomUnsubscribeFunc(roomUnsubscribeFunc) {
@@ -145,7 +155,7 @@ export default class Story extends Component {
 				// story changed, update app state
 				this.props.onStateChange("story", storyText);
 				console.log(this.props);
-				// TODO: show "Submitted!" next to button or something
+				// TODO: disable Submit button or say submitted! or something
 			});
 		} catch (error) {
 			this.setState({ error: error.message });

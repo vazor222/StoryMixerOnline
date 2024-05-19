@@ -27,11 +27,11 @@ export function createRoom(creator_player_name, app, roomCreatedCallback)
 	try
 	{
 		// makes the room entry in the database
-		var roomPlayers = {};
-		roomPlayers[creator_player_name] = {
+		var roomPlayers = [];
+		roomPlayers.push({
 					name: creator_player_name,
 					portrait: 0,
-					selftrait: ""};
+					selftrait: ""});
 		db.collection('rooms').doc(newRoomCode).set({
 			code: newRoomCode,
 			creator: creator_player_name,
@@ -73,17 +73,17 @@ async function joinRoomFromFormAsync(roomCodeToJoin, joinPlayerName, roomJoinedC
 				var roomPlayers = room.data().players;
 				console.log("roomPlayers before");
 				console.log(roomPlayers);
-				/*  TODO: check for duplicate names
+				/*  TODO: check for duplicate names?
 				if( roomPlayers[joinPlayerName] !== undefined ) {
 					console.error("player name "+joinPlayerName+" is taken!");
 					window.alert("Player name "+joinPlayerName+" is taken! Please try again.");
 					return;
 				}*/
-				roomPlayers[joinPlayerName] = {
+				roomPlayers.push({
 					name: joinPlayerName,
 					portrait: 0,
 					selftrait: ""
-				}
+				})
 				console.log("roomPlayers after");
 				console.log(roomPlayers);
 				roomRef.update({players: roomPlayers}).then(() => {
@@ -120,7 +120,7 @@ export function listenToRoom(roomCode, roomPlayersUpdateCallback, setUnsubscribe
 				var unsubscribeFunc = roomRef.onSnapshot((snapshot) => {
 					console.log("Got room update:"+snapshot.data());
 					let players = snapshot.data().players;
-					console.log("got players");
+					console.log("got players:");
 					console.log(players);
 					roomPlayersUpdateCallback(players);
 				});
@@ -158,12 +158,19 @@ export function updatePlayerInRoom(roomCode, player, playerInRoomUpdatedCallback
 				var roomPlayers = room.data().players;
 				console.log("roomPlayers before");
 				console.log(roomPlayers);
-				if( roomPlayers[player.name] === undefined ) {
+				let updateIndex = -1;
+				for (let i = 0; i < roomPlayers.length; ++i) {
+					if( roomPlayers[i].name === player.name ) {
+						updateIndex = i;
+						break;
+					}
+				}
+				if( updateIndex < 0 ) {
 					console.error("player "+player.name+" not found!");
 					window.alert("Server error: no longer in room, please restart the game (by having everyone browse back to the beginning and refresh) and try again.");
 					return;
 				}
-				roomPlayers[player.name] = player;
+				roomPlayers[updateIndex] = player;
 				console.log("roomPlayers after");
 				console.log(roomPlayers);
 				roomRef.update({players: roomPlayers}).then(() => {

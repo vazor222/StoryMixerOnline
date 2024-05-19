@@ -30,8 +30,6 @@ class App extends Component {
 			playerName: '',
 			playerPortraitIndex: 0,
 			selfTrait: '',
-			otherTrait: '',  // TODO: clean out otherTrait and obstacle since they are from remote players and we have to get them from database anyway?
-			obstacle: '',
 			story: '',
 			votes: 0
 		};
@@ -114,7 +112,6 @@ class App extends Component {
 								playerName={this.state.playerName} 
 								playerPortraitIndex={this.state.playerPortraitIndex} 
 								selfTrait={this.state.selfTrait} 
-								otherTrait={this.state.otherTrait} 
 								onStateChange={this.handleStateChange} />
 						)}
 					/>
@@ -126,8 +123,6 @@ class App extends Component {
 								playerName={this.state.playerName} 
 								playerPortraitIndex={this.state.playerPortraitIndex} 
 								selfTrait={this.state.selfTrait} 
-								otherTrait={this.state.otherTrait} 
-								obstacle={this.state.obstacle} 
 								onStateChange={this.handleStateChange} />
 						)}
 					/>
@@ -139,8 +134,6 @@ class App extends Component {
 								playerName={this.state.playerName} 
 								playerPortraitIndex={this.state.playerPortraitIndex} 
 								selfTrait={this.state.selfTrait} 
-								otherTrait={this.state.otherTrait} 
-								obstacle={this.state.obstacle} 
 								story={this.state.story} 
 								onStateChange={this.handleStateChange} />
 						)}
@@ -153,8 +146,6 @@ class App extends Component {
 								playerName={this.state.playerName} 
 								playerPortraitIndex={this.state.playerPortraitIndex} 
 								selfTrait={this.state.selfTrait} 
-								otherTrait={this.state.otherTrait} 
-								obstacle={this.state.obstacle} 
 								story={this.state.story} 
 								onStateChange={this.handleStateChange} />
 						)}

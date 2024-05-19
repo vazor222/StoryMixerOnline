@@ -81,7 +81,7 @@ export default class Lobby extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			players: {},
+			players: [],
 			error: null
 		};
 		this.roomUnsubscribeFunc = null;
@@ -209,10 +209,10 @@ export default class Lobby extends Component {
 				<p>{this.props.creatorPlayerName}</p>
 				<h2>Player List</h2>
 				<div className="playerListContainer">
-					{Object.entries(this.state.players).map(([key, value], index) => (
-						<div key={"playerdiv"+index+""+key} className="lobbyBox">
-							<div className="lobbyNameBox">{key}</div><br />
-							<img className="lobbyNameThumb" src={portraits[value.portrait].idle} alt={portraits[value.portrait].idle} />
+					{this.state.players.map((player, index) => (
+						<div key={"playerdiv"+index+""+player.name} className="lobbyBox">
+							<div className="lobbyNameBox">Player {index+1}: {player.name}</div><br />
+							<img className="lobbyNameThumb" src={portraits[player.portrait].idle} alt={portraits[player.portrait].idle} />
 						</div>
 					))}
 				</div>

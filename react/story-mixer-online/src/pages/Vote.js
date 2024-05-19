@@ -81,7 +81,7 @@ export default class Vote extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			players: {},
+			players: [],
 			error: null
 		};
 		this.roomUnsubscribeFunc = null;
@@ -133,9 +133,19 @@ export default class Vote extends Component {
 		try {
 			console.log("handleVoteSubmit calling updatePlayerInRoom player:"+this.props.playerName+" this.props.roomCodeToJoin:"+this.props.roomCodeToJoin);
 			// get target player (the player you are voting for)
-			var playerNames = Object.keys(this.state.players);
-			console.log(playerNames);
-			var targetPlayerData = this.state.players[votePlayerName];
+			let votePlayerIndex = -1;
+			for (let i = 0; i < this.state.players.length; ++i) {
+				if( this.state.players[i].name === votePlayerName ) {
+					votePlayerIndex = i;
+					break;
+				}
+			}
+			if( votePlayerIndex < 0 ) {
+				console.error("player "+votePlayerName+" not found!");
+				window.alert("Server error: could not find player in room, please restart the game (by having everyone browse back to the beginning and refresh) and try again.");
+				return;
+			}
+			var targetPlayerData = this.state.players[votePlayerIndex];
 			console.log(targetPlayerData);
 			targetPlayerData.votes++;
 			console.log(targetPlayerData);
@@ -161,16 +171,16 @@ export default class Vote extends Component {
 				<h2>Vote</h2>
 				<p>Vote for your favorites or for each one that entertained you.</p><br />
 				<div className="voteSelectionContainer">
-					{Object.entries(this.state.players).map(([key, value], index) => (
-						<div id={"story"+index} key={"story-"+index+"-"+key} className="storyDiv">
-							<p>Name: {value.name}</p>
-							<img src={portraits[value.portrait].idle} alt={portraits[value.portrait].idle+index} /><br />
-							<p>Self Trait: {value.selftrait}</p>
-							<p>Other Trait: {value.othertrait}</p>
-							<p>Obstacle: {value.obstacle}</p>
-							<p>Story: {value.story}</p>
+					{this.state.players.map((player, index) => (
+						<div id={"story"+index} key={"story-"+index+"-"+player.name} className="storyDiv">
+							<p>Name: {player.name}</p>
+							<img src={portraits[player.portrait].idle} alt={portraits[player.portrait].idle+index} /><br />
+							<p>Self Trait: {player.selftrait}</p>
+							<p>Other Trait: {player.othertrait}</p>
+							<p>Obstacle: {player.obstacle}</p>
+							<p>Story: {player.story}</p>
 							<form onSubmit={this.handleVoteSubmit}>
-								<button id={index+"VoteButton"} name={value.name} type="submit">Vote</button><br />
+								<button id={index+"VoteButton"} name={player.name} type="submit">Vote</button><br />
 							</form>
 							<hr />
 						</div>

@@ -81,7 +81,7 @@ export default class OtherTrait extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			players: {},
+			players: [],
 			targetPlayerData: {},
 			otherTrait: "",
 			error: null
@@ -119,16 +119,27 @@ export default class OtherTrait extends Component {
 		console.log(players);
 		
 		// get target player (the player you will set their 'other' trait for)
-		var playerNames = Object.keys(players);
-		console.log(playerNames);
-		var targetPlayerIndex = playerNames.indexOf(this.props.playerName)+1;
-		if( targetPlayerIndex >= playerNames.length ) {
+		
+		let myIndex = -1;
+		for (let i = 0; i < players.length; ++i) {
+			if( players[i].name === this.props.playerName) {
+				myIndex = i;
+				break;
+			}
+		}
+		if( myIndex < 0 ) {
+			console.error("player "+this.props.playerName+" not found!");
+			window.alert("Server error: no longer in room, please restart the game (by having everyone browse back to the beginning and refresh) and try again.");
+			return;
+		}
+		console.log("myIndex:"+myIndex);
+		var targetPlayerIndex = myIndex+1;
+		if( targetPlayerIndex >= players.length ) {
 			targetPlayerIndex = 0;
 		}
 		console.log("targetPlayerIndex:"+targetPlayerIndex);
-		console.log(Object.values(players));
-		console.log(Object.values(players)[targetPlayerIndex]);
-		this.setState({players: players, targetPlayerData: Object.values(players)[targetPlayerIndex]});
+		console.log(players[targetPlayerIndex]);
+		this.setState({players: players, targetPlayerData: players[targetPlayerIndex]});
 	}
 	
 	setRoomUnsubscribeFunc(roomUnsubscribeFunc) {
@@ -159,6 +170,7 @@ export default class OtherTrait extends Component {
 				console.log(this.props);
 				console.log(targetPlayerData);
 				this.setState(targetPlayerData);
+				// TODO: disable Submit button or say submitted! or something
 			});
 		} catch (error) {
 			this.setState({ error: error.message });

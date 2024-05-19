@@ -214,6 +214,14 @@ https://github.com/vazor222/StoryMixerOnline
 - firebase -
 https://console.firebase.google.com/u/0/project/story-mixer-online/
 
+- github pages deploy steps -
+https://create-react-app.dev/docs/deployment/
+You might need to do these:
+npm install --save gh-pages
+git remote add origin https://github.com/vazor222/StoryMixerOnline.git 
+Send people to this website:
+https://vazor222.github.io/StoryMixerOnline
+
 - animated png maker -
 Peter export apng from spine (was png sequence from toonboom)
 https://ezgif.com/apng-maker/ with 24 frames per second => 4.2 as the frametime
@@ -225,6 +233,8 @@ set loop once
 
 - Peter tasks -
 rework character animations to fit in 380 x 480 frame (just the robot is left I think)
+  -last time: piglet
+  -next up: robot?
 rework character victory and defeat animations to have a built in 1 second pause at the end
 finish character animations
   -last time: pirate rigged
@@ -256,8 +266,8 @@ display font
 display which player is the Room Creator with an added " (Room Creator)"
 add avatar selection to lobby
 clean up all the debug rooms
-fix bug with 3+ players (self trait is blank?)
-fix bug with other trait being blank on /story
+change submit buttons to display when you've submitted
+change next buttons to be disabled until all players have submitted?
 change obstacle and story to textareas
 clean up debug logs?
 make it clean up rooms after game is over/if they cancel?
@@ -277,6 +287,9 @@ launch party?
 
 
 - done -
+fix bug with 3+ players (self trait is blank?) - done
+  -make players an array instead, using push()? yes - done
+fix bug with other trait being blank on /story - done
 upload to website - done
   https://blog.logrocket.com/9-ways-deploy-react-app-free/
   https://vercel.com/vazors-projects (cli didn't work out of the box)
@@ -301,7 +314,7 @@ https://reactjs.org/docs/lifting-state-up.html#lifting-state-up
 vampire needs cropping, can't redo animation - done
   -scale 134%
   -crop 56 13 380 480
-add ninja and piglet to lobby portraits
+add ninja and piglet to lobby portraits - done
 revert security updates or learn new react api - reverted updates and it worked again - done
 check email for security advisory on storymixeronline and try to fix - done
 ping pong vamp 1-1-2-3-4-4-3-2-1-1 etc. for idle - done

@@ -81,7 +81,7 @@ export default class End extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			players: {},
+			players: [],
 			winners: [],
 			error: null
 		};
@@ -116,16 +116,16 @@ export default class End extends Component {
 		console.log(players);
 		var highestScore = 0;
 		var winners = [];
-		for( var pk in players ) {
-			var player = players[pk];
-			if( player.votes > highestScore ) {
-				highestScore = player.votes;
+		for (let h = players.length-1; h >= 0; --h) {
+			let player = players[h];
+			let playerVotes = player.votes;
+			if( playerVotes > highestScore ) {
+				highestScore = playerVotes;
 			}
 		}
-		for( var pk in players ) {
-			var player = players[pk];
-			if( player.votes == highestScore ) {
-				winners.push(pk);
+		for (let i = players.length-1; i >= 0; --i) {
+			if( players[i].votes == highestScore ) {
+				winners.push(players[i].name);
 			}
 		}
 		console.log("highestScore:"+highestScore);
@@ -151,11 +151,11 @@ export default class End extends Component {
 				<h2>The End</h2>
 				<p>Congratulations to our winners!</p><br />
 				<div className="endContainer">
-					{Object.entries(this.state.players).map(([key, value], index) => (
-						<div id={"end"+index} key={"end-"+index+"-"+key} className="endDiv">
-							<p>Name: {value.name}</p>
-							<img src={this.state.winners.includes(value.name)? portraits[value.portrait].success : portraits[value.portrait].failure} alt={(this.state.winners.includes(value.name)? portraits[value.portrait].success : portraits[value.portrait].failure)+""+index} /><br />
-							<p>Votes: {value.votes}</p>
+					{this.state.players.map((player, index) => (
+						<div id={"end"+index} key={"end-"+index+"-"+player.name} className="endDiv">
+							<p>Name: {player.name}</p>
+							<img src={this.state.winners.includes(player.name)? portraits[player.portrait].success : portraits[player.portrait].failure} alt={(this.state.winners.includes(player.name)? portraits[player.portrait].success : portraits[player.portrait].failure)+""+index} /><br />
+							<p>Votes: {player.votes}</p>
 							<hr />
 						</div>
 					))}

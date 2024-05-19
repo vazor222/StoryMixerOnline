@@ -82,6 +82,7 @@ export default class Story extends Component {
 		super(props);
 		this.state = {
 			playerStory: "",
+			submitted: "",
 			error: null
 		};
 		this.roomUnsubscribeFunc = null;
@@ -155,7 +156,7 @@ export default class Story extends Component {
 				// story changed, update app state
 				this.props.onStateChange("story", storyText);
 				console.log(this.props);
-				// TODO: disable Submit button or say submitted! or something
+				this.setState({ submitted: "Submitted!"});
 			});
 		} catch (error) {
 			this.setState({ error: error.message });
@@ -187,6 +188,7 @@ export default class Story extends Component {
 					<form onSubmit={this.handleStorySubmit}>
 						<input type="text" onChange={this.handleStoryInputTextChange} id="storyInput" name="storyInput" placeholder="I use my trait..." /><br />
 						<button id="storySubmitButton" type="submit">Submit</button><br />
+						{this.state.submitted}<br />
 					</form>
 				</div>
 				<hr />

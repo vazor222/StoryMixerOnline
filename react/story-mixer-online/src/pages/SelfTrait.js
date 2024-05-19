@@ -82,6 +82,7 @@ export default class SelfTrait extends Component {
 		super(props);
 		this.state = {
 			playerSelfTrait: "",
+			submitted: "",
 			error: null
 		};
 		this.roomUnsubscribeFunc = null;
@@ -152,7 +153,7 @@ export default class SelfTrait extends Component {
 				// self trait changed, update app state
 				this.props.onStateChange("selfTrait", selfTraitText);
 				console.log(this.props);
-				// TODO: disable Submit button or something
+				this.setState({ submitted: "Submitted!"});
 			});
 		} catch (error) {
 			this.setState({ error: error.message });
@@ -183,6 +184,7 @@ export default class SelfTrait extends Component {
 					<form onSubmit={this.handleSelfTraitSubmit}>
 						<input type="text" onChange={this.handleSelfTraitInputTextChange} id="selfTraitInput" name="selfTraitInput" placeholder="Can fly" /><br />
 						<button id="selfTraitSubmitButton" type="submit">Submit</button><br />
+						{this.state.submitted}<br />
 					</form>
 				</div>
 				<hr />

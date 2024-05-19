@@ -84,6 +84,7 @@ export default class Obstacle extends Component {
 			players: [],
 			targetPlayerData: {},
 			obstacle: "",
+			submitted: "",
 			error: null
 		};
 		this.roomUnsubscribeFunc = null;
@@ -168,7 +169,7 @@ export default class Obstacle extends Component {
 				console.log(this.props);
 				console.log(targetPlayerData);
 				this.setState(targetPlayerData);
-				// TODO: disable Submit button or say submitted! or something
+				this.setState({ submitted: "Submitted!"});
 			});
 		} catch (error) {
 			this.setState({ error: error.message });
@@ -201,6 +202,7 @@ export default class Obstacle extends Component {
 					<form onSubmit={this.handleObstacleSubmit}>
 						<input type="text" onChange={this.handleObstacleInputTextChange} id="obstacleInput" name="obstacleInput" placeholder="You meet a stranger" /><br />
 						<button id="obstacleSubmitButton" type="submit">Submit</button><br />
+						{this.state.submitted}<br />
 					</form>
 				</div>
 				<hr />

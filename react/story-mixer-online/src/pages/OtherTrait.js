@@ -84,6 +84,7 @@ export default class OtherTrait extends Component {
 			players: [],
 			targetPlayerData: {},
 			otherTrait: "",
+			submitted: "",
 			error: null
 		};
 		this.roomUnsubscribeFunc = null;
@@ -170,7 +171,7 @@ export default class OtherTrait extends Component {
 				console.log(this.props);
 				console.log(targetPlayerData);
 				this.setState(targetPlayerData);
-				// TODO: disable Submit button or say submitted! or something
+				this.setState({ submitted: "Submitted!"});
 			});
 		} catch (error) {
 			this.setState({ error: error.message });
@@ -202,6 +203,7 @@ export default class OtherTrait extends Component {
 					<form onSubmit={this.handleOtherTraitSubmit}>
 						<input type="text" onChange={this.handleOtherTraitInputTextChange} id="otherTraitInput" name="otherTraitInput" placeholder="Fears snakes" /><br />
 						<button id="otherTraitSubmitButton" type="submit">Submit</button><br />
+						{this.state.submitted}<br />
 					</form>
 				</div>
 				<hr />

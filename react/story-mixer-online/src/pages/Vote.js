@@ -82,6 +82,7 @@ export default class Vote extends Component {
 		super(props);
 		this.state = {
 			players: [],
+			submitted: "",
 			error: null
 		};
 		this.roomUnsubscribeFunc = null;
@@ -151,7 +152,7 @@ export default class Vote extends Component {
 			console.log(targetPlayerData);
 			updatePlayerInRoom(this.props.roomCodeToJoin, targetPlayerData, () => {
 				console.log("Vote player updated callback");
-				// TODO: show that vote was counted
+				this.setState({ submitted: "Vote submitted!"});
 			});
 		} catch (error) {
 			this.setState({ error: error.message });
@@ -181,6 +182,7 @@ export default class Vote extends Component {
 							<p>Story: {player.story}</p>
 							<form onSubmit={this.handleVoteSubmit}>
 								<button id={index+"VoteButton"} name={player.name} type="submit">Vote</button><br />
+								{this.state.submitted}<br />
 							</form>
 							<hr />
 						</div>

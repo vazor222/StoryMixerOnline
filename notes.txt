@@ -262,13 +262,13 @@ figure out layout and display of player list
   -start game and cancel buttons below that (only host)
 character select in lobby
   -TODO comments in Lobby.js
+remove test avatar from Home
 display font
-display which player is the Room Creator with an added " (Room Creator)"
+display which player is the Room Creator with an added " (Room Creator)"?
 add avatar selection to lobby
 clean up all the debug rooms
-change submit buttons to display when you've submitted
 change next buttons to be disabled until all players have submitted?
-change obstacle and story to textareas
+change obstacle to textarea?
 clean up debug logs?
 make it clean up rooms after game is over/if they cancel?
 add music?
@@ -287,6 +287,8 @@ launch party?
 
 
 - done -
+change story to textarea - done
+change submit buttons to display when you've submitted - done
 fix bug with 3+ players (self trait is blank?) - done
   -make players an array instead, using push()? yes - done
 fix bug with other trait being blank on /story - done
